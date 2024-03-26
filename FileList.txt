@@ -1,0 +1,49 @@
+./array_divider/array_divider_4b.v
+./array_divider/array_divider_4b_tb.v
+./array_divider/array_divider_32b.v
+./array_divider/divider_cell.v
+./subelements/sl_2b.v
+./subelements/register_32b.v
+./subelements/sll_32bit.v
+./subelements/sr_8b.v
+./subelements/sl_8b.v
+./subelements/register.v
+./subelements/mux_4.v
+./subelements/or_32bit.v
+./subelements/latch.v
+./subelements/decoder_5.v
+./subelements/tff_asyncR.v
+./subelements/sr_2b.v
+./subelements/dff_sync_clear.v
+./subelements/dffe_ref.v
+./subelements/sr_1b.v
+./subelements/mod_8_counter.v
+./subelements/s_ext27_32.v
+./subelements/cla_8b.v
+./subelements/sr_4b.v
+./subelements/sl_16b.v
+./subelements/sl_4b.v
+./subelements/mux_2_5b.v
+./subelements/sub_32bit.v
+./subelements/sr_16b.v
+./subelements/mux_8.v
+./subelements/mux_2.v
+./subelements/s_ext17_32.v
+./subelements/sl_1b.v
+./subelements/and_32bit.v
+./subelements/add_32bit.v
+./subelements/sra_32bit.v
+./main_modules/alu.v
+./main_modules/multdiv.v
+./main_modules/regfile.v
+./Wrapper_tb.v
+./hazards.v
+./Wrapper.v
+./control.v
+./RAM.v
+./processor.v
+./ROM.v
+./Wallace Tree/wallace_4b_tb.v
+./Wallace Tree/wallace_4b.v
+./Wallace Tree/wallace_32b.v
+./Wallace Tree/full_adder.v

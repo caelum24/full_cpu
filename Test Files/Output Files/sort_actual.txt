@@ -1,0 +1,335 @@
+Cycle   8: Wrote 256 into register 29
+Cycle   9: Wrote 3840 into register 27
+Cycle  10: Wrote 50 into register 8
+Cycle  11: Wrote 3 into register 9
+Cycle  13: Wrote 1 into register 9
+Cycle  15: Wrote 4 into register 9
+Cycle  17: Wrote 2 into register 9
+Cycle  19: Wrote 50 into register 4
+Cycle  23: Wrote 78 into register 31
+Cycle  27: Wrote 257 into register 29
+Cycle  28: Wrote 50 into register 8
+Cycle  29: Wrote 0 into register 9
+Cycle  30: Wrote 0 into register 4
+Cycle  31: Wrote 27 into register 31
+Cycle  34: Wrote 3840 into register 27
+Cycle  38: Wrote 3840 into register 2
+Cycle  42: Wrote 3837 into register 11
+Cycle  43: Wrote 3 into register 10
+Cycle  50: Wrote 3 into register 4
+Cycle  51: Wrote 32 into register 31
+Cycle  54: Wrote 3837 into register 27
+Cycle  58: Wrote 3837 into register 2
+Cycle  66: Wrote 51 into register 8
+Cycle  67: Wrote 1 into register 10
+Cycle  68: Wrote 3837 into register 9
+Cycle  72: Wrote 3 into register 4
+Cycle  73: Wrote 32 into register 31
+Cycle  76: Wrote 3834 into register 27
+Cycle  80: Wrote 3834 into register 2
+Cycle  88: Wrote 52 into register 8
+Cycle  89: Wrote 4 into register 10
+Cycle  90: Wrote 3834 into register 9
+Cycle  94: Wrote 3 into register 4
+Cycle  95: Wrote 32 into register 31
+Cycle  98: Wrote 3831 into register 27
+Cycle 102: Wrote 3831 into register 2
+Cycle 110: Wrote 53 into register 8
+Cycle 111: Wrote 2 into register 10
+Cycle 112: Wrote 3831 into register 9
+Cycle 116: Wrote 3 into register 4
+Cycle 117: Wrote 32 into register 31
+Cycle 120: Wrote 3828 into register 27
+Cycle 124: Wrote 3828 into register 2
+Cycle 132: Wrote 54 into register 8
+Cycle 133: Wrote 0 into register 10
+Cycle 134: Wrote 3828 into register 9
+Cycle 136: Wrote 3837 into register 2
+Cycle 137: Wrote 256 into register 29
+Cycle 138: Wrote 78 into register 31
+Cycle 143: Wrote 3837 into register 8
+Cycle 144: Wrote 3837 into register 4
+Cycle 145: Wrote 81 into register 31
+Cycle 149: Wrote 257 into register 29
+Cycle 150: Wrote 0 into register 15
+Cycle 151: Wrote 3837 into register 8
+Cycle 152: Wrote 3837 into register 9
+Cycle 156: Wrote 3834 into register 14
+Cycle 160: Wrote 3 into register 10
+Cycle 161: Wrote 1 into register 11
+Cycle 164: Wrote 1 into register 15
+Cycle 165: Wrote 0 into register 12
+Cycle 171: Wrote 3831 into register 13
+Cycle 180: Wrote 3834 into register 8
+Cycle 181: Wrote 3834 into register 9
+Cycle 182: Wrote 3837 into register 14
+Cycle 186: Wrote 1 into register 10
+Cycle 187: Wrote 3 into register 11
+Cycle 192: Wrote 3837 into register 9
+Cycle 193: Wrote 3831 into register 14
+Cycle 197: Wrote 3 into register 10
+Cycle 198: Wrote 4 into register 11
+Cycle 203: Wrote 3831 into register 9
+Cycle 204: Wrote 3828 into register 14
+Cycle 208: Wrote 4 into register 10
+Cycle 209: Wrote 2 into register 11
+Cycle 212: Wrote 1 into register 15
+Cycle 213: Wrote 3837 into register 12
+Cycle 219: Wrote 0 into register 13
+Cycle 230: Wrote 3828 into register 9
+Cycle 231: Wrote 3831 into register 14
+Cycle 235: Wrote 2 into register 10
+Cycle 236: Wrote 4 into register 11
+Cycle 241: Wrote 3831 into register 9
+Cycle 242: Wrote 0 into register 14
+Cycle 246: Wrote 4 into register 10
+Cycle 247: Wrote 0 into register 11
+Cycle 250: Wrote 1 into register 15
+Cycle 251: Wrote 3828 into register 12
+Cycle 257: Wrote 3834 into register 13
+Cycle 268: Wrote 0 into register 9
+Cycle 269: Wrote 3831 into register 14
+Cycle 273: Wrote 0 into register 10
+Cycle 274: Wrote 4 into register 11
+Cycle 279: Wrote 3831 into register 9
+Cycle 280: Wrote 3834 into register 14
+Cycle 284: Wrote 4 into register 10
+Cycle 285: Wrote 1 into register 11
+Cycle 288: Wrote 1 into register 15
+Cycle 289: Wrote 0 into register 12
+Cycle 295: Wrote 3837 into register 13
+Cycle 306: Wrote 3834 into register 9
+Cycle 307: Wrote 3831 into register 14
+Cycle 311: Wrote 1 into register 10
+Cycle 312: Wrote 4 into register 11
+Cycle 317: Wrote 3831 into register 9
+Cycle 318: Wrote 3837 into register 14
+Cycle 322: Wrote 4 into register 10
+Cycle 323: Wrote 3 into register 11
+Cycle 326: Wrote 1 into register 15
+Cycle 327: Wrote 3834 into register 12
+Cycle 333: Wrote 3828 into register 13
+Cycle 344: Wrote 3837 into register 9
+Cycle 345: Wrote 3831 into register 14
+Cycle 349: Wrote 3 into register 10
+Cycle 350: Wrote 4 into register 11
+Cycle 355: Wrote 3831 into register 9
+Cycle 356: Wrote 3828 into register 14
+Cycle 360: Wrote 4 into register 10
+Cycle 361: Wrote 2 into register 11
+Cycle 364: Wrote 1 into register 15
+Cycle 365: Wrote 3837 into register 12
+Cycle 371: Wrote 0 into register 13
+Cycle 382: Wrote 3828 into register 9
+Cycle 383: Wrote 3831 into register 14
+Cycle 387: Wrote 2 into register 10
+Cycle 388: Wrote 4 into register 11
+Cycle 393: Wrote 3831 into register 9
+Cycle 394: Wrote 0 into register 14
+Cycle 398: Wrote 4 into register 10
+Cycle 399: Wrote 0 into register 11
+Cycle 402: Wrote 1 into register 15
+Cycle 403: Wrote 3828 into register 12
+Cycle 409: Wrote 3834 into register 13
+Cycle 420: Wrote 0 into register 9
+Cycle 421: Wrote 3831 into register 14
+Cycle 425: Wrote 0 into register 10
+Cycle 426: Wrote 4 into register 11
+Cycle 431: Wrote 3831 into register 9
+Cycle 432: Wrote 3834 into register 14
+Cycle 436: Wrote 4 into register 10
+Cycle 437: Wrote 1 into register 11
+Cycle 440: Wrote 1 into register 15
+Cycle 441: Wrote 0 into register 12
+Cycle 447: Wrote 3837 into register 13
+Cycle 458: Wrote 3834 into register 9
+Cycle 459: Wrote 3831 into register 14
+Cycle 463: Wrote 1 into register 10
+Cycle 464: Wrote 4 into register 11
+Cycle 469: Wrote 3831 into register 9
+Cycle 470: Wrote 3837 into register 14
+Cycle 474: Wrote 4 into register 10
+Cycle 475: Wrote 3 into register 11
+Cycle 478: Wrote 1 into register 15
+Cycle 479: Wrote 3834 into register 12
+Cycle 485: Wrote 3828 into register 13
+Cycle 496: Wrote 3837 into register 9
+Cycle 497: Wrote 3831 into register 14
+Cycle 501: Wrote 3 into register 10
+Cycle 502: Wrote 4 into register 11
+Cycle 507: Wrote 3831 into register 9
+Cycle 508: Wrote 3828 into register 14
+Cycle 512: Wrote 4 into register 10
+Cycle 513: Wrote 2 into register 11
+Cycle 516: Wrote 1 into register 15
+Cycle 517: Wrote 3837 into register 12
+Cycle 523: Wrote 0 into register 13
+Cycle 534: Wrote 3828 into register 9
+Cycle 535: Wrote 3831 into register 14
+Cycle 539: Wrote 2 into register 10
+Cycle 540: Wrote 4 into register 11
+Cycle 545: Wrote 3831 into register 9
+Cycle 546: Wrote 0 into register 14
+Cycle 550: Wrote 4 into register 10
+Cycle 551: Wrote 0 into register 11
+Cycle 554: Wrote 1 into register 15
+Cycle 555: Wrote 3828 into register 12
+Cycle 561: Wrote 3834 into register 13
+Cycle 572: Wrote 0 into register 9
+Cycle 573: Wrote 3831 into register 14
+Cycle 577: Wrote 0 into register 10
+Cycle 578: Wrote 4 into register 11
+Cycle 583: Wrote 3831 into register 9
+Cycle 584: Wrote 3834 into register 14
+Cycle 588: Wrote 4 into register 10
+Cycle 589: Wrote 1 into register 11
+Cycle 592: Wrote 1 into register 15
+Cycle 593: Wrote 0 into register 12
+Cycle 599: Wrote 3837 into register 13
+Cycle 610: Wrote 3834 into register 9
+Cycle 611: Wrote 3831 into register 14
+Cycle 615: Wrote 1 into register 10
+Cycle 616: Wrote 4 into register 11
+Cycle 621: Wrote 3831 into register 9
+Cycle 622: Wrote 3837 into register 14
+Cycle 626: Wrote 4 into register 10
+Cycle 627: Wrote 3 into register 11
+Cycle 630: Wrote 1 into register 15
+Cycle 631: Wrote 3834 into register 12
+Cycle 637: Wrote 3828 into register 13
+Cycle 648: Wrote 3837 into register 9
+Cycle 649: Wrote 3831 into register 14
+Cycle 653: Wrote 3 into register 10
+Cycle 654: Wrote 4 into register 11
+Cycle 659: Wrote 3831 into register 9
+Cycle 660: Wrote 3828 into register 14
+Cycle 664: Wrote 4 into register 10
+Cycle 665: Wrote 2 into register 11
+Cycle 668: Wrote 1 into register 15
+Cycle 669: Wrote 3837 into register 12
+Cycle 675: Wrote 0 into register 13
+Cycle 686: Wrote 3828 into register 9
+Cycle 687: Wrote 3831 into register 14
+Cycle 691: Wrote 2 into register 10
+Cycle 692: Wrote 4 into register 11
+Cycle 697: Wrote 3831 into register 9
+Cycle 698: Wrote 0 into register 14
+Cycle 702: Wrote 4 into register 10
+Cycle 703: Wrote 0 into register 11
+Cycle 706: Wrote 1 into register 15
+Cycle 707: Wrote 3828 into register 12
+Cycle 713: Wrote 3834 into register 13
+Cycle 724: Wrote 0 into register 9
+Cycle 725: Wrote 3831 into register 14
+Cycle 729: Wrote 0 into register 10
+Cycle 730: Wrote 4 into register 11
+Cycle 735: Wrote 3831 into register 9
+Cycle 736: Wrote 3834 into register 14
+Cycle 740: Wrote 4 into register 10
+Cycle 741: Wrote 1 into register 11
+Cycle 744: Wrote 1 into register 15
+Cycle 745: Wrote 0 into register 12
+Cycle 751: Wrote 3837 into register 13
+Cycle 762: Wrote 3834 into register 9
+Cycle 763: Wrote 3831 into register 14
+Cycle 767: Wrote 1 into register 10
+Cycle 768: Wrote 4 into register 11
+Cycle 773: Wrote 3831 into register 9
+Cycle 774: Wrote 3837 into register 14
+Cycle 778: Wrote 4 into register 10
+Cycle 779: Wrote 3 into register 11
+Cycle 782: Wrote 1 into register 15
+Cycle 783: Wrote 3834 into register 12
+Cycle 789: Wrote 3828 into register 13
+Cycle 800: Wrote 3837 into register 9
+Cycle 801: Wrote 3831 into register 14
+Cycle 805: Wrote 3 into register 10
+Cycle 806: Wrote 4 into register 11
+Cycle 811: Wrote 3831 into register 9
+Cycle 812: Wrote 3828 into register 14
+Cycle 816: Wrote 4 into register 10
+Cycle 817: Wrote 2 into register 11
+Cycle 820: Wrote 1 into register 15
+Cycle 821: Wrote 3837 into register 12
+Cycle 827: Wrote 0 into register 13
+Cycle 838: Wrote 3828 into register 9
+Cycle 839: Wrote 3831 into register 14
+Cycle 843: Wrote 2 into register 10
+Cycle 844: Wrote 4 into register 11
+Cycle 849: Wrote 3831 into register 9
+Cycle 850: Wrote 0 into register 14
+Cycle 854: Wrote 4 into register 10
+Cycle 855: Wrote 0 into register 11
+Cycle 858: Wrote 1 into register 15
+Cycle 859: Wrote 3828 into register 12
+Cycle 865: Wrote 3834 into register 13
+Cycle 876: Wrote 0 into register 9
+Cycle 877: Wrote 3831 into register 14
+Cycle 881: Wrote 0 into register 10
+Cycle 882: Wrote 4 into register 11
+Cycle 887: Wrote 3831 into register 9
+Cycle 888: Wrote 3834 into register 14
+Cycle 892: Wrote 4 into register 10
+Cycle 893: Wrote 1 into register 11
+Cycle 896: Wrote 1 into register 15
+Cycle 897: Wrote 0 into register 12
+Cycle 903: Wrote 3837 into register 13
+Cycle 914: Wrote 3834 into register 9
+Cycle 915: Wrote 3831 into register 14
+Cycle 919: Wrote 1 into register 10
+Cycle 920: Wrote 4 into register 11
+Cycle 925: Wrote 3831 into register 9
+Cycle 926: Wrote 3837 into register 14
+Cycle 930: Wrote 4 into register 10
+Cycle 931: Wrote 3 into register 11
+Cycle 934: Wrote 1 into register 15
+Cycle 935: Wrote 3834 into register 12
+Cycle 941: Wrote 3828 into register 13
+Cycle 952: Wrote 3837 into register 9
+Cycle 953: Wrote 3831 into register 14
+Cycle 957: Wrote 3 into register 10
+Cycle 958: Wrote 4 into register 11
+Cycle 963: Wrote 3831 into register 9
+Cycle 964: Wrote 3828 into register 14
+Cycle 968: Wrote 4 into register 10
+Cycle 969: Wrote 2 into register 11
+Cycle 972: Wrote 1 into register 15
+Cycle 973: Wrote 3837 into register 12
+Cycle 979: Wrote 0 into register 13
+Cycle 990: Wrote 3828 into register 9
+Cycle 991: Wrote 3831 into register 14
+Cycle 995: Wrote 2 into register 10
+Cycle 996: Wrote 4 into register 11
+============== Testing Mode ==============
+Reg  0:           0
+Reg  1:           0
+Reg  2:        3837
+Reg  3:           0
+Reg  4:        3837
+Reg  5:           0
+Reg  6:           0
+Reg  7:           0
+Reg  8:        3834
+Reg  9:        3828
+Reg 10:           2
+Reg 11:           4
+Reg 12:        3837
+Reg 13:           0
+Reg 14:        3831
+Reg 15:           1
+Reg 16:           0
+Reg 17:           0
+Reg 18:           0
+Reg 19:           0
+Reg 20:           0
+Reg 21:           0
+Reg 22:           0
+Reg 23:           0
+Reg 24:           0
+Reg 25:           0
+Reg 26:           0
+Reg 27:        3828
+Reg 28:           0
+Reg 29:         257
+Reg 30:           0
+Reg 31:          81
