@@ -58,11 +58,12 @@ module VGAController(
 	wire[PALETTE_ADDRESS_WIDTH-1:0] colorAddr; 	 // Color address for the color palette
 	assign imgAddress = x + 640*y;				 // Address calculated coordinate
 
+	//TODO change image.mem to name of training ground background file name
 	VGA_RAM #(		
 		.DEPTH(PIXEL_COUNT), 				     // Set RAM depth to contain every pixel
 		.DATA_WIDTH(PALETTE_ADDRESS_WIDTH),      // Set data width according to the color palette
 		.ADDRESS_WIDTH(PIXEL_ADDRESS_WIDTH),     // Set address with according to the pixel count
-		.MEMFILE({FILES_PATH, "image.mem"})) // Memory initialization
+		.MEMFILE({FILES_PATH, "image.mem"})) // Memory initialization 
 	ImageData(
 		.clk(clk), 						 // Falling edge of the 100 MHz clk
 		.addr(imgAddress),					 // Image data address
@@ -72,6 +73,7 @@ module VGAController(
 	// Color Palette to Map Color Address to 12-Bit Color
 	wire[BITS_PER_COLOR-1:0] colorData; // 12-bit color data at current pixel
 
+	//TODO: initialize colors.mem from colors.csv
 	VGA_RAM #(
 		.DEPTH(PALETTE_COLOR_COUNT), 		       // Set depth to contain every color		
 		.DATA_WIDTH(BITS_PER_COLOR), 		       // Set data width according to the bits per color
@@ -115,7 +117,7 @@ module VGAController(
     reg [9:0] refx;
     reg [8:0] refy;
     initial 
-    begin
+    begin //SET THESE TO CHANGE WHERE THE GOAL IS
         refx <= 10'd310;
         refy <= 9'd50;
     end
@@ -134,10 +136,13 @@ module VGAController(
     assign show = active & ~isInBox;
     
 	// Assign to output color from register if active
-	wire[BITS_PER_COLOR-1:0] colorOut; 			  // Output color 
-	wire inbox;
-	assign inbox = sprite_on ?  12'b111111111111 : 12'd0; // When not active, output black
-    assign colorOut = show ? colorData : inbox;
+	wire[BITS_PER_COLOR-1:0] colorOut, background; 			  // Output color 
+	wire is_dot;
+	assign background = show ? colorData : 12'hc99; //TODO: SET THIS TO GOAL COLOR
+	//TODO: add section here to determine if there is a dot in that location
+	// assign is_dot;
+	// assign inbox = sprite_on ?  12'b111111111111 : 12'd0; // When not active, output black
+    assign colorOut = is_dot ? 12'b111111111111 : background; //if a dot, output black
 	// Quickly assign the output colors to their channels using concatenation
 	assign {VGA_R, VGA_G, VGA_B} = colorOut;
 endmodule

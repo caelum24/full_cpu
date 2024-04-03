@@ -1,6 +1,6 @@
 module mod_8_counter(count, clock, en, reset);
 
-    input clock, T, en, reset;
+    input clock, en, reset;
     output [2:0] count;
 
     wire three_in;
