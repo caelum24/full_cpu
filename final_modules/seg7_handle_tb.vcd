@@ -1,0 +1,427 @@
+$date
+	Wed Apr  3 12:30:13 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module seg7_handle_tb $end
+$var wire 4 ! seg_ctrl [3:0] $end
+$var wire 4 " out_seg [3:0] $end
+$var wire 7 # controls [6:0] $end
+$var reg 1 $ clock $end
+$var reg 14 % num [13:0] $end
+$var reg 1 & reset $end
+$scope module uut $end
+$var wire 1 $ clock $end
+$var wire 1 ' is_0 $end
+$var wire 1 ( is_1 $end
+$var wire 1 ) is_2 $end
+$var wire 1 * is_3 $end
+$var wire 1 + is_4 $end
+$var wire 1 , is_5 $end
+$var wire 1 - is_6 $end
+$var wire 1 . is_7 $end
+$var wire 1 / is_8 $end
+$var wire 1 0 is_9 $end
+$var wire 14 1 num [13:0] $end
+$var wire 1 & reset $end
+$var wire 4 2 wire2 [3:0] $end
+$var wire 4 3 wire1 [3:0] $end
+$var wire 4 4 seg_ctrl [3:0] $end
+$var wire 2 5 seg_choose [1:0] $end
+$var wire 4 6 out_seg [3:0] $end
+$var wire 7 7 controls [6:0] $end
+$var reg 4 8 hundreds [3:0] $end
+$var reg 4 9 ones [3:0] $end
+$var reg 4 : tens [3:0] $end
+$var reg 4 ; thousands [3:0] $end
+$scope module seg $end
+$var wire 1 $ clock $end
+$var wire 1 < en $end
+$var wire 1 & reset $end
+$var wire 2 = count [1:0] $end
+$scope module ones $end
+$var wire 1 > T $end
+$var wire 1 $ clock $end
+$var wire 1 ? d_in $end
+$var wire 1 < en $end
+$var wire 1 & reset $end
+$var wire 1 @ t_off $end
+$var wire 1 A t_on $end
+$var wire 1 B Q $end
+$scope module toggle_reg $end
+$var wire 1 $ clk $end
+$var wire 1 & clr $end
+$var wire 1 ? d $end
+$var wire 1 < en $end
+$var reg 1 B q $end
+$upscope $end
+$upscope $end
+$scope module twos $end
+$var wire 1 C T $end
+$var wire 1 $ clock $end
+$var wire 1 D d_in $end
+$var wire 1 < en $end
+$var wire 1 & reset $end
+$var wire 1 E t_off $end
+$var wire 1 F t_on $end
+$var wire 1 G Q $end
+$scope module toggle_reg $end
+$var wire 1 $ clk $end
+$var wire 1 & clr $end
+$var wire 1 D d $end
+$var wire 1 < en $end
+$var reg 1 G q $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#20000
+$dumpvars
+0G
+0F
+0E
+0D
+0C
+0B
+1A
+0@
+1?
+1>
+b0 =
+1<
+b0 ;
+b1 :
+b0 9
+b0 8
+b111111 7
+b0 6
+b0 5
+b1 4
+b0 3
+b0 2
+b1010 1
+00
+0/
+0.
+0-
+0,
+0+
+0*
+0)
+0(
+1'
+0&
+b1010 %
+0$
+b111111 #
+b0 "
+b1 !
+$end
+#30000
+b110 #
+b110 7
+0'
+1(
+0?
+1D
+b1 "
+b1 6
+0A
+1F
+b1 3
+b10 !
+b10 4
+1C
+b1 5
+b1 =
+1B
+1$
+#40000
+b1001111 #
+b1001111 7
+0(
+1*
+b11 "
+b11 6
+b11 3
+b10 8
+b11 :
+b10 9
+0$
+b11101000 %
+b11101000 1
+#50000
+b1011011 #
+b1011011 7
+1)
+0'
+0*
+1?
+1E
+1D
+1A
+b10 2
+b10 3
+b100 !
+b100 4
+0F
+b10 "
+b10 6
+0C
+0B
+b10 5
+b10 =
+1G
+1$
+#60000
+0(
+b1101101 #
+b1101101 7
+1,
+0)
+0*
+b101 "
+b101 6
+b101 2
+b110 3
+b11 ;
+b101 8
+b110 :
+b110 9
+0$
+b110111101110 %
+b110111101110 1
+#70000
+1*
+b1001111 #
+b1001111 7
+0,
+0.
+0D
+0?
+0E
+b11 "
+b11 6
+0A
+b11 2
+b1000 !
+b1000 4
+1C
+b11 5
+b11 =
+1B
+1$
+#80000
+b1100110 #
+b1100110 7
+0'
+1+
+0*
+b100 "
+b100 6
+b100 2
+b100 ;
+b100 9
+0$
+b1000111010100 %
+b1000111010100 1
+#90000
+b1100110 #
+b1100110 7
+1+
+0-
+1?
+1A
+b101 2
+b100 3
+b100 "
+b100 6
+b1 !
+b1 4
+0C
+0B
+b0 5
+b0 =
+0G
+1$
+#100000
+b0 2
+b0 ;
+b0 8
+b101 :
+0$
+b110110 %
+b110110 1
+#110000
+b1101101 #
+b1101101 7
+0+
+1,
+0?
+1D
+b101 "
+b101 6
+0A
+1F
+b101 3
+b10 !
+b10 4
+1C
+b1 5
+b1 =
+1B
+1$
+#120000
+1'
+b111111 #
+b111111 7
+0+
+0,
+b0 "
+b0 6
+b0 3
+b110 8
+b0 :
+b1001 9
+0$
+b1001100001 %
+b1001100001 1
+#130000
+0'
+b1111101 #
+b1111101 7
+1-
+0)
+1?
+1E
+b110 "
+b110 6
+1D
+1A
+b110 2
+b1001 3
+b100 !
+b100 4
+0F
+0C
+0B
+b10 5
+b10 =
+1G
+1$
+#140000
+b1100110 #
+b1100110 7
+1+
+0-
+b100 "
+b100 6
+b100 2
+b10 3
+b111 ;
+b100 8
+b11 :
+b10 9
+0$
+b1110100001000 %
+b1110100001000 1
+#150000
+b1000111 #
+b1000111 7
+0+
+1.
+0,
+0D
+0?
+0E
+b111 "
+b111 6
+0A
+b111 2
+b11 3
+b1000 !
+b1000 4
+1C
+b11 5
+b11 =
+1B
+1$
+#160000
+1'
+b111111 #
+b111111 7
+0.
+b0 "
+b0 6
+b0 2
+b0 3
+b0 ;
+b0 8
+b0 :
+b1000 9
+0$
+b1000 %
+b1000 1
+#170000
+b1111111 #
+b1111111 7
+0'
+1/
+1?
+b1000 "
+b1000 6
+1A
+b1000 3
+b1 !
+b1 4
+0C
+0B
+b0 5
+b0 =
+0G
+1$
+#180000
+1*
+b1001111 #
+b1001111 7
+0/
+00
+b11 "
+b11 6
+b11 3
+b1001 :
+b11 9
+0$
+b1011101 %
+b1011101 1
+#190000
+b1101111 #
+b1101111 7
+0(
+10
+0*
+0?
+1D
+b1001 "
+b1001 6
+0A
+1F
+b1001 3
+b10 !
+b10 4
+1C
+b1 5
+b1 =
+1B
+1$
+#200000
+0$
