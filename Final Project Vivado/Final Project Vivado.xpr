@@ -439,13 +439,13 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../Test Files/Memory Files/addi_basic.mem">
+      <File Path="$PPRDIR/../Test Files/Memory Files/sort.mem">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../Test Files/Memory Files/sort.mem">
+      <File Path="$PPRDIR/../Test Files/Memory Files/addi_basic.mem">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>

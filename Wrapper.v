@@ -48,7 +48,7 @@ module Wrapper (clock_100, reset, SW, LED);
     assign LED = led_bridge[15:0];
 	
 	// ADD YOUR MEMORY FILE HERE
-	localparam INSTR_FILE = "sort";
+	localparam INSTR_FILE = "addi_basic";
 
 	// Main Processing Unit
 	processor CPU(.clock(clock), .reset(reset), 
