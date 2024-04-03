@@ -3,7 +3,6 @@ module array_divider_32b(Q, data_operandA, data_operandB);
     input [31:0] data_operandA, data_operandB;
     // input clock, ctrl_DIV;
     output [31:0] Q;
-    // output data_resultRDY;
 
     wire [62:0] dividend;
     wire [31:0] divisor;

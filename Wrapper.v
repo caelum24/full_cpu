@@ -24,16 +24,21 @@
  *
  **/
 
-module Wrapper (clock, reset);
+module Wrapper (clock, reset, SW, LED);
 	input clock, reset;
+	input[4:0] SW;
+
+	output[15:0] LED;
 
 	wire rwe, mwe;
 	wire[4:0] rd, rs1, rs2;
 	wire[31:0] instAddr, instData, 
 		rData, regA, regB,
 		memAddr, memDataIn, memDataOut;
-
-
+	wire[31:0] ctrl_write_decoded;
+	wire [15:0] LED;
+	wire [31:0] led_bridge;
+    assign LED = led_bridge[15:0];
 	// ADD YOUR MEMORY FILE HERE
 	localparam INSTR_FILE = "addi_basic";
 	
@@ -62,9 +67,10 @@ module Wrapper (clock, reset);
 	regfile RegisterFile(.clock(clock), 
 		.ctrl_writeEnable(rwe), .ctrl_reset(reset), 
 		.ctrl_writeReg(rd),
-		.ctrl_readRegA(rs1), .ctrl_readRegB(rs2), 
-		.data_writeReg(rData), .data_readRegA(regA), .data_readRegB(regB));
-						
+		.ctrl_readRegA(rs1), .ctrl_readRegB(rs2), .SW(SW),
+		.data_writeReg(rData), .data_readRegA(regA), .data_readRegB(regB), .LED_reg_display(led_bridge));
+	
+				
 	// Processor Memory (RAM)
 	RAM ProcMem(.clk(clock), 
 		.wEn(mwe), 

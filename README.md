@@ -1,13 +1,7 @@
 # Processor
-## Will Neuner wjn7
+## Will Neuner  (wjn7)
+## Nico Molina  (nrm31)
 
 ## Description of Design
 
-## Bypassing
-
-## Stalling
-
 ## Optimizations
-
-## Bugs
-# full_cpu
