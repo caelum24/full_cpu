@@ -37,3 +37,5 @@ addi $r29, $r29, 29
 addi $r30, $r30, 30
 addi $r31, $r31, 31
 # nop
+stop:
+j stop

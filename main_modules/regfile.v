@@ -16,8 +16,6 @@ module regfile (
 
 	// wire [31:0] name [0:31];
 	wire [31:0] we, ctrl_write_decoded, ctrl_readA_decoded, ctrl_readB_decoded, LED_decoded;
-	// add your code here
-	
 
 	//building the decoders for write and read
 	decoder_5 write_decoded(ctrl_write_decoded, ctrl_writeReg);
@@ -45,5 +43,4 @@ module regfile (
             assign LED_reg_display = LED_decoded[r] ? q : 32'bz;
         end
     endgenerate
-
 endmodule

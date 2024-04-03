@@ -24,11 +24,18 @@
  *
  **/
 
-module Wrapper (clock, reset, SW, LED);
-	input clock, reset;
+module Wrapper (clock_100, reset, SW, LED);
+	input clock_100, reset;
 	input[4:0] SW;
 
 	output[15:0] LED;
+
+	// Slow clock from 100 to 50MHz
+	reg clock = 0;
+	always @(posedge clock_100)
+	begin
+		clock = ~clock;
+	end
 
 	wire rwe, mwe;
 	wire[4:0] rd, rs1, rs2;
@@ -39,43 +46,42 @@ module Wrapper (clock, reset, SW, LED);
 	wire [15:0] LED;
 	wire [31:0] led_bridge;
     assign LED = led_bridge[15:0];
-	// ADD YOUR MEMORY FILE HERE
-	localparam INSTR_FILE = "addi_basic";
 	
+	// ADD YOUR MEMORY FILE HERE
+	localparam INSTR_FILE = "sort";
+
 	// Main Processing Unit
 	processor CPU(.clock(clock), .reset(reset), 
-								
+
 		// ROM
 		.address_imem(instAddr), .q_imem(instData),
-									
+
 		// Regfile
 		.ctrl_writeEnable(rwe),     .ctrl_writeReg(rd),
 		.ctrl_readRegA(rs1),     .ctrl_readRegB(rs2), 
 		.data_writeReg(rData), .data_readRegA(regA), .data_readRegB(regB),
-									
+
 		// RAM
 		.wren(mwe), .address_dmem(memAddr), 
 		.data(memDataIn), .q_dmem(memDataOut)); 
-	
+
 	// Instruction Memory (ROM)
 	ROM #(.MEMFILE({INSTR_FILE, ".mem"}))
 	InstMem(.clk(clock), 
 		.addr(instAddr[11:0]), 
 		.dataOut(instData));
-	
+
 	// Register File
 	regfile RegisterFile(.clock(clock), 
 		.ctrl_writeEnable(rwe), .ctrl_reset(reset), 
 		.ctrl_writeReg(rd),
 		.ctrl_readRegA(rs1), .ctrl_readRegB(rs2), .SW(SW),
 		.data_writeReg(rData), .data_readRegA(regA), .data_readRegB(regB), .LED_reg_display(led_bridge));
-	
-				
+
 	// Processor Memory (RAM)
 	RAM ProcMem(.clk(clock), 
 		.wEn(mwe), 
 		.addr(memAddr[11:0]), 
 		.dataIn(memDataIn), 
 		.dataOut(memDataOut));
-
 endmodule
