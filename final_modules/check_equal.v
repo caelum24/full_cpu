@@ -1,4 +1,4 @@
-module check_equal(A, B, is_equal)
+module check_equal(A, B, is_equal);
     input [31:0] A, B;
     output is_equal;
 
@@ -13,3 +13,5 @@ module check_equal(A, B, is_equal)
     endgenerate
 
     assign is_equal = (|equal_bits) ? 1'b0 : 1'b1; // Equal if all bits are 0
+    
+endmodule

@@ -14,8 +14,8 @@ module VGAController(
 	);
 	
 	// Lab Memory Files Location
-	localparam FILES_PATH = "C:/Users/wjn7/Desktop/processor/final_modules";
-
+	localparam FILES_PATH = "C:/Users/wjn7/Desktop/full_cpu/final_modules/";
+    //localparam FILES_PATH = "";
 	// Clock divider 100 MHz -> 25 MHz
 	wire clk25; // 25MHz clock
 
@@ -142,14 +142,15 @@ module VGAController(
 	wire is_dot;
 
 	//checking if it's the background or the goal
-	assign background = show ? colorData : 12'hc99; //TODO: SET THIS TO GOAL COLOR
+	assign background = show ? colorData : 12'b000011010000; //TODO: SET THIS TO GOAL COLOR
 
 	//TODO: add section here to determine if there is a dot in that location
 	reg [9:0] dotx;
     reg [8:0] doty;
+    initial
 	begin //SET THESE TO CHANGE WHERE THE GOAL IS
-        dotx <= 10'd310;
-        doty <= 9'd50;
+        dotx <= 10'd0;
+        doty = 9'd0;
     end
 	// moving the dot around the screen
     always @(posedge slowclk) begin
@@ -158,15 +159,15 @@ module VGAController(
 	end 
 
 	wire x_equal, y_equal;
-	check_equal x_check(.A(x), .B(dotx), .is_equal(x_equal));
-	check_equal y_check(.A(y), .B(doty), .is_equal(y_equal));
-	
+	check_equal x_check(.A({21'd0, x}), .B({21'd0, dotx}), .is_equal(x_equal));
+	check_equal y_check(.A({22'd0,y}), .B({22'd0,doty}), .is_equal(y_equal));
+	//problem-> IS_DOT DOESN'T SEEM TO BE WORKING PROPERLY
 	assign is_dot = x_equal & y_equal;
 	// assign inbox = sprite_on ?  12'b111111111111 : 12'd0; // When not active, output black
-    assign colorOut = is_dot ? 12'b111111111111 : background; //if a dot, output black
+    assign colorOut = is_dot ? 12'h020 : background; //if a dot, output black
 	// Quickly assign the output colors to their channels using concatenation
-	assign {VGA_R, VGA_G, VGA_B} = colorOut;
-
+//	assign {VGA_R, VGA_G, VGA_B} = colorOut;
+    assign {VGA_R, VGA_G, VGA_B} = active ? colorOut : 12'd0;
 	//TODO: use screenEnd to signal to the processor that we can start changing dot values again
 	//TODO: might need to pause VGA until the calculations are done
 endmodule
