@@ -108,4 +108,10 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B);
 
 	// 7 seg control
 		//need some way for the processor to store the current generation value and then output it to this module
+//	reg [31:0] seg_value;
+//	initial
+//	begin
+//	   seg_value <= 32'd0;
+//	end	
+	
 endmodule

@@ -114,17 +114,67 @@ module VGAController(
     //         refx <= refx-1;
     //     end
     // end
-    
+    //TODO: need to convert this motion method into registers with wires and gates 
 	//registers to store reference of top left corner of goal
     reg [9:0] refx;
     reg [8:0] refy;
+    
+    parameter NUM_DOTS = 20;
+    reg [9:0] dots_x [NUM_DOTS-1 : 0];
+    reg [8:0] dots_y [NUM_DOTS-1 : 0];
+    reg [NUM_DOTS-1:0] is_dots;
+    
+    //TODO: on posedge writeEN, dots_x[reg_input] <= [reg_value] is_x_change -> inputs come from processor 
+    //TODO: use screenEnd to signal to the processor that we can start changing dot values again
+	//TODO: might need to pause VGA until the calculations are done
+    genvar i;
+    generate
+        for (i = 0; i< NUM_DOTS; i = i+1) begin : dots_move
+            initial begin
+                dots_x[i] <= 320;
+                dots_y[i] <= 240;
+                is_dots[i] <= 1'b0;
+            end
+            always @(posedge screenEnd) begin //TODO this will go away once processor is implemented
+		       dots_x[i] = dots_x[i]+10-i;
+		       dots_y[i] = dots_y[i]+1;
+	       end
+	       always @(posedge clk25) begin
+                if (x==dots_x[i] && y==dots_y[i]) begin
+                    is_dots[i] <= 1'b1;
+                end
+                else begin
+                    is_dots[i] <= 1'b0;
+                end
+          end
+//          always @(posedge dots_wren) begin
+//            if (dot_num == i) begin
+//                if (is_x_change == 1) begin
+//                    dots_x[i] <= dot_pos_change;
+//                end
+//                else begin
+//                    dots_y[i] <= dot_pos_change[8:0];
+//                end
+//            end
+//          end       
+      end
+    endgenerate
+    reg [9:0] dotx;
+    reg [8:0] doty;
+    wire is_dot;
+    assign is_dot = |is_dots;
+    
     initial 
     begin //SET THESE TO CHANGE WHERE THE GOAL IS
         refx <= 10'd310;
         refy <= 9'd50;
+        dotx <= 10'd20;
+        doty <= 9'd20;
     end
 
     reg isInBox;
+//    reg is_dot;
+    
     always @(posedge clk25) begin
         if (x >= refx && x < refx+20 && y >= refy && y < refy+20) begin
             isInBox <= 1'b1;
@@ -132,44 +182,43 @@ module VGAController(
         else begin
             isInBox <= 1'b0;
         end
+//        if (x==dotx && y==doty) begin
+//            is_dot <= 1'b1;
+//        end
+//        else begin
+//            is_dot <= 1'b0;
+//        end
     end
     
     wire show;
-    assign show = active & ~isInBox;
+    assign show = ~isInBox;
     
 	// Assign to output color from register if active
 	wire[BITS_PER_COLOR-1:0] colorOut, background; 			  // Output color 
-	wire is_dot;
+	
 
 	//checking if it's the background or the goal
 	assign background = show ? colorData : 12'b000011010000; //TODO: SET THIS TO GOAL COLOR
 
-	//TODO: add section here to determine if there is a dot in that location
-	reg [9:0] dotx;
-    reg [8:0] doty;
-    initial
-	begin //SET THESE TO CHANGE WHERE THE GOAL IS
-        dotx <= 10'd0;
-        doty = 9'd0;
-    end
 	// moving the dot around the screen
-    always @(posedge slowclk) begin
-		dotx <= dotx+1;
-		doty <= doty+1;
+    always @(posedge screenEnd) begin
+		dotx = dotx+1;
+		doty = doty+1;
 	end 
 
-	wire x_equal, y_equal;
-	check_equal x_check(.A({21'd0, x}), .B({21'd0, dotx}), .is_equal(x_equal));
-	check_equal y_check(.A({22'd0,y}), .B({22'd0,doty}), .is_equal(y_equal));
+//	wire x_equal, y_equal;
+//	check_equal x_check(.A({21'd0, x}), .B({21'd0, dotx}), .is_equal(x_equal));
+//	check_equal y_check(.A({22'd0,y}), .B({22'd0,doty}), .is_equal(y_equal));
 	//problem-> IS_DOT DOESN'T SEEM TO BE WORKING PROPERLY
-	assign is_dot = x_equal & y_equal;
+//	assign is_dot = x_equal & y_equal;
+//	assign is_dot = x==dotx;
+//    assign is_dot = 1'b0;
 	// assign inbox = sprite_on ?  12'b111111111111 : 12'd0; // When not active, output black
-    assign colorOut = is_dot ? 12'h020 : background; //if a dot, output black
+    assign colorOut = is_dot ? 12'b000000000000 : background; //if a dot, output black
 	// Quickly assign the output colors to their channels using concatenation
 //	assign {VGA_R, VGA_G, VGA_B} = colorOut;
     assign {VGA_R, VGA_G, VGA_B} = active ? colorOut : 12'd0;
-	//TODO: use screenEnd to signal to the processor that we can start changing dot values again
-	//TODO: might need to pause VGA until the calculations are done
+	
 endmodule
 
 
