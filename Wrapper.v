@@ -34,7 +34,7 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 	output[3:0] VGA_R;  // Red Signal Bits
 	output[3:0] VGA_G;  // Green Signal Bits
 	output[3:0] VGA_B;  // Blue Signal Bits
-	output[3:0] AN;
+	output[7:0] AN;
 	output[6:0] SEGCTRL;
 
 	// Slow clock from 100 to 50MHz
@@ -113,11 +113,10 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 	reg [31:0] seg_value;
 	initial
 	begin
-		seg_value <= 32'd4321;
+		seg_value <= 32'd1234;
 	end
 	// always @(posedge increment_seg) begin //increment_seg will come from the processor
 	// 	seg_value <= seg_value + 1;
 	// end
-
-	seg7_handle seg_ctrl(.clock_100(clock_100), .reset(reset), .num(seg_value), .controls(SEGCTRL), .seg_ctrl(AN));
+	seg7_handle seg_ctrl(.clock_100(clock_100), .reset(reset), .num(seg_value[13:0]), .controls(SEGCTRL), .seg_ctrl(AN));
 endmodule
