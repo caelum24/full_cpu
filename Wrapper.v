@@ -24,7 +24,7 @@
  *
  **/
 
-module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B);
+module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN, SEGCTRL);
 	input clock_100, reset;
 	input[4:0] SW;
 
@@ -34,6 +34,8 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B);
 	output[3:0] VGA_R;  // Red Signal Bits
 	output[3:0] VGA_G;  // Green Signal Bits
 	output[3:0] VGA_B;  // Blue Signal Bits
+	output[3:0] AN;
+	output[6:0] SEGCTRL;
 
 	// Slow clock from 100 to 50MHz
 	reg clock = 0;
@@ -108,10 +110,14 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B);
 
 	// 7 seg control
 		//need some way for the processor to store the current generation value and then output it to this module
-//	reg [31:0] seg_value;
-//	initial
-//	begin
-//	   seg_value <= 32'd0;
-//	end	
-	
+	reg [31:0] seg_value;
+	initial
+	begin
+		seg_value <= 32'd4321;
+	end
+	// always @(posedge increment_seg) begin //increment_seg will come from the processor
+	// 	seg_value <= seg_value + 1;
+	// end
+
+	seg7_handle seg_ctrl(.clock_100(clock_100), .reset(reset), .num(seg_value), .controls(SEGCTRL), .seg_ctrl(AN));
 endmodule

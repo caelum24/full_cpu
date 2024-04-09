@@ -1,9 +1,21 @@
-module seg7_handle(clock, reset, num, controls, seg_ctrl, out_seg);
+module seg7_handle(clock_100, reset, num, controls, seg_ctrl);
     input clock, reset;
     input [13:0] num;
-    output [6:0] controls;
-    output [3:0] seg_ctrl;
-    output [3:0] out_seg;
+    output [6:0] controls; //segment controllers
+    output [3:0] seg_ctrl; //which digit to output
+    // output [3:0] out_seg; //value of the 4 bit digit
+
+    reg [18:0] count_250Hz;
+    reg clock_250Hz;
+    always @(posedge clock_100) begin
+        if count_250Hz == 400000 begin
+            clock_250Hz = 0;
+            clock_250Hz = ~clock_250Hz;
+        end
+        else begin
+            count_250Hz <= count_250Hz+1;
+        end
+    end
 
     reg [3:0] thousands, hundreds, tens, ones;
     always @(*) begin
@@ -15,7 +27,7 @@ module seg7_handle(clock, reset, num, controls, seg_ctrl, out_seg);
 
     //this module will be used to handle the 7 segment displays to show generation count
     wire [1:0] seg_choose;
-    mod_4_counter seg(.count(seg_choose), .clock(clock), .en(1'b1), .reset(reset));
+    mod_4_counter seg(.count(seg_choose), .clock(clock_250Hz), .en(1'b1), .reset(reset));
     //TODO: REMEMBER THAT AN3-0 are low driven active
 
     assign seg_ctrl[0] = ~seg_choose[1] & ~seg_choose[0];
