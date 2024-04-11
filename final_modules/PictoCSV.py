@@ -30,7 +30,7 @@ with open(path + "colors.csv", "w") as csvFile:
     for n in range(int(len(colors)/8)):
         writer.writerow([(hex(color[0])[2:] + hex(color[1])[2:] + hex(color[1])[2:]) for color in colors[8 * n:8 * (n + 1)]])
 
-with open(path + "image.csv", "w") as csvFile:
+with open(path + "training_grounds.csv", "w") as csvFile:
     writer = csv.writer(csvFile)
     for y in range(img.size[1]):
         toWrite = []

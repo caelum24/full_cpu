@@ -24,11 +24,18 @@
  *
  **/
 
-module Wrapper (clock_100, reset, SW, LED);
+module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN, SEGCTRL);
 	input clock_100, reset;
 	input[4:0] SW;
 
 	output[15:0] LED;
+	output hSync;		// H Sync Signal
+	output vSync; 		// Veritcal Sync Signal
+	output[3:0] VGA_R;  // Red Signal Bits
+	output[3:0] VGA_G;  // Green Signal Bits
+	output[3:0] VGA_B;  // Blue Signal Bits
+	output[7:0] AN;
+	output[6:0] SEGCTRL;
 
 	// Slow clock from 100 to 50MHz
 	reg clock = 0;
@@ -84,4 +91,32 @@ module Wrapper (clock_100, reset, SW, LED);
 		.addr(memAddr[11:0]), 
 		.dataIn(memDataIn), 
 		.dataOut(memDataOut));
+
+
+	// VGA CONTROL
+		//the processor will need to interface with this to update dot locations
+		//for now, the dot locations are hard coded to start and move themselves
+	VGAController VGA(     
+		.clk(clock_100), 			// 100 MHz System Clock
+		.reset(reset), 		// Reset Signal
+
+		.hSync(hSync), 		// H Sync Signal
+		.vSync(vSync), 		// Veritcal Sync Signal
+		.VGA_R(VGA_R),  // Red Signal Bits
+		.VGA_G(VGA_G),  // Green Signal Bits
+		.VGA_B(VGA_B)  // Blue Signal Bits
+	);
+
+
+	// 7 seg control
+		//need some way for the processor to store the current generation value and then output it to this module
+	reg [31:0] seg_value;
+	initial
+	begin
+		seg_value <= 32'd1234;
+	end
+	// always @(posedge increment_seg) begin //increment_seg will come from the processor
+	// 	seg_value <= seg_value + 1;
+	// end
+	seg7_handle seg_ctrl(.clock_100(clock_100), .reset(reset), .num(seg_value[13:0]), .controls(SEGCTRL), .seg_ctrl(AN));
 endmodule
