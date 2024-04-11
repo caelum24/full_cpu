@@ -39,8 +39,10 @@ module processor(
     ctrl_readRegB,                  // O: Register to read from port B of RegFile
     data_writeReg,                  // O: Data to write to for RegFile
     data_readRegA,                  // I: Data from port A of RegFile
-    data_readRegB                   // I: Data from port B of RegFile
-	 
+    data_readRegB,                   // I: Data from port B of RegFile
+	
+	// 7seg 
+	inc_seg7 //bit to increment the 7segment display
 	);
 
 	// Control signals
@@ -60,6 +62,9 @@ module processor(
 	output [4:0] ctrl_writeReg, ctrl_readRegA, ctrl_readRegB;
 	output [31:0] data_writeReg;
 	input [31:0] data_readRegA, data_readRegB;
+	
+	//7seg
+	output inc_seg7;
 
 	/* YOUR CODE STARTS HERE */
 	//controls wire declaration 
@@ -117,7 +122,8 @@ module processor(
     wire [31:0] dx_clean_op;
     mux_2 dx_branch_cleaner(dx_clean_op, (valid_bj || hazard_stall), f_opcode, 32'b0);
     register_32b dx_instruction(dx_opcode, dx_clean_op, ~clock, (input_en && ~multdiv_halt), reset);  
-
+    
+    assign inc_seg7 = (dx_opcode[31:27] == 5'b11010); //NEW
     wire [31:0] xm_A_or_bp, xm_B_or_bp; //xm input decided between dx latch and bypassing options
     
     //TODO: could make this more efficient by pulling the other one in instead

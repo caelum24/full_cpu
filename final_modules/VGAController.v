@@ -7,9 +7,14 @@ module VGAController(
 	output vSync, 		// Veritcal Sync Signal
 	output[3:0] VGA_R,  // Red Signal Bits
 	output[3:0] VGA_G,  // Green Signal Bits
-	output[3:0] VGA_B  // Blue Signal Bits
+	output[3:0] VGA_B,  // Blue Signal Bits
 	// inout ps2_clk,
 	// inout ps2_data
+	//dot update stuff
+	input dotWren,
+	input is_Yloc,
+	input [31:0] dotID, 
+	input [31:0] dotLoc
 	//TODO: will need to add more inputs for data from the processor
 	);
 	
@@ -127,6 +132,11 @@ module VGAController(
     //TODO: on posedge writeEN, dots_x[reg_input] <= [reg_value] is_x_change -> inputs come from processor 
     //TODO: use screenEnd to signal to the processor that we can start changing dot values again
 	//TODO: might need to pause VGA until the calculations are done
+	
+//	dotWren,
+//	is_Yloc,
+//	[31:0] dotID, 
+//	[31:0] dotLoc
     genvar i;
     generate
         for (i = 0; i< NUM_DOTS; i = i+1) begin : dots_move
@@ -135,10 +145,10 @@ module VGAController(
                 dots_y[i] <= 240;
                 is_dots[i] <= 1'b0;
             end
-            always @(posedge screenEnd) begin //TODO this will go away once processor is implemented
-		       dots_x[i] = dots_x[i]+10-i;
-		       dots_y[i] = dots_y[i]+1;
-	       end
+//            always @(posedge screenEnd) begin //TODO this will go away once processor is implemented
+//		       dots_x[i] = dots_x[i]+10-i;
+//		       dots_y[i] = dots_y[i]+1;
+//	       end
 	       always @(posedge clk25) begin
                 if (x==dots_x[i] && y==dots_y[i]) begin
                     is_dots[i] <= 1'b1;
@@ -147,16 +157,17 @@ module VGAController(
                     is_dots[i] <= 1'b0;
                 end
           end
-//          always @(posedge dots_wren) begin
-//            if (dot_num == i) begin
-//                if (is_x_change == 1) begin
-//                    dots_x[i] <= dot_pos_change;
-//                end
-//                else begin
-//                    dots_y[i] <= dot_pos_change[8:0];
-//                end
-//            end
-//          end       
+          //TODO: Check over -> moving the dots based on inputs from processor
+          always @(posedge dotWren) begin
+            if (dotID == i) begin
+                if (is_Yloc == 1) begin
+                    dots_y[i] <= dotLoc[8:0];
+                end
+                else begin
+                    dots_x[i] <= dotLoc[9:0];
+                end
+            end
+          end       
       end
     endgenerate
     reg [9:0] dotx;

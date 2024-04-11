@@ -70,7 +70,11 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 
 		// RAM
 		.wren(mwe), .address_dmem(memAddr), 
-		.data(memDataIn), .q_dmem(memDataOut)); 
+		.data(memDataIn), .q_dmem(memDataOut),
+		
+		//7seg
+		.inc_seg7(increment_seg)
+		); 
 
 	// Instruction Memory (ROM)
 	ROM #(.MEMFILE({INSTR_FILE, ".mem"}))
@@ -86,16 +90,32 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 		.data_writeReg(rData), .data_readRegA(regA), .data_readRegB(regB), .LED_reg_display(led_bridge));
 
 	// Processor Memory (RAM)
+	wire [31:0] memoryData, randomNum;
+	
 	RAM ProcMem(.clk(clock), 
 		.wEn(mwe), 
 		.addr(memAddr[11:0]), 
 		.dataIn(memDataIn), 
-		.dataOut(memDataOut));
+		.dataOut(memoryData)); //changed for muxing with MMIO
 
-
+    lsfr RNG(clock, reset, randomNum); //random number module
+    
+    assign memDataOut = (memAddr == 9990) ? randomNum : memoryData; //if memory reading from addy 10000, grab random number
+    
 	// VGA CONTROL
 		//the processor will need to interface with this to update dot locations
 		//for now, the dot locations are hard coded to start and move themselves
+	
+	//wires for dictating when/how to update dot locations from the processor
+	wire [31:0] dotLoc;
+	wire [31:0] dotID;
+	wire dotWren, is_Yloc;	
+	
+	assign dotWren = (memAddr >= 10240 && mwe);
+	assign is_Yloc = (memAddr >= 12288);
+	assign dotID = is_Yloc ? (memAddr - 12288) : (memAddr - 10240);
+	assign dotLoc = memDataIn;
+	
 	VGAController VGA(     
 		.clk(clock_100), 			// 100 MHz System Clock
 		.reset(reset), 		// Reset Signal
@@ -104,7 +124,14 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 		.vSync(vSync), 		// Veritcal Sync Signal
 		.VGA_R(VGA_R),  // Red Signal Bits
 		.VGA_G(VGA_G),  // Green Signal Bits
-		.VGA_B(VGA_B)  // Blue Signal Bits
+		.VGA_B(VGA_B),  // Blue Signal Bits
+		
+		//dot updating
+		.dotWren(dotWren),
+	    .is_Yloc(is_Yloc),
+	    .dotID(dotID), 
+	    .dotLoc(dotLoc)
+		
 	);
 
 
@@ -113,10 +140,10 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 	reg [31:0] seg_value;
 	initial
 	begin
-		seg_value <= 32'd1234;
+		seg_value <= 32'd0;
 	end
-	// always @(posedge increment_seg) begin //increment_seg will come from the processor
-	// 	seg_value <= seg_value + 1;
-	// end
+	always @(posedge increment_seg) begin //increment_seg will come from the processor
+	 	seg_value <= seg_value + 1;
+	 end
 	seg7_handle seg_ctrl(.clock_100(clock_100), .reset(reset), .num(seg_value[13:0]), .controls(SEGCTRL), .seg_ctrl(AN));
 endmodule

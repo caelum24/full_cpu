@@ -1,8 +1,10 @@
-module lsfr(clock, reset, random_acc);
+module lsfr(clock, reset, randNum);
 
     //it works for now ig, but we may want to split it into 4 separate value generators
     input clock, reset;
-    output [3:0] random_acc;
+    output [31:0] randNum;
+    wire [3:0] random_acc;
+    
     
     wire limiter;
     
@@ -42,6 +44,8 @@ module lsfr(clock, reset, random_acc);
     assign limiter = &rand[3] & ~rand[2:0];
     assign random_acc = limiter ?  4'd0 : rand; //want to keep + and - sides even, but 2's complement isn't even, so -8 becomes 0
     // 4'b1001
-
+    assign randNum[31:4] = random_acc[3];
+    assign randNum[3:0] = random_acc[3:0];
+     
     endmodule
 
