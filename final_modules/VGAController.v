@@ -170,8 +170,8 @@ module VGAController(
           end       
       end
     endgenerate
-    reg [9:0] dotx;
-    reg [8:0] doty;
+    // reg [9:0] dotx;
+    // reg [8:0] doty;
     wire is_dot;
     assign is_dot = |is_dots;
     
@@ -179,8 +179,8 @@ module VGAController(
     begin //SET THESE TO CHANGE WHERE THE GOAL IS
         refx <= 10'd310;
         refy <= 9'd50;
-        dotx <= 10'd20;
-        doty <= 9'd20;
+        // dotx <= 10'd20;
+        // doty <= 9'd20;
     end
 
     reg isInBox;
