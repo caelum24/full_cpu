@@ -102,3 +102,5 @@ run: #loop over this for all of time
 
 
 
+stop:
+j stop
