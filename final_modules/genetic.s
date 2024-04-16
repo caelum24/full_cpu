@@ -4,6 +4,7 @@ NUMDOTS: .word 20
 WIDTH: .word 640
 HEIGHT: .word 480
 MAXVEL: .word 7
+MAXSTEP: .word 400
 NUMVECTORS: .word 400
 GOALX: .word 320 #x location on VGA of center of goal
 GOALY: .word 60  #y location on VGA of center of goal
@@ -31,9 +32,10 @@ addi $t2, $zero, STARTY
 
 
 
+#TODO: want $a0 to be the address of the head of the linkedlist of dots upon jumping to run
 
-
-
+#end of init jumps to run to start the process
+j run
 
 
 #make the dots change position
@@ -99,10 +101,9 @@ sw $t8, $a0, 0 #store x position
 sw $t9, $a0, 1 #store y position
 
 #load dot.position into the registers in VGAcontroller
-#TODO: insert the memory mapped store instruction once the hardware has been updated 
-# sw $t8, $a1, 10240 #storing Xpos to corresponding VGA register
-# sw $t9, $a1, 12288 #storing Ypos to corresponding VGA register
-
+#TODO: change this if we ever change the convention for where the memory mapped goes
+sw $t8, $a1, 100 #storing Xpos to corresponding VGA register
+sw $t9, $a1, 550 #storing Ypos to corresponding VGA register
 
 # If dot.position outside of boundaries of arena or numSteps >= maxStep:
     # Dot.dead = true
@@ -190,23 +191,33 @@ naturalSelection: #sort, mutate, and make new generation (should be a pretty hef
 
 run: #loop over this for all of time
 
+add $s0, $a0, $zero #head of linkedlist
+addi $s2, $zero, NUMDOTS #while counter < numdots, we loop move
 
+add $s3, $zero, $zero #counter for which step we're on
+addi $s4, $zero, 400 #MAXSTEP
 
+play_generation: #loop through this to play out the entire generation's movement
 
+add $s1, $zero, $zero #counter for which dot we're moving = 0
+move_step:
+#a0 is already the address of the needed dot
+add $a1, $s1, $zero #which dot is being moved
+jal move
+lw $a0, $a0, 9 #loading dot.next for next loop over the dots
+addi $s1, $s1, 1 #increment dotID
+blt $s1, $s2, move_step
+#before looping need to make sure $a0 is head of linkedlist
 
+add $a0, $s0, $zero #making $a0 the head of the linkedlist
+addi $s3, $s3, 1 #increment step counter
 
+blt $s3, $s4, play_generation
 
-
-
-
-
-
-
-
-
-
-
-
+# j run -> TODO uncomment once we have multiple generations programmed, for now just one will do
 
 stop:
+nop
+nop
+nop
 j stop
