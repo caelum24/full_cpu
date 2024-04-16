@@ -100,7 +100,7 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 
     lsfr RNG(clock, reset, randomNum); //random number module
     
-    assign memDataOut = (memAddr == 9990) ? randomNum : memoryData; //if memory reading from addy 10000, grab random number
+    assign memDataOut = (memAddr == 99) ? randomNum : memoryData; //if memory reading from addy 10000, grab random number
     
 	// VGA CONTROL
 		//the processor will need to interface with this to update dot locations
@@ -111,9 +111,9 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 	wire [31:0] dotID;
 	wire dotWren, is_Yloc;	
 	
-	assign dotWren = (memAddr >= 10240 && mwe);
-	assign is_Yloc = (memAddr >= 12288);
-	assign dotID = is_Yloc ? (memAddr - 12288) : (memAddr - 10240);
+	assign dotWren = (memAddr >= 100 && memAddr <= 999  && mwe);
+	assign is_Yloc = (memAddr >= 550);
+	assign dotID = is_Yloc ? (memAddr - 550) : (memAddr - 100);
 	assign dotLoc = memDataIn;
 	
 	VGAController VGA(     

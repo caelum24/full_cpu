@@ -212,10 +212,10 @@ module VGAController(
 	assign background = show ? colorData : 12'b000011010000; //TODO: SET THIS TO GOAL COLOR
 
 	// moving the dot around the screen
-    always @(posedge screenEnd) begin
-		dotx = dotx+1;
-		doty = doty+1;
-	end 
+//    always @(posedge screenEnd) begin
+//		dotx = dotx+1;
+//		doty = doty+1;
+//	end 
 
 //	wire x_equal, y_equal;
 //	check_equal x_check(.A({21'd0, x}), .B({21'd0, dotx}), .is_equal(x_equal));

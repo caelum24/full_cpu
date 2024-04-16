@@ -1,5 +1,5 @@
 `timescale 1ns / 1ps
-module RAM #( parameter DATA_WIDTH = 32, ADDRESS_WIDTH = 12, DEPTH = 4096) ( //262144
+module RAM #( parameter DATA_WIDTH = 32, ADDRESS_WIDTH = 12, DEPTH = 262144) ( // //4096
     input wire                     clk,                     
     input wire                     wEn,
     // input wire                     big,
