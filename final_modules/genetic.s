@@ -157,10 +157,34 @@ jr $ra
 
 
 calculateFitness: #determine the fitness of every dot
+#$a0 is the address of the dot in memory
+addi $t0, $zero, 1 
+lw $t1, $a0, 5 #load reachedgoal 
+bne $t0, $t1, is_dead #if reachedgoal != 1, to do is_read
 
+#Setting fitness to the number of steps taken
+lw $t2, $a0, 7 #loading numsteps
+sw $t2, $a0, 8
+j exit_calcFitness
 
+is_dead:
 
+lw $t3, $a0, 0 #load x position of the dot
+lw $t5, $a0, 1 #load y position of the dot
+addi, $t4, $zero, GOALX #loading x position of goal
+addi, $t6, $zero, GOALY #loading y position of goal
 
+sub $t7, $t4, $t3 #t7 = goalx - xpos
+sub $t8, $t6, $t5 #t8 = goaly - ypos
+mult $t7, $t7, $t7 #t7 =  xdist^2
+mult $t8, $t8, $t8 #t8 =  ydist^2
+add $t9, $t7, $t8 #calculating squared distance: dx^2 + dy^2
+
+addi $t2, $t9, 400 #dist+maxsteps
+sw $t2, $a0, 8
+
+exit_calcFitness:
+jr $ra
 
 
 
@@ -213,8 +237,21 @@ add $a0, $s0, $zero #making $a0 the head of the linkedlist
 addi $s3, $s3, 1 #increment step counter
 
 blt $s3, $s4, play_generation
+inc $zero, $zero, 0 #increment the generation counter
 
 # j run -> TODO uncomment once we have multiple generations programmed, for now just one will do
+
+# /*
+# #calculating the fitness of a dot
+# #s2 holds the number of dots
+# add $s1, $zero, $zero #counter for which dot we're calculating = 0
+# #a0 should be head of linkedlist from exiting the move loop above
+# fitness_loop:
+# jal calculateFitness
+# addi $s1, $s1, 1 #increment looper
+# lw $a0, $a0, 9 #loading dot.next for next loop over the dots
+# blt $s1, $s2, fitness_loop
+# */
 
 stop:
 nop

@@ -137,6 +137,7 @@ module VGAController(
 //	is_Yloc,
 //	[31:0] dotID, 
 //	[31:0] dotLoc
+	// TODO: add functionality for the champion
     genvar i;
     generate
         for (i = 0; i< NUM_DOTS; i = i+1) begin : dots_move
