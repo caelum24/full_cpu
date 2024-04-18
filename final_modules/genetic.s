@@ -10,7 +10,8 @@ GOALY: .word 60  #y location on VGA of center of goal
 STARTX: .word 320 #x location on VGA of dots' start location
 STARTY: .word 420 #y location on VGA of dots' start location
 MUTATIONRATE: .word 4 #How likely a dot's vector is to mutate when being born (likely out of 128 by using lfsr rng)
-STARTING_ADDR: .word 0x100 #Starting addr for  dots
+# STARTING_ADDR: .word 0x100 #Starting addr for  dots
+START_ADDR: .word 1000 
 
 #GLOBAL VARIABLES TO GO IN MEMORY
 #MAXSTEP
@@ -22,54 +23,71 @@ nop
 nop
 nop
 nop
-jal init_dots
-j run
-
-.data
-NUMDOTS: .word 20
-START_ADDR: .word 0x1000  
+# jal init_dots -> not necessary since init is right below main
+# j run
+ 
+#changes-> changing lw and li to addi to load in the desired values into the registers
+    #locations in memory are word addressed instead of byte addressed, so we don't need to multiply by 4 for addresses
 
 init_dots:
-    lw $s0, NUMDOTS       # Load NUMDOTS
-    lw $t2, START_ADDR    # Load starting addr
-    li $s1, 0             # Initialize counter
+addi $s0, $zero, NUMDOTS       # Load NUMDOTS
+addi $s1, $zero, 0 # Initialize counter for initializing all dots
+addi $t2, $zero, START_ADDR    # Load starting addr (head)
+add $t1, $zero, $t2 #t1 is current (initialized to head)
+addi $s3, $zero, NUMVECTORS #s3 has the number of vectors needed to be created
+sll $s3, $s3, 1 #multiply s3 by 2 to account for x and y in each vector = 2*NUMVECTORS
+
+addi $t8, $zero, STARTX #start location X for dots
+addi $t9, $zero, STARTY #start location Y for dots
 
 loop_dots:
-    li $t3, 40            # each dot occupies 10 words; each word 4 bytes = 40 bytes
-    mul $t1, $s1, $t3
-    add $t1, $t1, $t2     # $t1 now holds the address of the current dot
+    # addi $t3, $zero, 10            # each dot occupies 10 words; each word 4 bytes = 40 bytes
+    # addi $t1, , $t3
+    # mul $t1, $s1, $t3 don't need the mul if we can just add the size of a dot to the current address instead
+    # add $t1, $t1, $t2     # $t1 now holds the address of the current dot
+addi $s2, $zero, 0 #initialize random vector creation counter
 
-    # Initialize variables
-    sw $zero, 0($t1)      # x position
-    sw $zero, 4($t1)      # y position
-    sw $zero, 8($t1)      # x velocity
-    sw $zero, 12($t1)     # y velocity
-    sw $zero, 16($t1)     # dead status
-    sw $zero, 20($t1)     # reachedGoal status
-    sw $zero, 24($t1)     # champion status
-    sw $zero, 28($t1)     # numSteps
-    sw $zero, 32($t1)     # fitness
+# Initialize variables for current dot
+sw $t8, 0($t1)      # x start position
+sw $t9, 1($t1)      # y start position
+sw $zero, 2($t1)      # x velocity
+sw $zero, 3($t1)     # y velocity
+sw $zero, 4($t1)     # dead status
+sw $zero, 5($t1)     # reachedGoal status
+sw $zero, 6($t1)     # champion status
+sw $zero, 7($t1)     # numSteps
+sw $zero, 8($t1)     # fitness
 
-    # Set the next pointer, check if it's not the last dot
-    addi $t4, $s1, 1      # next dot index
-    mul $t4, $t4, $t3
-    add $t4, $t4, $t2
-    blt $s1, $s0, update_next  # Jump to update if not the last dot
-    sw $zero, 36($t1)     # next pointer of last dot is zilch
+loop_random: #creating the random vectors
+lw $t5, 99($zero) #getting a random value from the LFSR
+add $t6, $t1, $s2 #t6 is the address to put random value in the brain (current+vector number)
+sw $t5, 10($t6) #10 is vector 0 of the brain for current dot
+addi $s2, $s2, 1 #increment random vector counter
+blt $s2,  $s3, loop_random #if rand counter < 2*NUMVECTORS
 
-    j increment_counter
-
+# Set the next pointer, check if it's not the last dot
+# addi $t4, $s1, 1      # next dot index
+addi $t4, $t1, 810 #810 total words in a dot-> moving to the next one t4 = location of next dot
+# mul $t4, $t4, $t3
+# add $t4, $t4, $t2
+# blt $s1, $s0, update_next  # Jump to update if not the last dot
+# j increment_counter
 update_next:
-    sw $t4, 36($t1)       # next pointer
+sw $t4, 9($t1)       # dot.next = t4
 
 increment_counter:
-    addi $s1, $s1, 1
-    blt $s1, $s0, loop_dots  # Continue loop if not done w dots
-    
-    j main  # jump to main when done
+addi $s1, $s1, 1
+addi $t1, $t4, 0 #setting t1 to dot.next for next loop
+blt $s1, $s0, loop_dots  # Continue loop if not done w dots
+sw $zero, -801($t1)  # next pointer of last dot is zilch -> was written to earlier, but is now set to 0 (have to go back in memory because t1 was set to next) 
+
+addi $a0, $t2, 0 #set input to head of the linkedlist
+j run #jump to run when done
+# j main  # jump to main when done
+
 
 #make the dots change position
-move: #take in address of the dot being moved and its dot number (dot0, dot11, etc)
+move: #take in address of the dot being moved (a0) and its dot number (a1) (dot0, dot11, etc)
 
 # If not dead or reachedGoal
 lw $t1, $a0, 4 #load dead
@@ -206,8 +224,8 @@ addi, $t6, $zero, GOALY #loading y position of goal
 
 sub $t7, $t4, $t3 #t7 = goalx - xpos
 sub $t8, $t6, $t5 #t8 = goaly - ypos
-mult $t7, $t7, $t7 #t7 =  xdist^2
-mult $t8, $t8, $t8 #t8 =  ydist^2
+mul $t7, $t7, $t7 #t7 =  xdist^2
+mul $t8, $t8, $t8 #t8 =  ydist^2
 add $t9, $t7, $t8 #calculating squared distance: dx^2 + dy^2
 
 addi $t2, $t9, 400 #dist+maxsteps
@@ -272,9 +290,6 @@ mutate: #mutate the dots based on RNG and stuff
 
 
 naturalSelection: #sort, mutate, and make new generation (should be a pretty hefty method)
-
-
-
 
 
 
