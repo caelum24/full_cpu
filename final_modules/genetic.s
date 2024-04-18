@@ -187,10 +187,49 @@ exit_calcFitness:
 jr $ra
 
 
-
+#TODO: sort
 sort: #sort all of the dots based on fitness
+# $a0 = head of list
 
-
+sortrecur:
+addi $t7, $zero, 0          # $t7 = 0
+add $t0, $a0, $zero         # $t0 = head
+add $t1, $t0, $zero         # $t1 = current
+j siguard
+sortiter:
+lw $t2, 0($t1)              # $t2 = current.data
+lw $t3, 0($t6)              # $t3 = current.next.data
+blt $t2, $t3, sinext
+addi $t7, $zero, 1          # $t7 = 1
+lw $t4, 1($t1)              # $t4 = current.prev
+bne $t4, $zero, supprev
+j supprevd
+supprev:
+sw $t6, 2($t4)              # current.prev.next = current.next
+supprevd:
+sw $t4, 1($t6)              # current.next.prev = current.prev
+lw $t5, 2($t6)              # $t5 = current.next.next
+bne $t5, $zero, supnnprev
+j supnnprevd
+supnnprev:
+sw $t1, 1($t5)              # current.next.next.prev = current
+supnnprevd:
+sw $t5, 2($t1)              # current.next = current.next.next
+sw $t1, 2($t6)              # current.next.next = current
+sw $t6, 1($t1)              # current.prev = current.next
+bne $t0, $t1, sinext
+add $t0, $t6, $zero         # head = current.next
+sinext:
+add $t1, $t6, $zero         # $t1 = current.next
+siguard:
+lw $t6, 2($t1)              # $t6 = current.next
+bne $t6, $zero, sortiter
+add $a0, $t0, $zero
+bne $t7, $zero, sortrecur
+add $v0, $t0, $zero         # $v0 = head
+addi $sp, $sp, -1
+lw $ra, 0($sp)
+jr $ra
 
 
 
