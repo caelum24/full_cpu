@@ -1,4 +1,3 @@
-
 .data
 NUMDOTS: .word 20
 WIDTH: .word 640
@@ -11,6 +10,7 @@ GOALY: .word 60  #y location on VGA of center of goal
 STARTX: .word 320 #x location on VGA of dots' start location
 STARTY: .word 420 #y location on VGA of dots' start location
 MUTATIONRATE: .word 4 #How likely a dot's vector is to mutate when being born (likely out of 128 by using lfsr rng)
+STARTING_ADDR: .word 0x100 #Starting addr for  dots
 
 #GLOBAL VARIABLES TO GO IN MEMORY
 #MAXSTEP
@@ -22,21 +22,51 @@ nop
 nop
 nop
 nop
-init:
-#create all of the dots
-add $t0, $zero, $zero #init to zero
-
-#initialize where all the dots start
-addi $t1, $zero, STARTX
-addi $t2, $zero, STARTY
-
-
-
-#TODO: want $a0 to be the address of the head of the linkedlist of dots upon jumping to run
-
-#end of init jumps to run to start the process
+jal init_dots
 j run
 
+.data
+NUMDOTS: .word 20
+START_ADDR: .word 0x1000  
+
+init_dots:
+    lw $s0, NUMDOTS       # Load NUMDOTS
+    lw $t2, START_ADDR    # Load starting addr
+    li $s1, 0             # Initialize counter
+
+loop_dots:
+    li $t3, 40            # each dot occupies 10 words; each word 4 bytes = 40 bytes
+    mul $t1, $s1, $t3
+    add $t1, $t1, $t2     # $t1 now holds the address of the current dot
+
+    # Initialize variables
+    sw $zero, 0($t1)      # x position
+    sw $zero, 4($t1)      # y position
+    sw $zero, 8($t1)      # x velocity
+    sw $zero, 12($t1)     # y velocity
+    sw $zero, 16($t1)     # dead status
+    sw $zero, 20($t1)     # reachedGoal status
+    sw $zero, 24($t1)     # champion status
+    sw $zero, 28($t1)     # numSteps
+    sw $zero, 32($t1)     # fitness
+
+    # Set the next pointer, check if it's not the last dot
+    addi $t4, $s1, 1      # next dot index
+    mul $t4, $t4, $t3
+    add $t4, $t4, $t2
+    blt $s1, $s0, update_next  # Jump to update if not the last dot
+    sw $zero, 36($t1)     # next pointer of last dot is zilch
+
+    j increment_counter
+
+update_next:
+    sw $t4, 36($t1)       # next pointer
+
+increment_counter:
+    addi $s1, $s1, 1
+    blt $s1, $s0, loop_dots  # Continue loop if not done w dots
+    
+    j main  # jump to main when done
 
 #make the dots change position
 move: #take in address of the dot being moved and its dot number (dot0, dot11, etc)
