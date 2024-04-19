@@ -23,8 +23,8 @@ nop
 nop
 nop
 addi $sp, $zero, 10
-sw $sp, 262142($zero)
-lw $30, 262142($zero)
+sw $sp, 131070($zero)
+lw $30, 131070($zero)
 addi $sp, $zero 0
 nop
 # jal init_dots -> not necessary since init is right below main
