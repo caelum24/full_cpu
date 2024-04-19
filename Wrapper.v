@@ -145,5 +145,8 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 	always @(posedge increment_seg) begin //increment_seg will come from the processor
 	 	seg_value <= seg_value + 1;
 	 end
+	always @(posedge reset) begin //increment_seg will come from the processor
+	 	seg_value <= 0;
+	 end
 	seg7_handle seg_ctrl(.clock_100(clock_100), .reset(reset), .num(seg_value[13:0]), .controls(SEGCTRL), .seg_ctrl(AN));
 endmodule
