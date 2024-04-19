@@ -57,7 +57,6 @@ sw $zero, 5($t1)     # reachedGoal status
 sw $zero, 6($t1)     # champion status
 sw $zero, 7($t1)     # numSteps
 sw $zero, 8($t1)     # fitness
-
 loop_random: #creating the random vectors
 lw $t5, 99($zero) #getting a random value from the LFSR
 add $t6, $t1, $s2 #t6 is the address to put random value in the brain (current+vector number)
@@ -309,8 +308,9 @@ addi $s4, $zero, 400 #MAXSTEP
 play_generation: #loop through this to play out the entire generation's movement
 
 add $s1, $zero, $zero #counter for which dot we're moving = 0
+
 move_step:
-#a0 is already the address of the needed dot
+# a0 is already the address of the needed dot
 add $a1, $s1, $zero #which dot is being moved
 jal move
 lw $a0, 9($a0) #loading dot.next for next loop over the dots

@@ -1,3 +1,11 @@
+./final_modules/seg7_handle_tb.v
+./final_modules/VGAController.v
+./final_modules/VGA_RAM.v
+./final_modules/VGATimingGenerator.v
+./final_modules/lsfr_tb.v
+./final_modules/seg7_handle.v
+./final_modules/lsfr.v
+./final_modules/check_equal.v
 ./array_divider/array_divider_4b.v
 ./array_divider/array_divider_4b_tb.v
 ./array_divider/array_divider_32b.v
@@ -25,6 +33,7 @@
 ./subelements/sl_4b.v
 ./subelements/mux_2_5b.v
 ./subelements/sub_32bit.v
+./subelements/mod_4_counter.v
 ./subelements/sr_16b.v
 ./subelements/mux_8.v
 ./subelements/mux_2.v
