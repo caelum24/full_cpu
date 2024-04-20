@@ -42,8 +42,22 @@ module Wrapper_tb #(parameter FILE = "t_gen");
 	localparam VERIF_DIR = "Verification Files/";
 	localparam DEFAULT_CYCLES = 255;
 
+	reg clock_100 = 0;
+
 	// Inputs to the processor
 	reg clock = 0, reset = 0;
+
+	reg[1:0] pixCounter = 0;      // Pixel counter to divide the clock
+    // assign clock = pixCounter[1]; // Set the clock high whenever the second bit (2) is high
+	always @(posedge clock_100) begin
+		pixCounter <= pixCounter + 1; // Since the reg is only 3 bits, it will reset every 8 cycles
+		if (pixCounter[1]) begin
+			clock <= 1'b1;
+		end 
+		else begin
+			clock <= 1'b0;
+		end
+	end
 
 	// I/O for the processor
 	wire rwe, mwe;
@@ -184,7 +198,7 @@ module Wrapper_tb #(parameter FILE = "t_gen");
 	
 	// Create the clock
 	always
-		#10 clock = ~clock; 
+		#10 clock_100 = ~clock_100; 
 
 	//////////////////
 	// Test Harness //

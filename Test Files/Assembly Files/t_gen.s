@@ -29,7 +29,7 @@ addi $s0, $zero, 2       # Load NUMDOTS
 addi $s1, $zero, 0 # Initialize counter for initializing all dots
 addi $t2, $zero, 1000    # Load starting addr (head)
 add $t1, $zero, $t2 #t1 is current (initialized to head)
-addi $s3, $zero, 4 #s3 has the NUMVECTORS number of vectors needed to be created
+addi $s3, $zero, 20 #s3 has the NUMVECTORS number of vectors needed to be created
 sll $s3, $s3, 1 #multiply s3 by 2 to account for x and y in each vector = 2*NUMVECTORS
 
 addi $t8, $zero, 320 #start location X for dots
@@ -199,7 +199,7 @@ add $s0, $a0, $zero #head of linkedlist
 addi $s2, $zero, 2 #while counter < NUMDOTS, we loop move
 
 addi $s3, $zero, 0 #counter for which step we're on
-addi $s4, $zero, 4 #MAXSTEP
+addi $s4, $zero, 20 #MAXSTEP
 
 play_generation: #loop through this to play out the entire generation's movement
 
@@ -219,6 +219,14 @@ add $a0, $s0, $zero #making $a0 the head of the linkedlist
 addi $s3, $s3, 1 #increment step counter
 # addi $sp, $zero, 7 #testing
 inc $zero, $zero, 0 #increment the generation counter
+
+# TODO: modify this to get dots to move slower
+addi $26, $zero, 0
+addi $27, $zero, 191850 #12*1600 63950 ns per line of VGA -> 747400 instructions to == nanoseconds -> /4 because brand and 2 nops
+waiter:
+addi $26, $26, 1
+blt $26, $27, waiter
+
 blt $s3, $s4, play_generation
 inc $zero, $zero, 0 #increment the generation counter
 
