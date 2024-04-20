@@ -131,7 +131,7 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 	assign dotWren = (memAddr >= 100 && memAddr <= 999  && mwe);
 	assign is_Yloc = (memAddr >= 550); //if it's an x or y address
 	assign dotID = is_Yloc ? (memAddr - 550) : (memAddr - 100); //which register we need to write to
-	assign dotLoc = memDataIn; //where the dot needs to be
+	assign dotLoc = memDataIn; //where the dot needs to
 	
 	VGAController VGA(     
 		.clk(clock_100), 			// 100 MHz System Clock

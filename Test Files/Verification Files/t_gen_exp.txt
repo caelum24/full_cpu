@@ -1,4 +1,4 @@
-num cycles:200000
+num cycles:1015
 r0=0
 r1=0
 r2=0

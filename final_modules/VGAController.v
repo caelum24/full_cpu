@@ -144,6 +144,8 @@ module VGAController(
             initial begin
                 dots_x[i] <= 320;
                 dots_y[i] <= 240;
+				// dots_x[i] <= 4*(i+1);
+                // dots_y[i] <= 0;
                 is_dots[i] <= 1'b0;
             end
 //            always @(posedge screenEnd) begin //TODO this will go away once processor is implemented
