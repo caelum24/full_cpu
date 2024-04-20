@@ -222,7 +222,8 @@ inc $zero, $zero, 0 #increment the generation counter
 
 # TODO: modify this to get dots to move slower
 addi $26, $zero, 0
-addi $27, $zero, 191850 #12*1600 63950 ns per line of VGA -> 747400 instructions to == nanoseconds -> /4 because brand and 2 nops
+addi $27, $zero, 47962 #12*1600 63950 ns per line of VGA -> 747400 instructions to == nanoseconds -> /4 because brand and 2 nops
+sll $27, $27, 2 #191850/4 ~= 47962
 waiter:
 addi $26, $26, 1
 blt $26, $27, waiter
