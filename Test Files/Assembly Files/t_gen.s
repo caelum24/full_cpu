@@ -21,6 +21,12 @@ main:
 nop
 nop
 nop
+addi $26, $zero, 0
+addi $27, $zero, 131071 #25MHz -> 17 bit immediate -> 131071 largest pos, so shift left 9 to get ~3 second delay before running the code
+sll $27, $27, 9 #191850/4 ~= 47962
+startup:
+addi $26, $26, 1
+blt $26, $27, startup
 nop
 nop
 
@@ -223,7 +229,8 @@ inc $zero, $zero, 0 #increment the generation counter
 # TODO: modify this to get dots to move slower
 addi $26, $zero, 0
 addi $27, $zero, 47962 #12*1600 63950 ns per line of VGA -> 747400 instructions to == nanoseconds -> /4 because brand and 2 nops
-sll $27, $27, 2 #191850/4 ~= 47962
+# sll $27, $27, 2 #191850/4 ~= 47962
+sll $27, $27, 8 #arbitrary to make it 2^6 times slower than it was with above instruction
 waiter:
 addi $26, $26, 1
 blt $26, $27, waiter
