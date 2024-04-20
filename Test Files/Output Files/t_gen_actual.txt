@@ -63,14 +63,75 @@ Cycle 152: Wrote 2620 into register 12
 Cycle 154: Wrote 2 into register 17
 Cycle 155: Wrote 2620 into register 9
 Cycle 158: Wrote 1000 into register 4
-Cycle 159: Wrote 1810 into register 29
+
+Cycle 159: Wrote 1000 into register 16
+Cycle 160: Wrote 2 into register 18
+Cycle 161: Wrote 0 into register 19
+Cycle 162: Wrote 4 into register 20
+
+First Step Cycle
+Cycle 163: Wrote 0 into register 17
+Cycle 164: Wrote 0 into register 5
+Cycle 165: Wrote 42 into register 31
+Cycle 169: Wrote 69 into register 30
+Cycle 174: Wrote 1810 into register 4
+Cycle 175: Wrote 1 into register 17
+Cycle 179: Wrote 1 into register 5
+Cycle 180: Wrote 42 into register 31
+Cycle 184: Wrote 69 into register 30
+Cycle 189: Wrote 0 into register 4
+Cycle 190: Wrote 2 into register 17
+Cycle 192: Wrote 1000 into register 4
+Cycle 193: Wrote 1 into register 19
+2nd step cycle
+Cycle 198: Wrote 0 into register 17
+Cycle 199: Wrote 0 into register 5
+Cycle 200: Wrote 42 into register 31
+Cycle 204: Wrote 69 into register 30
+Cycle 209: Wrote 1810 into register 4
+Cycle 210: Wrote 1 into register 17
+Cycle 214: Wrote 1 into register 5
+Cycle 215: Wrote 42 into register 31
+Cycle 219: Wrote 69 into register 30
+Cycle 224: Wrote 0 into register 4
+Cycle 225: Wrote 2 into register 17
+Cycle 227: Wrote 1000 into register 4
+Cycle 228: Wrote 2 into register 19
+3rd step cycle
+Cycle 233: Wrote 0 into register 17
+Cycle 234: Wrote 0 into register 5
+Cycle 235: Wrote 42 into register 31
+Cycle 239: Wrote 69 into register 30
+Cycle 244: Wrote 1810 into register 4
+Cycle 245: Wrote 1 into register 17
+Cycle 249: Wrote 1 into register 5
+Cycle 250: Wrote 42 into register 31
+Cycle 254: Wrote 69 into register 30
+Cycle 259: Wrote 0 into register 4
+Cycle 260: Wrote 2 into register 17
+Cycle 262: Wrote 1000 into register 4
+Cycle 263: Wrote 3 into register 19
+4th step cycle
+Cycle 268: Wrote 0 into register 17
+Cycle 269: Wrote 0 into register 5
+Cycle 270: Wrote 42 into register 31
+Cycle 274: Wrote 69 into register 30
+Cycle 279: Wrote 1810 into register 4
+Cycle 280: Wrote 1 into register 17
+Cycle 284: Wrote 1 into register 5
+Cycle 285: Wrote 42 into register 31
+Cycle 289: Wrote 69 into register 30
+Cycle 294: Wrote 0 into register 4
+Cycle 295: Wrote 2 into register 17
+Cycle 297: Wrote 1000 into register 4
+Cycle 298: Wrote 4 into register 19
 ============== Testing Mode ==============
 Reg  0:           0
 Reg  1:           0
 Reg  2:           0
 Reg  3:           0
 Reg  4:        1000
-Reg  5:           0
+Reg  5:           1
 Reg  6:           0
 Reg  7:           0
 Reg  8:           0
@@ -81,11 +142,11 @@ Reg 12:        2620
 Reg 13:  4294967292
 Reg 14:        1817
 Reg 15:           0
-Reg 16:           2
+Reg 16:        1000
 Reg 17:           2
-Reg 18:           8
-Reg 19:           8
-Reg 20:           0
+Reg 18:           2
+Reg 19:           4
+Reg 20:           4
 Reg 21:           0
 Reg 22:           0
 Reg 23:           0
@@ -94,6 +155,6 @@ Reg 25:         420
 Reg 26:           0
 Reg 27:           0
 Reg 28:           0
-Reg 29:        1810
-Reg 30:           0
-Reg 31:           0
+Reg 29:           0
+Reg 30:          69
+Reg 31:          42

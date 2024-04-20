@@ -29,7 +29,7 @@ addi $s0, $zero, 2       # Load NUMDOTS
 addi $s1, $zero, 0 # Initialize counter for initializing all dots
 addi $t2, $zero, 1000    # Load starting addr (head)
 add $t1, $zero, $t2 #t1 is current (initialized to head)
-addi $s3, $zero, 4 #s3 has the number of vectors needed to be created
+addi $s3, $zero, 4 #s3 has the NUMVECTORS number of vectors needed to be created
 sll $s3, $s3, 1 #multiply s3 by 2 to account for x and y in each vector = 2*NUMVECTORS
 
 addi $t8, $zero, 320 #start location X for dots
@@ -69,9 +69,49 @@ blt $s1, $s0, loop_dots  # Continue loop if not done w dots
 sw $zero, -801($t1)  # next pointer of last dot is zilch -> was written to earlier, but is now set to 0 (have to go back in memory because t1 was set to next) 
 
 addi $a0, $t2, 0 #set input to head of the linkedlist
-# addi $sp, $zero, 2 #testing
-lw $sp, 9($a0)
-run:
+
+
+
+
+run: #loop over this for all of time
+# addi $sp, $zero, 3 #testing
+add $s0, $a0, $zero #head of linkedlist
+addi $s2, $zero, 2 #while counter < NUMDOTS, we loop move
+
+addi $s3, $zero, 0 #counter for which step we're on
+addi $s4, $zero, 4 #MAXSTEP
+
+play_generation: #loop through this to play out the entire generation's movement
+
+add $s1, $zero, $zero #counter for which dot we're moving = 0
+
+move_step:
+# a0 is already the address of the needed dot
+add $a1, $s1, $zero #which dot is being moved
+jal move
+lw $a0, 9($a0) #loading dot.next for next loop over the dots
+addi $s1, $s1, 1 #increment dotID
+# addi $sp, $zero, 6 #testing
+blt $s1, $s2, move_step
+#before looping need to make sure $a0 is head of linkedlist
+
+add $a0, $s0, $zero #making $a0 the head of the linkedlist
+addi $s3, $s3, 1 #increment step counter
+# addi $sp, $zero, 7 #testing
+inc $zero, $zero, 0 #increment the generation counter
+blt $s3, $s4, play_generation
+inc $zero, $zero, 0 #increment the generation counter
+
+stop:
 nop
 nop
-j run
+nop
+j stop
+
+
+
+move:
+nop
+addi $30, $zero, 69
+nop
+jr $ra

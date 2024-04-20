@@ -24,7 +24,8 @@ module seg7_handle(clock_100, reset, num, controls, seg_ctrl);
     end
     
     wire [3:0] w_1, w_10, w_100, w_1000;
-    bin2bcd bin_conv(.bin(num), .bcd({w_1000, w_100, w_10, w_1}));
+    wire [1:0] buff; //TODO: buffer idk what it does
+    bin2bcd bin_conv(.bin(num), .bcd({buff, w_1000, w_100, w_10, w_1}));
     reg [3:0] thousands, hundreds, tens, ones;
     always @(posedge clock_250Hz) begin
 //        ones = num %10;
