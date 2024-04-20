@@ -24,7 +24,7 @@
  *
  **/
 
-module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN, SEGCTRL);
+module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN, SEGCTRL, BTNL);
 	input clock_100, reset;
 	input[4:0] SW;
 
@@ -36,13 +36,22 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 	output[3:0] VGA_B;  // Blue Signal Bits
 	output[7:0] AN;
 	output[6:0] SEGCTRL;
+	input BTNL;
 
 	// Slow clock from 100 to 50MHz
 	reg clock = 0;
-	always @(posedge clock_100)
+	always @(posedge BTNL)
 	begin
 		clock = ~clock;
 	end
+//    always @(posedge BTNL) begin
+       
+//            clock <= 1'b1;
+//        end
+//    always @(negedge BTNL) begin
+//            clock <= 1'b0;
+        
+//    end
 
 	wire rwe, mwe;
 	wire[4:0] rd, rs1, rs2;
@@ -142,11 +151,14 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 	begin
 		seg_value <= 32'd0;
 	end
-	always @(posedge increment_seg) begin //increment_seg will come from the processor
-	 	seg_value <= seg_value + 1;
+	always @(posedge clock) begin //increment_seg will come from the processor
+	 	
+	 	if (increment_seg == 1) begin
+	 	     seg_value <= seg_value + 1;
+	 	end
 	 end
-	always @(posedge reset) begin //increment_seg will come from the processor
-	 	seg_value <= 0;
-	 end
+//	always @(posedge reset) begin //increment_seg will come from the processor
+//	 	seg_value <= 0;
+//	 end
 	seg7_handle seg_ctrl(.clock_100(clock_100), .reset(reset), .num(seg_value[13:0]), .controls(SEGCTRL), .seg_ctrl(AN));
 endmodule
