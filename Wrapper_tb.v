@@ -33,7 +33,7 @@
  *
  **/
 
-module Wrapper_tb #(parameter FILE = "genetic");
+module Wrapper_tb #(parameter FILE = "t_gen");
 
 	// FileData
 	localparam DIR = "Test Files/";
@@ -51,6 +51,8 @@ module Wrapper_tb #(parameter FILE = "genetic");
 	wire[31:0] instAddr, instData, 
 		rData, regA, regB,
 		memAddr, memDataIn, memDataOut;
+
+	wire [31:0] memoryData, randomNum;
 
 	// Wires for Test Harness
 	wire[4:0] rs1_test, rs1_in;
@@ -112,8 +114,11 @@ module Wrapper_tb #(parameter FILE = "genetic");
 		.wEn(mwe), 
 		.addr(memAddr[11:0]), 
 		.dataIn(memDataIn), 
-		.dataOut(memDataOut));
+		.dataOut(memoryData));
 
+	lsfr RNG(clock, reset, randomNum); //random number module
+
+	assign memDataOut = (memAddr == 99) ? randomNum : memoryData; //if memory reading from addy 10000, grab random number
 	// Create the clock
 	always
 		#10 clock = ~clock; 

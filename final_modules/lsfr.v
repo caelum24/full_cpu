@@ -12,7 +12,7 @@ module lsfr(clock, reset, randNum);
     
     // Initialize the LFSR register value upon startup
     initial begin
-        lfsr_reg = 32'b10001110101011110110100101101100;  // Set initial value to a specific value
+        lfsr_reg = 32'b10101110101011110110100101101100;  // Set initial value to a specific value
     end
 
     // Clock the LFSR
@@ -41,11 +41,38 @@ module lsfr(clock, reset, randNum);
     // assign rand[2] = lfsr_reg[2]; // Feedback from taps 2 and 24
     // assign rand[3] = lfsr_reg[3];  // Feedback from taps 5 and 17
 
-    assign limiter = &rand[3] & ~rand[2:0];
+    assign limiter = rand[3] & ~rand[2] & ~rand[1] & ~rand[0];
     assign random_acc = limiter ?  4'd0 : rand; //want to keep + and - sides even, but 2's complement isn't even, so -8 becomes 0
     // 4'b1001
-    assign randNum[31:4] = random_acc[3];
-    assign randNum[3:0] = random_acc[3:0];
-     
+    assign randNum[4] = random_acc[3];
+    assign randNum[5] = random_acc[3];
+    assign randNum[6] = random_acc[3];
+    assign randNum[7] = random_acc[3];
+    assign randNum[8] = random_acc[3];
+    assign randNum[9] = random_acc[3];
+    assign randNum[10] = random_acc[3];
+    assign randNum[11] = random_acc[3];
+    assign randNum[12] = random_acc[3];
+    assign randNum[13] = random_acc[3];
+    assign randNum[14] = random_acc[3];
+    assign randNum[15] = random_acc[3];
+    assign randNum[16] = random_acc[3];
+    assign randNum[17] = random_acc[3];
+    assign randNum[18] = random_acc[3];
+    assign randNum[19] = random_acc[3];
+    assign randNum[20] = random_acc[3];
+    assign randNum[21] = random_acc[3];
+    assign randNum[22] = random_acc[3];
+    assign randNum[23] = random_acc[3];
+    assign randNum[24] = random_acc[3];
+    assign randNum[25] = random_acc[3];
+    assign randNum[26] = random_acc[3];
+    assign randNum[27] = random_acc[3];
+    assign randNum[28] = random_acc[3];
+    assign randNum[29] = random_acc[3];
+    assign randNum[30] = random_acc[3];
+    assign randNum[31] = random_acc[3];
+    
+    assign randNum[3:0] = random_acc[3:0];   
     endmodule
 
