@@ -31,7 +31,7 @@ nop
 nop
 
 init_dots:
-addi $s0, $zero, 200       # Load NUMDOTS
+addi $s0, $zero, 10       # Load NUMDOTS
 addi $s1, $zero, 0 # Initialize counter for initializing all dots
 addi $t2, $zero, 1000    # Load starting addr (head)
 add $t1, $zero, $t2 #t1 is current (initialized to head)
@@ -202,7 +202,7 @@ jr $ra
 run: #loop over this for all of time
 # addi $sp, $zero, 3 #testing
 add $s0, $a0, $zero #head of linkedlist
-addi $s2, $zero, 200 #while counter < NUMDOTS, we loop move
+addi $s2, $zero, 10 #while counter < NUMDOTS, we loop move
 
 addi $s3, $zero, 0 #counter for which step we're on
 addi $s4, $zero, 400 #MAXSTEP
@@ -230,7 +230,7 @@ inc $zero, $zero, 0 #increment the generation counter
 addi $26, $zero, 0
 addi $27, $zero, 47962 #12*1600 63950 ns per line of VGA -> 747400 instructions to == nanoseconds -> /4 because brand and 2 nops
 # sll $27, $27, 2 #191850/4 ~= 47962
-sll $27, $27, 8 #arbitrary to make it 2^6 times slower than it was with above instruction
+sll $27, $27, 7 #arbitrary to make it 2^5 times slower than it was with above instruction
 waiter:
 addi $26, $26, 1
 blt $26, $27, waiter
