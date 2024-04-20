@@ -19,8 +19,8 @@ module VGAController(
 	);
 	
 	// Lab Memory Files Location
-	// localparam FILES_PATH = "C:/Users/wjn7/Desktop/full_cpu/final_modules/";
-    localparam FILES_PATH = "./final_modules/";
+	 localparam FILES_PATH = "C:/Users/wjn7/Desktop/full_cpu/final_modules/";
+//    localparam FILES_PATH = "./final_modules/";
 	// Clock divider 100 MHz -> 25 MHz
 	wire clk25; // 25MHz clock
 
@@ -124,7 +124,7 @@ module VGAController(
     reg [9:0] refx;
     reg [8:0] refy;
     
-    parameter NUM_DOTS = 20;
+    parameter NUM_DOTS = 200;
     reg [9:0] dots_x [NUM_DOTS-1 : 0];
     reg [8:0] dots_y [NUM_DOTS-1 : 0];
     reg [NUM_DOTS-1:0] is_dots;
@@ -161,8 +161,18 @@ module VGAController(
                 end
           end
           //TODO: Check over -> moving the dots based on inputs from processor
-          always @(posedge dotWren) begin
-            if (dotID == i) begin
+//          always @(posedge dotWren) begin
+//            if (dotID == i) begin
+//                if (is_Yloc == 1) begin
+//                    dots_y[i] <= dotLoc[8:0];
+//                end
+//                else begin
+//                    dots_x[i] <= dotLoc[9:0];
+//                end
+//            end
+//          end 
+          always @(posedge clk25) begin
+            if (dotID == i && dotWren) begin
                 if (is_Yloc == 1) begin
                     dots_y[i] <= dotLoc[8:0];
                 end
