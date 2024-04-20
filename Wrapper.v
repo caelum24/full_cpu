@@ -24,7 +24,7 @@
  *
  **/
 
-module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN, SEGCTRL, BTNL);
+module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN, SEGCTRL, BTNL, LED16_R);
 	input clock_100, reset;
 	input[4:0] SW;
 
@@ -37,13 +37,21 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 	output[7:0] AN;
 	output[6:0] SEGCTRL;
 	input BTNL;
-
+	output LED16_R;
+    assign LED16_R = 1'b1;
 	// Slow clock from 100 to 50MHz
-	reg clock = 0;
-	always @(posedge BTNL)
-	begin
-		clock = ~clock;
+//	reg clock = 0;
+//	always @(posedge clock_100)
+//	begin
+//		clock = ~clock;
+//	end
+    //25MHz clock
+    reg[1:0] pixCounter = 0;      // Pixel counter to divide the clock
+    assign clock = pixCounter[1]; // Set the clock high whenever the second bit (2) is high
+	always @(posedge clock_100) begin
+		pixCounter <= pixCounter + 1; // Since the reg is only 3 bits, it will reset every 8 cycles
 	end
+
 //    always @(posedge BTNL) begin
        
 //            clock <= 1'b1;
