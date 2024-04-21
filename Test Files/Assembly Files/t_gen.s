@@ -64,7 +64,7 @@ blt $s2,  $s3, loop_random #if rand counter < 2*NUMVECTORS
 
 # Set the next pointer, check if it's not the last dot
 # addi $t4, $s1, 1      # next dot index
-addi $t4, $t1, 810 #810 total words in a dot-> moving to the next one t4 = location of next dot
+addi $t4, $t1, 410 #810 total words in a dot-> moving to the next one t4 = location of next dot
 update_next:
 sw $t4, 9($t1)       # dot.next = t4
 
@@ -72,7 +72,7 @@ increment_counter:
 addi $s1, $s1, 1
 addi $t1, $t4, 0 #setting t1 to dot.next for next loop
 blt $s1, $s0, loop_dots  # Continue loop if not done w dots
-sw $zero, -801($t1)  # next pointer of last dot is zilch -> was written to earlier, but is now set to 0 (have to go back in memory because t1 was set to next) 
+sw $zero, -401($t1)  # next pointer of last dot is zilch -> was written to earlier, but is now set to 0 (have to go back in memory because t1 was set to next) 
 
 addi $a0, $t2, 0 #set input to head of the linkedlist
 
