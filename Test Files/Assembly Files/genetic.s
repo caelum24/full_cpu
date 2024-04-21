@@ -239,7 +239,7 @@ exit_calcFitness:
 jr $ra
 
 # sort all of the dots based on fitness
-sort:
+sort: #a0 is the head of the liinkedlist
 addi $t7, $zero, 0          # $t7 = 0
 add $t0, $a0, $zero         # $t0 = head
 add $t1, $t0, $zero         # $t1 = current

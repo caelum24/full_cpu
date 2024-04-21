@@ -222,6 +222,9 @@ addi, $t6, $zero, 60 #loading y position of goal
 
 sub $t7, $t4, $t3 #t7 = goalx - xpos
 sub $t8, $t6, $t5 #t8 = goaly - ypos
+nop
+nop
+nop
 # mul $t7, $t7, $t7 #t7 =  xdist^2
 # mul $t8, $t8, $t8 #t8 =  ydist^2
 # add $t9, $t7, $t8 #calculating squared distance: dx^2 + dy^2
