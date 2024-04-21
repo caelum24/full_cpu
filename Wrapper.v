@@ -111,7 +111,7 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 	
 	RAM ProcMem(.clk(clock), 
 		.wEn(mwe), 
-		.addr(memAddr[15:0]), 
+		.addr(memAddr[14:0]), 
 		.dataIn(memDataIn), 
 		.dataOut(memoryData)); //changed for muxing with MMIO
 
