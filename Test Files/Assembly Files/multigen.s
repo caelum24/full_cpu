@@ -30,6 +30,7 @@ blt $26, $27, startup
 nop
 nop
 
+# TODO -> INITIALIZE everything with a prev word
 init_dots:
 addi $s0, $zero, 38      # Load NUMDOTS
 addi $s1, $zero, 0 # Initialize counter for initializing all dots
@@ -58,13 +59,13 @@ addi $s2, $zero, 0 #initialize random vector creation counter
 loop_random: #creating the random vectors
 lw $t5, 99($zero) #getting a random value from the LFSR
 add $t6, $t1, $s2 #t6 is the address to put random value in the brain (current+vector number)
-sw $t5, 10($t6) #10 is vector 0 of the brain for current dot
+sw $t5, 10($t6) #10 is vector 0 of the brain for current dot #REPLACE WITH 11
 addi $s2, $s2, 1 #increment random vector counter
 blt $s2,  $s3, loop_random #if rand counter < 2*NUMVECTORS
 
 # Set the next pointer, check if it's not the last dot
 # addi $t4, $s1, 1      # next dot index
-addi $t4, $t1, 810 #810 total words in a dot-> moving to the next one t4 = location of next dot
+addi $t4, $t1, 810 #810 total words in a dot-> moving to the next one t4 = location of next dot #REPLACE with 811
 update_next:
 sw $t4, 9($t1)       # dot.next = t4
 
@@ -94,8 +95,8 @@ bne $zero, $t2 move_exit
 # dot.Acceleration = brain[numSteps]
 lw $t3, 7($a0) #$t3 = numSteps
 add $t4, $t3, $a0 #$t4 = numSteps+address (getting the acceleration vector address for that step)
-lw $t1, 10($t4) #$t1 = X coordinate of acceleration for that step
-lw $t2, 11($t4) #$t2 = Y coordinate of acceleration for that step
+lw $t1, 10($t4) #$t1 = X coordinate of acceleration for that step #REPLACE WITH 11
+lw $t2, 11($t4) #$t2 = Y coordinate of acceleration for that step #REPLACE WITH 12
 
 # Numsteps +=1
 addi $t3, $t3, 1 #numsteps = numsteps + 1
@@ -208,7 +209,7 @@ addi $t0, $zero, 1
 lw $t1, 5($a0) #load reachedgoal 
 bne $t0, $t1, is_dead #if reachedgoal != 1, go to is_read
 
-#  Setting fitness to the number of steps taken
+#  Setting fitness to the number of steps taken if we found the goal
 lw $t2, 7($a0) #loading numsteps
 sw $t2, 8($a0)
 j exit_calcFitness
@@ -239,6 +240,65 @@ exit_calcFitness:
 jr $ra
 
 
+# SORT TODO:
+    #add a prev word for each dot in the linkedlist
+    #test the new implementation to make sure nothing broke horribly
+    #implement sorting algorithm
+
+
+# sort all of the dots based on fitness
+sort:
+addi $t7, $zero, 0          # $t7 = 0
+add $t0, $a0, $zero         # $t0 = head
+add $t1, $t0, $zero         # $t1 = current
+j siguard
+
+sortiter:
+lw $t2, 8($t1)              # $t2 = current fitness
+# lw $t3, 8($t1)              # $t3 = next fitness (initially, current fitness)
+# lw $t6, 810($t1)            # $t6 = address of next dot -> this is addressed in siguard
+lw $t3, 8($t6)              # $t3 = next fitness
+blt $t2, $t3, sinext        # if current fitness < next fitness, go to sinext
+addi $t7, $zero, 1          # $t7 = 1
+lw $t4, 10($t1)             # $t4 = current.prev
+bne $t4, $zero, supprev     # if current.prev != 0, go to supprev
+j supprevd
+
+supprev:
+sw $t6, 14($t4)             # current.prev.next = current next
+
+supprevd:
+sw $t4, 10($t6)             # current.next.prev = current.prev
+lw $t5, 14($t6)             # $t5 = current.next.next
+bne $t5, $zero, supnnprev   # if current.next.next != 0, go to supnnprev
+j supnnprevd
+
+supnnprev:
+sw $t1, 10($t5)             # current.next.next.prev = current
+
+supnnprevd:
+sw $t5, 14($t1)             # current.next = current.next.next
+sw $t1, 14($t6)             # current.next.next = current
+sw $t6, 10($t1)             # current.prev = current.next
+bne $t0, $t1, sinext        # if head != current, go to sinext
+add $t0, $t6, $zero         # head = current next
+
+sinext:
+add $t1, $t6, $zero         # $t1 = current.next
+
+siguard:
+lw $t6, 9($t1)             # $t6 = current.next
+bne $t6, $zero, sortiter    # if current.next != 0, go to sortiter
+add $a0, $t0, $zero         # $a0 = head
+bne $t7, $zero, sortrecur   # if $t7 != 0, go to sortrecur
+add $v0, $t0, $zero         # $v0 = head
+
+sortrecur:
+# addi $sp, $sp, -1
+# lw $ra, 0($sp)
+jr $ra
+
+
 
 
 
@@ -247,6 +307,7 @@ jr $ra
 
 
 run: #loop over this for all of time
+# a0 is the head of the linkedlist
 # addi $sp, $zero, 3 #testing
 add $s0, $a0, $zero #head of linkedlist
 addi $s2, $zero, 38 #while counter < NUMDOTS, we loop move
@@ -254,6 +315,7 @@ addi $s2, $zero, 38 #while counter < NUMDOTS, we loop move
 addi $s3, $zero, 0 #counter for which step we're on
 addi $s4, $zero, 400 #MAXSTEP
 
+# RUNNING A GENERATION (ALL DOTS MOVE UNTIL DEAD)
 play_generation: #loop through this to play out the entire generation's movement
 
 add $s1, $zero, $zero #counter for which dot we're moving = 0
@@ -284,7 +346,7 @@ blt $26, $27, waiter
 
 blt $s3, $s4, play_generation
 
-# ## calculating the fitness of a dot
+# CALCULATING THE FITNESS OF A DOT
 # ## s2 holds the number of dots
 add $s1, $zero, $zero #counter for which dot we're calculating = 0
 # ## a0 should be head of linkedlist from exiting the move loop above
@@ -293,6 +355,9 @@ jal calculateFitness
 addi $s1, $s1, 1 #increment looper
 lw $a0, 9($a0) #loading dot.next for next loop over the dots
 blt $s1, $s2, fitness_loop
+
+
+# SORTING ALL OF THE DOTS BASED ON THEIR FITNESS
 
 
 

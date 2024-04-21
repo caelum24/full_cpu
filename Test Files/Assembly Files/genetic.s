@@ -238,13 +238,8 @@ sw $t2, 8($a0)
 exit_calcFitness:
 jr $ra
 
-# sort all of the dots based on fitness
-sort: #a0 is the head of the liinkedlist
-addi $t7, $zero, 0          # $t7 = 0
-add $t0, $a0, $zero         # $t0 = head
-add $t1, $t0, $zero         # $t1 = current
-j siguard
 
+# sort all of the dots based on fitness
 sort:
 addi $t7, $zero, 0          # $t7 = 0
 add $t0, $a0, $zero         # $t0 = head
@@ -292,8 +287,8 @@ bne $t7, $zero, sortrecur   # if $t7 != 0, go to sortrecur
 add $v0, $t0, $zero         # $v0 = head
 
 sortrecur:
-addi $sp, $sp, -1
-lw $ra, 0($sp)
+# addi $sp, $sp, -1
+# lw $ra, 0($sp)
 jr $ra
 
 
