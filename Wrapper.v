@@ -73,7 +73,7 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 	
 	// ADD YOUR MEMORY FILE HERE
 	localparam INSTR_FILE = "t_gen";
-
+//    localparam INSTR_FILE = "move_test";
 	// Main Processing Unit
 	processor CPU(.clock(clock), .reset(reset), 
 
@@ -111,7 +111,7 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 	
 	RAM ProcMem(.clk(clock), 
 		.wEn(mwe), 
-		.addr(memAddr[11:0]), 
+		.addr(memAddr[15:0]), 
 		.dataIn(memDataIn), 
 		.dataOut(memoryData)); //changed for muxing with MMIO
 
