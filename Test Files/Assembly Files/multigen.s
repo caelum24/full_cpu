@@ -223,15 +223,14 @@ addi, $t6, $zero, 60 #loading y position of goal
 sub $t7, $t4, $t3 #t7 = goalx - xpos
 sub $t8, $t6, $t5 #t8 = goaly - ypos
 nop
+nop #for some reason, the mult doesn't work without a buffer-> must be a bypassing issue
 nop
-nop
-# mul $t7, $t7, $t7 #t7 =  xdist^2
-# mul $t8, $t8, $t8 #t8 =  ydist^2
-# add $t9, $t7, $t8 #calculating squared distance: dx^2 + dy^2
-mul $28, $t7, $t7 #t7 =  xdist^2
-mul $29, $t8, $t8 #t8 =  ydist^2
-add $t9, $28, $29 #calculating squared distance: dx^2 + dy^2
-
+mul $t7, $t7, $t7 #t7 =  xdist^2
+mul $t8, $t8, $t8 #t8 =  ydist^2
+add $t9, $t7, $t8 #calculating squared distance: dx^2 + dy^2
+# mul $28, $t7, $t7 #t7 =  xdist^2
+# mul $29, $t8, $t8 #t8 =  ydist^2
+# add $t9, $28, $29 #calculating squared distance: dx^2 + dy^2
 
 addi $t2, $t9, 400 #dist+maxsteps
 sw $t2, 8($a0)
@@ -294,10 +293,6 @@ jal calculateFitness
 addi $s1, $s1, 1 #increment looper
 lw $a0, 9($a0) #loading dot.next for next loop over the dots
 blt $s1, $s2, fitness_loop
-
-
-
-
 
 
 
