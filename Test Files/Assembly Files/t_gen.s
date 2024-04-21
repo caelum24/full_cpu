@@ -31,11 +31,11 @@ nop
 nop
 
 init_dots:
-addi $s0, $zero, 50       # Load NUMDOTS
+addi $s0, $zero, 10       # Load NUMDOTS
 addi $s1, $zero, 0 # Initialize counter for initializing all dots
 addi $t2, $zero, 1000    # Load starting addr (head)
 add $t1, $zero, $t2 #t1 is current (initialized to head)
-addi $s3, $zero, 200 #s3 has the NUMVECTORS number of vectors needed to be created
+addi $s3, $zero, 50 #s3 has the NUMVECTORS number of vectors needed to be created
 sll $s3, $s3, 1 #multiply s3 by 2 to account for x and y in each vector = 2*NUMVECTORS
 
 addi $t8, $zero, 320 #start location X for dots
@@ -64,7 +64,7 @@ blt $s2,  $s3, loop_random #if rand counter < 2*NUMVECTORS
 
 # Set the next pointer, check if it's not the last dot
 # addi $t4, $s1, 1      # next dot index
-addi $t4, $t1, 410 #810 total words in a dot-> moving to the next one t4 = location of next dot
+addi $t4, $t1, 810 #810 total words in a dot-> moving to the next one t4 = location of next dot
 update_next:
 sw $t4, 9($t1)       # dot.next = t4
 
@@ -72,7 +72,7 @@ increment_counter:
 addi $s1, $s1, 1
 addi $t1, $t4, 0 #setting t1 to dot.next for next loop
 blt $s1, $s0, loop_dots  # Continue loop if not done w dots
-sw $zero, -401($t1)  # next pointer of last dot is zilch -> was written to earlier, but is now set to 0 (have to go back in memory because t1 was set to next) 
+sw $zero, -801($t1)  # next pointer of last dot is zilch -> was written to earlier, but is now set to 0 (have to go back in memory because t1 was set to next) 
 
 addi $a0, $t2, 0 #set input to head of the linkedlist
 
@@ -158,7 +158,7 @@ blt $t9, $t7, make_dead #if ypos(t9) < maxvel($t7) -> top boundary of arena
 blt $t0, $t9, make_dead #if Ypos(t9) > Height-maxvel($t0) -> bottom boundary of arena
 
 # TODO: this logic could be wrong
-addi $t0, $zero, 200 #MAXSTEP
+addi $t0, $zero, 50 #MAXSTEP
 # blt $t0, $t3, make_dead #if MAXSTEP < Numsteps, make dead
 blt $t3, $t0, check_at_goal #if Numsteps < MAXSTEP, check at goal (else make dead)
 # j check_at_goal
@@ -204,10 +204,10 @@ jr $ra
 run: #loop over this for all of time
 # addi $sp, $zero, 3 #testing
 add $s0, $a0, $zero #head of linkedlist
-addi $s2, $zero, 50 #while counter < NUMDOTS, we loop move
+addi $s2, $zero, 10 #while counter < NUMDOTS, we loop move
 
 addi $s3, $zero, 0 #counter for which step we're on
-addi $s4, $zero, 200 #MAXSTEP
+addi $s4, $zero, 50 #MAXSTEP
 
 play_generation: #loop through this to play out the entire generation's movement
 
