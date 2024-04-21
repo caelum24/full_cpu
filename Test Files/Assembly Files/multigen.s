@@ -21,35 +21,27 @@ main:
 nop
 nop
 nop
+addi $26, $zero, 0
+addi $27, $zero, 131071 #25MHz -> 17 bit immediate -> 131071 largest pos, so shift left 9 to get ~3 second delay before running the code
+sll $27, $27, 9 #191850/4 ~= 47962
+startup:
+addi $26, $26, 1
+blt $26, $27, startup
 nop
-# addi $sp, $zero, 10
-# sw $sp, 131070($zero)
-# lw $30, 131070($zero)
-# addi $sp, $zero 0
 nop
-# jal init_dots -> not necessary since init is right below main
-# j run
- 
-#changes-> changing lw and li to addi to load in the desired values into the registers
-    #locations in memory are word addressed instead of byte addressed, so we don't need to multiply by 4 for addresses
 
 init_dots:
-addi $s0, $zero, 200       # Load NUMDOTS
+addi $s0, $zero, 38      # Load NUMDOTS
 addi $s1, $zero, 0 # Initialize counter for initializing all dots
 addi $t2, $zero, 1000    # Load starting addr (head)
 add $t1, $zero, $t2 #t1 is current (initialized to head)
-addi $s3, $zero, 400 #s3 has the number of vectors needed to be created
+addi $s3, $zero, 400 #s3 has the NUMVECTORS number of vectors needed to be created
 sll $s3, $s3, 1 #multiply s3 by 2 to account for x and y in each vector = 2*NUMVECTORS
 
 addi $t8, $zero, 320 #start location X for dots
 addi $t9, $zero, 420 #start location Y for dots
-# addi $sp, $zero, 1 #testing
+
 loop_dots:
-    # addi $t3, $zero, 10            # each dot occupies 10 words; each word 4 bytes = 40 bytes
-    # addi $t1, , $t3
-    # mul $t1, $s1, $t3 don't need the mul if we can just add the size of a dot to the current address instead
-    # add $t1, $t1, $t2     # $t1 now holds the address of the current dot
-addi $s2, $zero, 0 #initialize random vector creation counter
 
 # Initialize variables for current dot
 sw $t8, 0($t1)      # x start position
@@ -61,6 +53,8 @@ sw $zero, 5($t1)     # reachedGoal status
 sw $zero, 6($t1)     # champion status
 sw $zero, 7($t1)     # numSteps
 sw $zero, 8($t1)     # fitness
+
+addi $s2, $zero, 0 #initialize random vector creation counter
 loop_random: #creating the random vectors
 lw $t5, 99($zero) #getting a random value from the LFSR
 add $t6, $t1, $s2 #t6 is the address to put random value in the brain (current+vector number)
@@ -71,10 +65,6 @@ blt $s2,  $s3, loop_random #if rand counter < 2*NUMVECTORS
 # Set the next pointer, check if it's not the last dot
 # addi $t4, $s1, 1      # next dot index
 addi $t4, $t1, 810 #810 total words in a dot-> moving to the next one t4 = location of next dot
-# mul $t4, $t4, $t3
-# add $t4, $t4, $t2
-# blt $s1, $s0, update_next  # Jump to update if not the last dot
-# j increment_counter
 update_next:
 sw $t4, 9($t1)       # dot.next = t4
 
@@ -85,14 +75,16 @@ blt $s1, $s0, loop_dots  # Continue loop if not done w dots
 sw $zero, -801($t1)  # next pointer of last dot is zilch -> was written to earlier, but is now set to 0 (have to go back in memory because t1 was set to next) 
 
 addi $a0, $t2, 0 #set input to head of the linkedlist
-# addi $sp, $zero, 2 #testing
+
 j run #jump to run when done
-# j main  # jump to main when done
+
+
+
 
 
 #make the dots change position
 move: #take in address of the dot being moved (a0) and its dot number (a1) (dot0, dot11, etc)
-# addi $sp, $zero, 4 #testing
+
 # If not dead or reachedGoal
 lw $t1, 4($a0) #load dead
 lw $t2, 5($a0) #load reachedGoal
@@ -168,16 +160,17 @@ addi $t0, $t0, 480 #t0 = height-Maxvel
 blt $t9, $t7, make_dead #if ypos(t9) < maxvel($t7) -> top boundary of arena
 blt $t0, $t9, make_dead #if Ypos(t9) > Height-maxvel($t0) -> bottom boundary of arena
 
-addi $t0, $zero, 400
-blt $t0, $t3, make_dead #if MAXSTEP < Numsteps, make dead
-j check_at_goal
+# TODO: this logic could be wrong
+addi $t0, $zero, 400 #MAXSTEP
+# blt $t0, $t3, make_dead #if MAXSTEP < Numsteps, make dead
+blt $t3, $t0, check_at_goal #if Numsteps < MAXSTEP, check at goal (else make dead)
+# j check_at_goal
 
 make_dead:
 addi $t1, $zero, 1 #init 1 for set to true
 sw $t1, 4($a0) #setting dead to true
 j move_exit
 
-# TODO: wrap this up
 # elif dot.position inside of goal:
     # dot.reachedGoal = true
 check_at_goal:
@@ -208,13 +201,14 @@ move_exit:
 jr $ra
 
 
+
 calculateFitness: #determine the fitness of every dot
-#$a0 is the address of the dot in memory
+#  $a0 is the address of the dot in memory
 addi $t0, $zero, 1 
 lw $t1, 5($a0) #load reachedgoal 
-bne $t0, $t1, is_dead #if reachedgoal != 1, to do is_read
+bne $t0, $t1, is_dead #if reachedgoal != 1, go to is_read
 
-#Setting fitness to the number of steps taken
+#  Setting fitness to the number of steps taken
 lw $t2, 7($a0) #loading numsteps
 sw $t2, 8($a0)
 j exit_calcFitness
@@ -239,61 +233,6 @@ exit_calcFitness:
 jr $ra
 
 
-# TODO: sort
-sort: #sort all of the dots based on fitness
-# $a0 = head of list
-
-# sortrecur:
-# addi $t7, $zero, 0          # $t7 = 0
-# add $t0, $a0, $zero         # $t0 = head
-# add $t1, $t0, $zero         # $t1 = current
-# j siguard
-# sortiter:
-# lw $t2, 0($t1)              # $t2 = current.data
-# lw $t3, 0($t6)              # $t3 = current.next.data
-# blt $t2, $t3, sinext
-# addi $t7, $zero, 1          # $t7 = 1
-# lw $t4, 1($t1)              # $t4 = current.prev
-# bne $t4, $zero, supprev
-# j supprevd
-# supprev:
-# sw $t6, 2($t4)              # current.prev.next = current.next
-# supprevd:
-# sw $t4, 1($t6)              # current.next.prev = current.prev
-# lw $t5, 2($t6)              # $t5 = current.next.next
-# bne $t5, $zero, supnnprev
-# j supnnprevd
-# supnnprev:
-# sw $t1, 1($t5)              # current.next.next.prev = current
-# supnnprevd:
-# sw $t5, 2($t1)              # current.next = current.next.next
-# sw $t1, 2($t6)              # current.next.next = current
-# sw $t6, 1($t1)              # current.prev = current.next
-# bne $t0, $t1, sinext
-# add $t0, $t6, $zero         # head = current.next
-# sinext:
-# add $t1, $t6, $zero         # $t1 = current.next
-# siguard:
-# lw $t6, 2($t1)              # $t6 = current.next
-# bne $t6, $zero, sortiter
-# add $a0, $t0, $zero
-# bne $t7, $zero, sortrecur
-# add $v0, $t0, $zero         # $v0 = head
-# addi $sp, $sp, -1
-# lw $ra, 0($sp)
-# jr $ra
-
-
-
-
-mutate: #mutate the dots based on RNG and stuff
-
-
-
-
-
-
-naturalSelection: #sort, mutate, and make new generation (should be a pretty hefty method)
 
 
 
@@ -304,7 +243,7 @@ naturalSelection: #sort, mutate, and make new generation (should be a pretty hef
 run: #loop over this for all of time
 # addi $sp, $zero, 3 #testing
 add $s0, $a0, $zero #head of linkedlist
-addi $s2, $zero, 200 #while counter < numdots, we loop move
+addi $s2, $zero, 38 #while counter < NUMDOTS, we loop move
 
 addi $s3, $zero, 0 #counter for which step we're on
 addi $s4, $zero, 400 #MAXSTEP
@@ -321,31 +260,51 @@ lw $a0, 9($a0) #loading dot.next for next loop over the dots
 addi $s1, $s1, 1 #increment dotID
 # addi $sp, $zero, 6 #testing
 blt $s1, $s2, move_step
-#before looping need to make sure $a0 is head of linkedlist
+# before looping need to make sure $a0 is head of linkedlist
 
 add $a0, $s0, $zero #making $a0 the head of the linkedlist
 addi $s3, $s3, 1 #increment step counter
 # addi $sp, $zero, 7 #testing
 inc $zero, $zero, 0 #increment the generation counter
+
+# TODO: modify this to get dots to move slower
+addi $26, $zero, 0
+addi $27, $zero, 47962 #12*1600 63950 ns per line of VGA -> 747400 instructions to == nanoseconds -> /4 because brand and 2 nops
+# sll $27, $27, 2 #191850/4 ~= 47962
+sll $27, $27, 3 #arbitrary to make it 2 times slower than it was with above instruction
+waiter:
+addi $26, $26, 1
+blt $26, $27, waiter
+
 blt $s3, $s4, play_generation
+
+# ## calculating the fitness of a dot
+# ## s2 holds the number of dots
+add $s1, $zero, $zero #counter for which dot we're calculating = 0
+# ## a0 should be head of linkedlist from exiting the move loop above
+fitness_loop:
+# ## jal calculateFitness
+addi $s1, $s1, 1 #increment looper
+lw $a0, 9($a0) #loading dot.next for next loop over the dots
+blt $s1, $s2, fitness_loop
+
+
+
+
+
+
+
+
+
+
+
 inc $zero, $zero, 0 #increment the generation counter
 
-# j run -> TODO uncomment once we have multiple generations programmed, for now just one will do
 
-# /*
-# #calculating the fitness of a dot
-# #s2 holds the number of dots
-# add $s1, $zero, $zero #counter for which dot we're calculating = 0
-# #a0 should be head of linkedlist from exiting the move loop above
-# fitness_loop:
-# jal calculateFitness
-# addi $s1, $s1, 1 #increment looper
-# lw $a0, 9($a0) #loading dot.next for next loop over the dots
-# blt $s1, $s2, fitness_loop
-# */
 
 stop:
 nop
 nop
 nop
 j stop
+
