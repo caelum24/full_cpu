@@ -283,7 +283,7 @@ blt $s3, $s4, play_generation
 add $s1, $zero, $zero #counter for which dot we're calculating = 0
 # ## a0 should be head of linkedlist from exiting the move loop above
 fitness_loop:
-# ## jal calculateFitness
+jal calculateFitness
 addi $s1, $s1, 1 #increment looper
 lw $a0, 9($a0) #loading dot.next for next loop over the dots
 blt $s1, $s2, fitness_loop
