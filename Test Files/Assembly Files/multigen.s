@@ -24,6 +24,7 @@ nop
 addi $26, $zero, 0
 addi $27, $zero, 131071 #25MHz -> 17 bit immediate -> 131071 largest pos, so shift left 9 to get ~3 second delay before running the code
 sll $27, $27, 9 #191850/4 ~= 47962
+
 startup:
 addi $26, $26, 1
 blt $26, $27, startup
@@ -32,55 +33,52 @@ nop
 
 # TODO -> INITIALIZE everything with a prev word
 init_dots:
-addi $s0, $zero, 38      # Load NUMDOTS
-addi $s1, $zero, 0 # Initialize counter for initializing all dots
-addi $t2, $zero, 1000    # Load starting addr (head)
-add $t1, $zero, $t2 #t1 is current (initialized to head)
-addi $s3, $zero, 400 #s3 has the NUMVECTORS number of vectors needed to be created
-sll $s3, $s3, 1 #multiply s3 by 2 to account for x and y in each vector = 2*NUMVECTORS
-
-addi $t8, $zero, 320 #start location X for dots
-addi $t9, $zero, 420 #start location Y for dots
-
-loop_dots:
+addi $s0, $zero, 38     # Load NUMDOTS
+addi $s1, $zero, 0      # Initialize counter for initializing all dots
+addi $t2, $zero, 1000   # Load starting addr (head)
+add $t1, $zero, $t2     # $t1 = current (initialized to head)
+addi $s3, $zero, 400    # $s3 = number of vectors needed to be created
+sll $s3, $s3, 1         # $s3 mult by 2 to account for x and y in each vector (2*NUMVECTORS)
+addi $t8, $zero, 320    # $t8 = start location X for dots
+addi $t9, $zero, 420    # $t9 = start location Y for dots
 
 # Initialize variables for current dot
+loop_dots:
 sw $t8, 0($t1)      # x start position
 sw $t9, 1($t1)      # y start position
-sw $zero, 2($t1)      # x velocity
-sw $zero, 3($t1)     # y velocity
-sw $zero, 4($t1)     # dead status
-sw $zero, 5($t1)     # reachedGoal status
-sw $zero, 6($t1)     # champion status
-sw $zero, 7($t1)     # numSteps
-sw $zero, 8($t1)     # fitness
+sw $zero, 2($t1)    # x velocity
+sw $zero, 3($t1)    # y velocity
+sw $zero, 4($t1)    # dead status
+sw $zero, 5($t1)    # reachedGoal status
+sw $zero, 6($t1)    # champion status
+sw $zero, 7($t1)    # numSteps
+sw $zero, 8($t1)    # fitness
+sw $zero, 9($t1)    # nextDot
+sw $zero, 10($t1)   # prevDot
+addi $s2, $zero, 0  # initialize random vector creation counter
 
-addi $s2, $zero, 0 #initialize random vector creation counter
-loop_random: #creating the random vectors
-lw $t5, 99($zero) #getting a random value from the LFSR
-add $t6, $t1, $s2 #t6 is the address to put random value in the brain (current+vector number)
-sw $t5, 10($t6) #10 is vector 0 of the brain for current dot #REPLACE WITH 11
-addi $s2, $s2, 1 #increment random vector counter
-blt $s2,  $s3, loop_random #if rand counter < 2*NUMVECTORS
-
+# Creating the random vectors
+loop_random:
+lw $t5, 99($zero)   # $t5 = getting a random value from the LFSR
+add $t6, $t1, $s2   # $t6 = address to put random value in the brain (current + vector number)
+sw $t5, 11($t6)     # 11 is vector 0 of the brain for current dot
+addi $s2, $s2, 1    # increment random vector counter
+blt $s2,  $s3, loop_random  #if rand counter < 2*NUMVECTORS
 # Set the next pointer, check if it's not the last dot
-# addi $t4, $s1, 1      # next dot index
-addi $t4, $t1, 810 #810 total words in a dot-> moving to the next one t4 = location of next dot #REPLACE with 811
+# addi $t4, $s1, 1  # next dot index
+addi $t4, $t1, 811  # $t4 = location of next dot (811 total words in a dot -> moving to the next one)
+
 update_next:
-sw $t4, 9($t1)       # dot.next = t4
+sw $t4, 9($t1)      # $t4 = dot.next
 
 increment_counter:
-addi $s1, $s1, 1
-addi $t1, $t4, 0 #setting t1 to dot.next for next loop
-blt $s1, $s0, loop_dots  # Continue loop if not done w dots
-sw $zero, -801($t1)  # next pointer of last dot is zilch -> was written to earlier, but is now set to 0 (have to go back in memory because t1 was set to next) 
+addi $s1, $s1, 1    # increment counter 
+addi $t1, $t4, 0    #setting t1 to dot.next for next loop
+blt $s1, $s0, loop_dots     # Continue loop if not done w dots
+sw $zero, -801($t1) # next pointer of last dot is zilch -> was written to earlier, but is now set to 0 (have to go back in memory because t1 was set to next) 
+addi $a0, $t2, 0    # set input to head of the linkedlist
 
-addi $a0, $t2, 0 #set input to head of the linkedlist
-
-j run #jump to run when done
-
-
-
+j run   #jump to run when done
 
 
 #make the dots change position
@@ -95,8 +93,8 @@ bne $zero, $t2 move_exit
 # dot.Acceleration = brain[numSteps]
 lw $t3, 7($a0) #$t3 = numSteps
 add $t4, $t3, $a0 #$t4 = numSteps+address (getting the acceleration vector address for that step)
-lw $t1, 10($t4) #$t1 = X coordinate of acceleration for that step #REPLACE WITH 11
-lw $t2, 11($t4) #$t2 = Y coordinate of acceleration for that step #REPLACE WITH 12
+lw $t1, 11($t4) #$t1 = X coordinate of acceleration for that step
+lw $t2, 12($t4) #$t2 = Y coordinate of acceleration for that step
 
 # Numsteps +=1
 addi $t3, $t3, 1 #numsteps = numsteps + 1
@@ -215,7 +213,6 @@ sw $t2, 8($a0)
 j exit_calcFitness
 
 is_dead:
-
 lw $t3, 0($a0) #load x position of the dot
 lw $t5, 1($a0) #load y position of the dot
 addi, $t4, $zero, 320 #loading x position of goal
@@ -255,8 +252,6 @@ j siguard
 
 sortiter:
 lw $t2, 8($t1)              # $t2 = current fitness
-# lw $t3, 8($t1)              # $t3 = next fitness (initially, current fitness)
-# lw $t6, 810($t1)            # $t6 = address of next dot -> this is addressed in siguard
 lw $t3, 8($t6)              # $t3 = next fitness
 blt $t2, $t3, sinext        # if current fitness < next fitness, go to sinext
 addi $t7, $zero, 1          # $t7 = 1
@@ -287,7 +282,7 @@ sinext:
 add $t1, $t6, $zero         # $t1 = current.next
 
 siguard:
-lw $t6, 9($t1)             # $t6 = current.next
+lw $t6, 9($t1)              # $t6 = current.next
 bne $t6, $zero, sortiter    # if current.next != 0, go to sortiter
 add $a0, $t0, $zero         # $a0 = head
 bne $t7, $zero, sortrecur   # if $t7 != 0, go to sortrecur
@@ -297,10 +292,6 @@ sortrecur:
 # addi $sp, $sp, -1
 # lw $ra, 0($sp)
 jr $ra
-
-
-
-
 
 
 
