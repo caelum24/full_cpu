@@ -389,21 +389,30 @@ blt $26, $27, waiter
 
 blt $s3, $s4, play_generation
 
-# # CALCULATING THE FITNESS OF A DOT
-# # ## s2 holds the number of dots
-# add $s1, $zero, $zero #counter for which dot we're calculating = 0
-# # ## a0 should be head of linkedlist from exiting the move loop above
-# fitness_loop:
-# jal calculateFitness
-# addi $s1, $s1, 1 #increment looper
-# lw $a0, 9($a0) #loading dot.next for next loop over the dots
-# blt $s1, $s2, fitness_loop
+# CALCULATING THE FITNESS OF A DOT
+# ## s2 holds the number of dots
+add $s1, $zero, $zero #counter for which dot we're calculating = 0
+# ## a0 should be head of linkedlist from exiting the move loop above
+fitness_loop:
+jal calculateFitness
+addi $s1, $s1, 1 #increment looper
+lw $a0, 9($a0) #loading dot.next for next loop over the dots
+blt $s1, $s2, fitness_loop
 
 
 # # SORTING ALL OF THE DOTS BASED ON THEIR FITNESS
-# add $a0, $s0, $zero #making $a0 the head of the linkedlist
-# jal sort
-# add $s0, $v0, $zero #making s0 head of sorted linkedlist
+add $a0, $s0, $zero #making $a0 the head of the linkedlist
+jal sort
+add $s0, $v0, $zero #making s0 head of sorted linkedlist
+lw $26, 8($a0) #fitness
+lw $a0, 9($a0)
+lw $27, 8($a0) #fitness
+lw $a0, 9($a0)
+lw $28, 8($a0) #fitness
+lw $a0, 9($a0)
+lw $29, 8($a0) #fitness
+lw $a0, 9($a0)
+lw $30, 8($a0) #fitness
 
 # #RESETTING THE INIT VALUES FOR THE Champion
 # addi $t8, $zero, 320    # $t8 = start location X for dots
