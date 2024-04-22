@@ -389,57 +389,57 @@ blt $26, $27, waiter
 
 blt $s3, $s4, play_generation
 
-# CALCULATING THE FITNESS OF A DOT
-# ## s2 holds the number of dots
-add $s1, $zero, $zero #counter for which dot we're calculating = 0
-# ## a0 should be head of linkedlist from exiting the move loop above
-fitness_loop:
-jal calculateFitness
-addi $s1, $s1, 1 #increment looper
-lw $a0, 9($a0) #loading dot.next for next loop over the dots
-blt $s1, $s2, fitness_loop
+# # CALCULATING THE FITNESS OF A DOT
+# # ## s2 holds the number of dots
+# add $s1, $zero, $zero #counter for which dot we're calculating = 0
+# # ## a0 should be head of linkedlist from exiting the move loop above
+# fitness_loop:
+# jal calculateFitness
+# addi $s1, $s1, 1 #increment looper
+# lw $a0, 9($a0) #loading dot.next for next loop over the dots
+# blt $s1, $s2, fitness_loop
 
 
-# SORTING ALL OF THE DOTS BASED ON THEIR FITNESS
-add $a0, $s0, $zero #making $a0 the head of the linkedlist
-jal sort
-add $s0, $v0, $zero #making s0 head of sorted linkedlist
+# # SORTING ALL OF THE DOTS BASED ON THEIR FITNESS
+# add $a0, $s0, $zero #making $a0 the head of the linkedlist
+# jal sort
+# add $s0, $v0, $zero #making s0 head of sorted linkedlist
 
-#RESETTING THE INIT VALUES FOR THE Champion
-addi $t8, $zero, 320    # $t8 = start location X for dots
-addi $t9, $zero, 420    # $t9 = start location Y for dots
-addi $t7, $zero, 1
-# Initialize variables for current dot
-sw $t8, 0($s0)      # x start position
-sw $t9, 1($s0)      # y start position
-sw $zero, 2($s0)    # x velocity
-sw $zero, 3($s0)    # y velocity
-sw $zero, 4($s0)    # dead status
-sw $zero, 5($s0)    # reachedGoal status
-sw $t7, 6($s0)    # champion status -> champion = 1
-sw $zero, 7($s0)    # numSteps
-sw $zero, 8($s0)    # fitness
+# #RESETTING THE INIT VALUES FOR THE Champion
+# addi $t8, $zero, 320    # $t8 = start location X for dots
+# addi $t9, $zero, 420    # $t9 = start location Y for dots
+# addi $t7, $zero, 1
+# # Initialize variables for current dot
+# sw $t8, 0($s0)      # x start position
+# sw $t9, 1($s0)      # y start position
+# sw $zero, 2($s0)    # x velocity
+# sw $zero, 3($s0)    # y velocity
+# sw $zero, 4($s0)    # dead status
+# sw $zero, 5($s0)    # reachedGoal status
+# sw $t7, 6($s0)    # champion status -> champion = 1
+# sw $zero, 7($s0)    # numSteps
+# sw $zero, 8($s0)    # fitness
 
-# TODO: choose how to give each dot their offspring
-# TODO: MAKE 7 SEG DISPLAY RESET PROPERLY
+# # TODO: choose how to give each dot their offspring
+# # TODO: MAKE 7 SEG DISPLAY RESET PROPERLY
 
-# CREATING NEW DOT OFFSPRING AND MUTATING THEM
-# TODO -> for now, just copying the best dot each time... not an 
-lw $s5, 9($s0) #getting next of linkedlist
-add $a0, $s0, $zero #making $a0 the head of the linkedlist
-add $a1, $s5, $zero #making $a1 the next value of the linkedlist (child)
+# # CREATING NEW DOT OFFSPRING AND MUTATING THEM
+# # TODO -> for now, just copying the best dot each time... not an 
+# lw $s5, 9($s0) #getting next of linkedlist
+# add $a0, $s0, $zero #making $a0 the head of the linkedlist
+# add $a1, $s5, $zero #making $a1 the next value of the linkedlist (child)
 
-child_create:
-jal mutate
-lw $a1, 9($a1) #new child = child.next
-nop
-nop #nops just in case
-bne $zero, $a1, child_create #if next child isn't at 0, we need to create/mutate it
+# child_create:
+# jal mutate
+# lw $a1, 9($a1) #new child = child.next
+# nop
+# nop #nops just in case
+# bne $zero, $a1, child_create #if next child isn't at 0, we need to create/mutate it
 
-inc $zero, $zero, 0 #increment the generation counter
+# inc $zero, $zero, 0 #increment the generation counter
 
-add $a0, $s0, $zero #setting a0 to head of linkedlist 
-j run
+# add $a0, $s0, $zero #setting a0 to head of linkedlist 
+# j run
 
 stop:
 nop
