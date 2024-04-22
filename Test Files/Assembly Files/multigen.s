@@ -431,7 +431,9 @@ add $a1, $s5, $zero #making $a1 the next value of the linkedlist (child)
 
 child_create:
 jal mutate
-add $a1, 9($a1) #new child = child.next
+lw $a1, 9($a1) #new child = child.next
+nop
+nop #nops just in case
 bne $zero, $a1, child_create #if next child isn't at 0, we need to create/mutate it
 
 inc $zero, $zero, 0 #increment the generation counter
