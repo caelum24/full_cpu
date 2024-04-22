@@ -37,7 +37,8 @@ addi $s0, $zero, 38     # Load NUMDOTS
 addi $s1, $zero, 0      # Initialize counter for initializing all dots
 addi $t2, $zero, 1000   # Load starting addr (head)
 add $t1, $zero, $t2     # $t1 = current (initialized to head)
-addi $s3, $zero, 400    # $s3 = number of vectors needed to be created
+addi $s7, $zero, 0      # $s7 = prev (initialized to 0 for 0th dot)
+addi $s3, $zero, 400    # $s3 = NUMVECTORS number of vectors needed to be created 
 sll $s3, $s3, 1         # $s3 mult by 2 to account for x and y in each vector (2*NUMVECTORS)
 addi $t8, $zero, 320    # $t8 = start location X for dots
 addi $t9, $zero, 420    # $t9 = start location Y for dots
@@ -53,8 +54,9 @@ sw $zero, 5($t1)    # reachedGoal status
 sw $zero, 6($t1)    # champion status
 sw $zero, 7($t1)    # numSteps
 sw $zero, 8($t1)    # fitness
-sw $zero, 9($t1)    # nextDot
-sw $zero, 10($t1)   # prevDot
+# sw $zero, 9($t1)    # nextDot -> not necessary because it comes in update next
+sw $s7, 10($t1)   # prevDot
+
 addi $s2, $zero, 0  # initialize random vector creation counter
 
 # Creating the random vectors
@@ -73,9 +75,11 @@ sw $t4, 9($t1)      # $t4 = dot.next
 
 increment_counter:
 addi $s1, $s1, 1    # increment counter 
-addi $t1, $t4, 0    #setting t1 to dot.next for next loop
+addi $s7, $t1, 0    #setting s7 (prev) = current for next loop
+addi $t1, $t4, 0    #setting t1 (current) to dot.next for next loop
 blt $s1, $s0, loop_dots     # Continue loop if not done w dots
-sw $zero, -801($t1) # next pointer of last dot is zilch -> was written to earlier, but is now set to 0 (have to go back in memory because t1 was set to next) 
+# sw $zero, -802($t1) # next pointer of last dot is zilch -> was written to earlier, but is now set to 0 (have to go back in memory because t1 was set to next) 
+sw $zero, 9($s7) # previous dot (last in list) has a .next=0
 addi $a0, $t2, 0    # set input to head of the linkedlist
 
 j run   #jump to run when done
@@ -231,7 +235,7 @@ add $t9, $t7, $t8 #calculating squared distance: dx^2 + dy^2
 # add $t9, $28, $29 #calculating squared distance: dx^2 + dy^2
 
 addi $t2, $t9, 400 #dist+maxsteps
-sw $t2, 8($a0)
+sw $t2, 8($a0) #store fitness
 
 exit_calcFitness:
 jr $ra
@@ -252,7 +256,7 @@ j siguard
 
 sortiter:
 lw $t2, 8($t1)              # $t2 = current fitness
-lw $t3, 8($t6)              # $t3 = next fitness
+lw $t3, 8($t6)              # $t3 = current.next fitness
 blt $t2, $t3, sinext        # if current fitness < next fitness, go to sinext
 addi $t7, $zero, 1          # $t7 = 1
 lw $t4, 10($t1)             # $t4 = current.prev
@@ -260,11 +264,11 @@ bne $t4, $zero, supprev     # if current.prev != 0, go to supprev
 j supprevd
 
 supprev:
-sw $t6, 14($t4)             # current.prev.next = current next
+sw $t6, 9($t4)             # current.prev.next = current next
 
 supprevd:
 sw $t4, 10($t6)             # current.next.prev = current.prev
-lw $t5, 14($t6)             # $t5 = current.next.next
+lw $t5, 9($t6)             # $t5 = current.next.next
 bne $t5, $zero, supnnprev   # if current.next.next != 0, go to supnnprev
 j supnnprevd
 
@@ -272,8 +276,8 @@ supnnprev:
 sw $t1, 10($t5)             # current.next.next.prev = current
 
 supnnprevd:
-sw $t5, 14($t1)             # current.next = current.next.next
-sw $t1, 14($t6)             # current.next.next = current
+sw $t5, 9($t1)             # current.next = current.next.next
+sw $t1, 9($t6)             # current.next.next = current
 sw $t6, 10($t1)             # current.prev = current.next
 bne $t0, $t1, sinext        # if head != current, go to sinext
 add $t0, $t6, $zero         # head = current next
@@ -293,6 +297,41 @@ sortrecur:
 # lw $ra, 0($sp)
 jr $ra
 
+
+
+mutate: #must be passed $a0-> address of parent, $a1, address of child
+
+addi $t0, $zero, 0 #counter for total vector location
+addi $t1, $zero, 800 #NUMVECTORS*2
+
+mutate_loop:
+
+lw $t9, 99($zero)   # $t9 = getting a random value from the LFSR
+addi $t8, $zero, -6 #mutation rate (blt random, mutationrate) (basically 1/15 odds for every)
+blt $t9, $t8, rand_mutate
+
+keep_same:
+add $t2, $t0, $a0 #address of parent vector
+lw $t3, 11($t2) #getting the nth x_vector 
+add $t4, $t0, $a1 #address of child vector
+sw $t3, 11($t4) #storing the nth x_vector for child
+lw $t3, 12($t2) #getting the nth y_vector
+sw $t3, 12($t4) #storing the nth y_vector for child
+j copy_comp
+
+rand_mutate:
+add $t4, $t0, $a1 #address of child vector
+lw $t9, 99($zero)   # $t9 = getting a random value from the LFSR
+sw $t9, 11($t4) #storing the nth x_vector for child
+lw $t9, 99($zero)   # $t9 = getting a random value from the LFSR
+sw $t3, 12($t4) #storing the nth y_vector for child
+
+
+copy_comp:
+addi $t0, $t0, 2 #incrementing t0 by 2 (for x and y)
+blt $t0, $t1, mutate_loop #counter < numvectors*2
+
+jr $ra
 
 
 
@@ -349,9 +388,20 @@ blt $s1, $s2, fitness_loop
 
 
 # SORTING ALL OF THE DOTS BASED ON THEIR FITNESS
+add $a0, $s0, $zero #making $a0 the head of the linkedlist
+jal sort
+add $s0, $v0, $zero #making s0 head of sorted linkedlist
 
 
+#CREATING NEW DOT OFFSPRING AND MUTATING THEM
 
+# TODO: give champion to head of list
+# TODO: choose how to give each dot their offspring
+# TODO: set champion to 0 for other dots
+# TODO:  create loop to make the new dots
+# TODO: new dots need to have initialized data
+
+# jal mutate
 
 
 
