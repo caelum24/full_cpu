@@ -304,6 +304,21 @@ mutate: #must be passed $a0-> address of parent, $a1, address of child
 addi $t0, $zero, 0 #counter for total vector location
 addi $t1, $zero, 800 #NUMVECTORS*2
 
+#RESETTING THE INIT VALUES FOR THE CHILD DOT
+addi $t8, $zero, 320    # $t8 = start location X for dots
+addi $t9, $zero, 420    # $t9 = start location Y for dots
+
+# Initialize variables for current dot
+sw $t8, 0($a1)      # x start position
+sw $t9, 1($a1)      # y start position
+sw $zero, 2($a1)    # x velocity
+sw $zero, 3($a1)    # y velocity
+sw $zero, 4($a1)    # dead status
+sw $zero, 5($a1)    # reachedGoal status
+sw $zero, 6($a1)    # champion status
+sw $zero, 7($a1)    # numSteps
+sw $zero, 8($a1)    # fitness
+
 mutate_loop:
 
 lw $t9, 99($zero)   # $t9 = getting a random value from the LFSR
@@ -332,8 +347,6 @@ addi $t0, $t0, 2 #incrementing t0 by 2 (for x and y)
 blt $t0, $t1, mutate_loop #counter < numvectors*2
 
 jr $ra
-
-
 
 
 run: #loop over this for all of time
@@ -392,23 +405,39 @@ add $a0, $s0, $zero #making $a0 the head of the linkedlist
 jal sort
 add $s0, $v0, $zero #making s0 head of sorted linkedlist
 
+#RESETTING THE INIT VALUES FOR THE Champion
+addi $t8, $zero, 320    # $t8 = start location X for dots
+addi $t9, $zero, 420    # $t9 = start location Y for dots
+addi $t7, $zero, 1
+# Initialize variables for current dot
+sw $t8, 0($s0)      # x start position
+sw $t9, 1($s0)      # y start position
+sw $zero, 2($s0)    # x velocity
+sw $zero, 3($s0)    # y velocity
+sw $zero, 4($s0)    # dead status
+sw $zero, 5($s0)    # reachedGoal status
+sw $t7, 6($s0)    # champion status -> champion = 1
+sw $zero, 7($s0)    # numSteps
+sw $zero, 8($s0)    # fitness
 
-#CREATING NEW DOT OFFSPRING AND MUTATING THEM
-
-# TODO: give champion to head of list
 # TODO: choose how to give each dot their offspring
-# TODO: set champion to 0 for other dots
-# TODO:  create loop to make the new dots
-# TODO: new dots need to have initialized data
+# TODO: MAKE 7 SEG DISPLAY RESET PROPERLY
 
-# jal mutate
+# CREATING NEW DOT OFFSPRING AND MUTATING THEM
+# TODO -> for now, just copying the best dot each time... not an 
+lw $s5, 9($s0) #getting next of linkedlist
+add $a0, $s0, $zero #making $a0 the head of the linkedlist
+add $a1, $s5, $zero #making $a1 the next value of the linkedlist (child)
 
-
-
+child_create:
+jal mutate
+add $a1, 9($a1) #new child = child.next
+bne $zero, $a1, child_create #if next child isn't at 0, we need to create/mutate it
 
 inc $zero, $zero, 0 #increment the generation counter
 
-
+add $a0, $s0, $zero #setting a0 to head of linkedlist 
+j run
 
 stop:
 nop

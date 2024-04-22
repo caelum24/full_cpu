@@ -160,12 +160,22 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 	begin
 		seg_value <= 32'd0;
 	end
-	always @(posedge clock) begin //increment_seg will come from the processor
+	// always @(posedge clock) begin //increment_seg will come from the processor
 	 	
-	 	if (increment_seg == 1) begin
-	 	     seg_value <= seg_value + 1;
-	 	end
-	 end
+	//  	if (increment_seg == 1) begin
+	//  	     seg_value <= seg_value + 1;
+	//  	end
+	//  end
+	//Set value of q on positive edge of the clock or clear -> TODO: test this module
+   	always @(posedge clock or posedge reset) begin
+       	//If clear is high, set q to 0
+       	if (reset) begin
+           seg_value <= 1'b0;
+       	//If enable is high, set q to the value of d
+       	end else if (increment_seg) begin
+          seg_value <= seg_value + 1;
+       	end
+   	end
 //	always @(posedge reset) begin //increment_seg will come from the processor
 //	 	seg_value <= 0;
 //	 end
