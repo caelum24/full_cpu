@@ -404,15 +404,17 @@ blt $s1, $s2, fitness_loop
 add $a0, $s0, $zero #making $a0 the head of the linkedlist
 jal sort
 add $s0, $v0, $zero #making s0 head of sorted linkedlist
-lw $26, 8($a0) #fitness
-lw $a0, 9($a0)
-lw $27, 8($a0) #fitness
-lw $a0, 9($a0)
-lw $28, 8($a0) #fitness
-lw $a0, 9($a0)
-lw $29, 8($a0) #fitness
-lw $a0, 9($a0)
-lw $30, 8($a0) #fitness
+lw $t0, 10($a0) #previous
+lw $26, 0($a0) #xloc
+lw $27, 1($a0) #yloc
+lw $a0, 9($a0) #next
+lw $28, 0($a0) #xloc
+lw $29, 1($a0) #yloc
+lw $a0, 9($a0) #next
+lw $30, 0($a0) #xloc
+lw $31, 1($a0) #yloc
+
+
 
 # #RESETTING THE INIT VALUES FOR THE Champion
 # addi $t8, $zero, 320    # $t8 = start location X for dots
