@@ -46,8 +46,8 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 //		clock = ~clock;
 //	end
     //25MHz clock
-    reg[2:0] pixCounter = 0;      // Pixel counter to divide the clock
-    assign clock = pixCounter[2]; // Set the clock high whenever the second bit (2) is high
+    reg[1:0] pixCounter = 0;      // Pixel counter to divide the clock
+    assign clock = pixCounter[1]; // Set the clock high whenever the second bit (2) is high
 	always @(posedge clock_100) begin
 		pixCounter <= pixCounter + 1; // Since the reg is only 3 bits, it will reset every 8 cycles
 	end

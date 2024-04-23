@@ -251,7 +251,9 @@ jr $ra
 
 # sort all of the dots based on fitness
 sort:
-
+addi $1, $zero, 0 #counter to kill if something is really bad
+addi $30, $zero, 100000 
+sll $30, $30, 2
 sortrecur:
 addi $t7, $zero, 0          # $t7 = 0
 add $t0, $a0, $zero         # $t0 = head
@@ -290,10 +292,14 @@ sinext:
 add $t1, $t6, $zero         # $t1 = current.next
 
 siguard:
+addi $1, $1, 1
+blt $30, $1, excuse
 lw $t6, 9($t1)              # $t6 = current.next
+addi $1, $zero, 0
 bne $t6, $zero, sortiter    # if current.next != 0, go to sortiter
 add $a0, $t0, $zero         # $a0 = head
 bne $t7, $zero, sortrecur   # if $t7 != 0, go to sortrecur
+excuse:
 add $v0, $t0, $zero         # $v0 = head
 
 jr $ra
