@@ -125,7 +125,7 @@ module VGAController(
     reg [9:0] refx;
     reg [8:0] refy;
     
-    parameter NUM_DOTS = 45;
+    parameter NUM_DOTS = 70;
     reg [9:0] dots_x [NUM_DOTS-1 : 0];
     reg [8:0] dots_y [NUM_DOTS-1 : 0];
     reg [NUM_DOTS-1:0] is_dots;
