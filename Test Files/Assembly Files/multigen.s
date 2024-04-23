@@ -253,7 +253,7 @@ jr $ra
 sort:
 addi $1, $zero, 0 #counter to kill if something is really bad
 addi $30, $zero, 100000 
-sll $30, $30, 2
+sll $30, $30, 8
 sortrecur:
 addi $t7, $zero, 0          # $t7 = 0
 add $t0, $a0, $zero         # $t0 = head
