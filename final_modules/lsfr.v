@@ -95,6 +95,7 @@ module lsfr(clock, reset, randNum);
     assign randNum[30] = random_acc[3];
     assign randNum[31] = random_acc[3];
     
-    assign randNum[3:0] = random_acc[3:0];   
+    // assign randNum[3:0] = random_acc[3:0];
+    assign randNum[3:0] = 4'b1111;   
     endmodule
 
