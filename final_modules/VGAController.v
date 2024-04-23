@@ -1,4 +1,5 @@
 `timescale 1 ns/ 100 ps
+
 module VGAController(     
 	input clk, 			// 100 MHz System Clock
 	input reset, 		// Reset Signal
@@ -124,7 +125,7 @@ module VGAController(
     reg [9:0] refx;
     reg [8:0] refy;
     
-    parameter NUM_DOTS = 8;
+    parameter NUM_DOTS = 38;
     reg [9:0] dots_x [NUM_DOTS-1 : 0];
     reg [8:0] dots_y [NUM_DOTS-1 : 0];
     reg [NUM_DOTS-1:0] is_dots;
