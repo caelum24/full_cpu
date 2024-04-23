@@ -323,7 +323,7 @@ sw $zero, 8($a1)    # fitness
 mutate_loop:
 
 lw $t9, 99($zero)   # $t9 = getting a random value from the LFSR
-addi $t8, $zero, -6 #mutation rate (blt random, mutationrate) (basically 1/15 odds for every)
+addi $t8, $zero, -5 #mutation rate (blt random, mutationrate) (basically 1/15 odds for every)
 blt $t9, $t8, rand_mutate
 
 keep_same:
