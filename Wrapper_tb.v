@@ -33,7 +33,7 @@
  *
  **/
 
-module Wrapper_tb #(parameter FILE = "addi_basic");
+module Wrapper_tb #(parameter FILE = "t_gen");
 
 	// FileData
 	localparam DIR = "Test Files/";
@@ -42,8 +42,22 @@ module Wrapper_tb #(parameter FILE = "addi_basic");
 	localparam VERIF_DIR = "Verification Files/";
 	localparam DEFAULT_CYCLES = 255;
 
+	reg clock_100 = 0;
+
 	// Inputs to the processor
 	reg clock = 0, reset = 0;
+
+	reg[1:0] pixCounter = 0;      // Pixel counter to divide the clock
+    // assign clock = pixCounter[1]; // Set the clock high whenever the second bit (2) is high
+	always @(posedge clock_100) begin
+		pixCounter <= pixCounter + 1; // Since the reg is only 3 bits, it will reset every 8 cycles
+		if (pixCounter[1]) begin
+			clock <= 1'b1;
+		end 
+		else begin
+			clock <= 1'b0;
+		end
+	end
 
 	// I/O for the processor
 	wire rwe, mwe;
@@ -52,10 +66,28 @@ module Wrapper_tb #(parameter FILE = "addi_basic");
 		rData, regA, regB,
 		memAddr, memDataIn, memDataOut;
 
+	//lfsr stuff
+	wire [31:0] memoryData, randomNum;
+
+	//vga
+	wire[15:0] LED;
+	wire hSync;		// H Sync Signal
+	wire[3:0] VGA_R;  // Red Signal Bits
+	wire vSync; 		// Veritcal Sync Signal
+	wire[3:0] VGA_G;  // Green Signal Bits
+	wire[3:0] VGA_B;  // Blue Signal Bits
+	wire[7:0] AN;
+	wire[6:0] SEGCTRL;
+
+	//7seg
+	wire increment_seg;
+
+
+
 	// Wires for Test Harness
 	wire[4:0] rs1_test, rs1_in;
 	reg testMode = 0; 
-	reg[9:0] num_cycles = DEFAULT_CYCLES;
+	reg[31:0] num_cycles = DEFAULT_CYCLES;
 	reg[15*8:0] exp_text;
 	reg null;
 
@@ -110,13 +142,63 @@ module Wrapper_tb #(parameter FILE = "addi_basic");
 	// Processor Memory (RAM)
 	RAM ProcMem(.clk(clock), 
 		.wEn(mwe), 
-		.addr(memAddr[11:0]), 
+		.addr(memAddr[14:0]), 
 		.dataIn(memDataIn), 
-		.dataOut(memDataOut));
+		.dataOut(memoryData));
 
+	lsfr RNG(clock, reset, randomNum); //random number module
+
+	assign memDataOut = (memAddr == 99) ? randomNum : memoryData; //if memory reading from addy 10000, grab random number
+	
+	
+	wire [31:0] dotLoc;
+	wire [31:0] dotID;
+	wire dotWren, is_Yloc;	
+	
+	assign dotWren = (memAddr >= 100 && memAddr <= 999  && mwe);
+	assign is_Yloc = (memAddr >= 550);
+	assign dotID = is_Yloc ? (memAddr - 550) : (memAddr - 100);
+	assign dotLoc = memDataIn;
+	
+	VGAController VGA(     
+		.clk(clock_100), 			// 100 MHz System Clock
+		.reset(reset), 		// Reset Signal
+
+		.hSync(hSync), 		// H Sync Signal
+		.vSync(vSync), 		// Veritcal Sync Signal
+		.VGA_R(VGA_R),  // Red Signal Bits
+		.VGA_G(VGA_G),  // Green Signal Bits
+		.VGA_B(VGA_B),  // Blue Signal Bits
+		
+		//dot updating
+		.dotWren(dotWren),
+	    .is_Yloc(is_Yloc),
+	    .dotID(dotID), 
+	    .dotLoc(dotLoc)
+		
+	);
+
+
+	// 7 seg control
+		//need some way for the processor to store the current generation value and then output it to this module
+	reg [31:0] seg_value;
+	initial
+	begin
+		seg_value <= 32'd0;
+	end
+	always @(posedge increment_seg) begin //increment_seg will come from the processor
+	 	seg_value <= seg_value + 1;
+	 end
+	always @(posedge reset) begin //increment_seg will come from the processor
+	 	seg_value <= 0;
+	 end
+	seg7_handle seg_ctrl(.clock_100(clock_100), .reset(reset), .num(seg_value[13:0]), .controls(SEGCTRL), .seg_ctrl(AN));
+	
+	
+	
 	// Create the clock
 	always
-		#10 clock = ~clock; 
+		#10 clock_100 = ~clock_100; 
 
 	//////////////////
 	// Test Harness //

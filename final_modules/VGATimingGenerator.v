@@ -43,7 +43,7 @@ module VGATimingGenerator #(parameter HEIGHT=480, WIDTH=640) (
 	--  	R->Visable Area					: HEIGHT
 	--  	S->Front porch                  : V_FRONT_PORCH
 	--  	O->vertical line total length   : V_LINE
-	///////////////////////////////////////////*/
+	*/
 
 	localparam 
 		H_FRONT_PORCH = 16,

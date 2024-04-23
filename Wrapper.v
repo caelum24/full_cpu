@@ -24,7 +24,7 @@
  *
  **/
 
-module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN, SEGCTRL);
+module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN, SEGCTRL, BTNL, LED16_R);
 	input clock_100, reset;
 	input[4:0] SW;
 
@@ -36,13 +36,30 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 	output[3:0] VGA_B;  // Blue Signal Bits
 	output[7:0] AN;
 	output[6:0] SEGCTRL;
-
+	input BTNL;
+	output LED16_R;
+    assign LED16_R = 1'b1;
 	// Slow clock from 100 to 50MHz
-	reg clock = 0;
-	always @(posedge clock_100)
-	begin
-		clock = ~clock;
+//	reg clock = 0;
+//	always @(posedge clock_100)
+//	begin
+//		clock = ~clock;
+//	end
+    //25MHz clock
+    reg[1:0] pixCounter = 0;      // Pixel counter to divide the clock
+    assign clock = pixCounter[1]; // Set the clock high whenever the second bit (2) is high
+	always @(posedge clock_100) begin
+		pixCounter <= pixCounter + 1; // Since the reg is only 3 bits, it will reset every 8 cycles
 	end
+
+//    always @(posedge BTNL) begin
+       
+//            clock <= 1'b1;
+//        end
+//    always @(negedge BTNL) begin
+//            clock <= 1'b0;
+        
+//    end
 
 	wire rwe, mwe;
 	wire[4:0] rd, rs1, rs2;
@@ -55,8 +72,9 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
     assign LED = led_bridge[15:0];
 	
 	// ADD YOUR MEMORY FILE HERE
-	localparam INSTR_FILE = "fpga_test";
-
+	// localparam INSTR_FILE = "t_gen";
+	localparam INSTR_FILE = "multigen";
+//    localparam INSTR_FILE = "move_test";
 	// Main Processing Unit
 	processor CPU(.clock(clock), .reset(reset), 
 
@@ -70,7 +88,11 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 
 		// RAM
 		.wren(mwe), .address_dmem(memAddr), 
-		.data(memDataIn), .q_dmem(memDataOut)); 
+		.data(memDataIn), .q_dmem(memDataOut),
+		
+		//7seg
+		.inc_seg7(increment_seg)
+		); 
 
 	// Instruction Memory (ROM)
 	ROM #(.MEMFILE({INSTR_FILE, ".mem"}))
@@ -86,16 +108,32 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 		.data_writeReg(rData), .data_readRegA(regA), .data_readRegB(regB), .LED_reg_display(led_bridge));
 
 	// Processor Memory (RAM)
+	wire [31:0] memoryData, randomNum;
+	
 	RAM ProcMem(.clk(clock), 
 		.wEn(mwe), 
-		.addr(memAddr[11:0]), 
+		.addr(memAddr[14:0]), 
 		.dataIn(memDataIn), 
-		.dataOut(memDataOut));
+		.dataOut(memoryData)); //changed for muxing with MMIO
 
-
+    lsfr RNG(clock, reset, randomNum); //random number module
+    
+    assign memDataOut = (memAddr == 99) ? randomNum : memoryData; //if memory reading from addy 10000, grab random number
+    
 	// VGA CONTROL
 		//the processor will need to interface with this to update dot locations
 		//for now, the dot locations are hard coded to start and move themselves
+	
+	//wires for dictating when/how to update dot locations from the processor
+	wire [31:0] dotLoc;
+	wire [31:0] dotID;
+	wire dotWren, is_Yloc;	
+	
+	assign dotWren = (memAddr >= 100 && memAddr <= 999  && mwe);
+	assign is_Yloc = (memAddr >= 550); //if it's an x or y address
+	assign dotID = is_Yloc ? (memAddr - 550) : (memAddr - 100); //which register we need to write to
+	assign dotLoc = memDataIn; //where the dot needs to
+	
 	VGAController VGA(     
 		.clk(clock_100), 			// 100 MHz System Clock
 		.reset(reset), 		// Reset Signal
@@ -104,7 +142,14 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 		.vSync(vSync), 		// Veritcal Sync Signal
 		.VGA_R(VGA_R),  // Red Signal Bits
 		.VGA_G(VGA_G),  // Green Signal Bits
-		.VGA_B(VGA_B)  // Blue Signal Bits
+		.VGA_B(VGA_B),  // Blue Signal Bits
+		
+		//dot updating
+		.dotWren(dotWren),
+	    .is_Yloc(is_Yloc),
+	    .dotID(dotID), 
+	    .dotLoc(dotLoc)
+		
 	);
 
 
@@ -113,10 +158,26 @@ module Wrapper (clock_100, reset, SW, LED, hSync, vSync, VGA_R, VGA_G, VGA_B, AN
 	reg [31:0] seg_value;
 	initial
 	begin
-		seg_value <= 32'd1234;
+		seg_value <= 32'd0;
 	end
-	// always @(posedge increment_seg) begin //increment_seg will come from the processor
-	// 	seg_value <= seg_value + 1;
-	// end
+	// always @(posedge clock) begin //increment_seg will come from the processor
+	 	
+	//  	if (increment_seg == 1) begin
+	//  	     seg_value <= seg_value + 1;
+	//  	end
+	//  end
+	//Set value of q on positive edge of the clock or clear -> TODO: test this module
+   	always @(posedge clock or posedge reset) begin
+       	//If clear is high, set q to 0
+       	if (reset) begin
+           seg_value <= 1'b0;
+       	//If enable is high, set q to the value of d
+       	end else if (increment_seg) begin
+          seg_value <= seg_value + 1;
+       	end
+   	end
+//	always @(posedge reset) begin //increment_seg will come from the processor
+//	 	seg_value <= 0;
+//	 end
 	seg7_handle seg_ctrl(.clock_100(clock_100), .reset(reset), .num(seg_value[13:0]), .controls(SEGCTRL), .seg_ctrl(AN));
 endmodule
