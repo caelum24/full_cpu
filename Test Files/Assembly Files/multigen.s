@@ -418,6 +418,13 @@ add $a0, $s0, $zero #making $a0 the head of the linkedlist
 jal sort
 addi $30, $zero, 5
 add $s0, $v0, $zero #making s0 head of sorted linkedlist
+lw $s0, 9($s0) #next
+lw $s0, 9($s0) #next
+lw $s0, 9($s0) #next
+lw $s0, 9($s0) #next
+lw $s0, 9($s0) #next
+lw $s0, 9($s0) #next
+lw $29, 9($s0) #next
 # inc $zero, $zero, 0 #increment the generation counter
 # lw $t0, 10($s0) #previous
 # lw $26, 0($s0) #xloc 176
