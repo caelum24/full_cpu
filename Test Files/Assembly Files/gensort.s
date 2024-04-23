@@ -248,6 +248,8 @@ jr $ra
 
 # sort all of the dots based on fitness
 sort:
+
+sortrecur:
 addi $t7, $zero, 0          # $t7 = 0
 add $t0, $a0, $zero         # $t0 = head
 add $t1, $t0, $zero         # $t1 = current
@@ -293,7 +295,6 @@ add $a0, $t0, $zero         # $a0 = head
 bne $t7, $zero, sortrecur   # if $t7 != 0, go to sortrecur
 add $v0, $t0, $zero         # $v0 = head
 
-sortrecur:
 # addi $sp, $sp, -1
 # lw $ra, 0($sp)
 jr $ra
