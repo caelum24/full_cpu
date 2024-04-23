@@ -34,17 +34,20 @@ module lsfr(clock, reset, randNum);
             // lfsr_reg[3] = lfsr_reg[5] ^ lfsr_reg[28];  // Feedback from taps 5 and 17
             // lfsr_reg[0] <= lfsr_reg[31] ^ lfsr_reg[29] ^ lfsr_reg[25] ^ lfsr_reg[24];
             
-            lfsr_reg[0] <= lfsr_reg[1] ^ lfsr_reg[5] ^ lfsr_reg[6] ^ lfsr_reg[31]; //-> TO ADD
-            lfsr_reg1[0] <= lfsr_reg1[1] ^ lfsr_reg1[9] ^ lfsr_reg1[14] ^ lfsr_reg1[31];
-            lfsr_reg2[0] <= lfsr_reg2[2] ^ lfsr_reg2[5] ^ lfsr_reg2[6] ^ lfsr_reg2[31];
-            lfsr_reg3[0] <= lfsr_reg3[1] ^ lfsr_reg3[5] ^ lfsr_reg3[6] ^ lfsr_reg3[31];
+            // lfsr_reg[0] <= lfsr_reg[1] ^ lfsr_reg[5] ^ lfsr_reg[6] ^ lfsr_reg[31]; //-> TO ADD
+            // lfsr_reg1[0] <= lfsr_reg1[1] ^ lfsr_reg1[9] ^ lfsr_reg1[14] ^ lfsr_reg1[31];
+            // lfsr_reg2[0] <= lfsr_reg2[2] ^ lfsr_reg2[5] ^ lfsr_reg2[6] ^ lfsr_reg2[31];
+            // lfsr_reg3[0] <= lfsr_reg3[1] ^ lfsr_reg3[5] ^ lfsr_reg3[6] ^ lfsr_reg3[31];
             
-            lfsr_reg = lfsr_reg << 1;
-            lfsr_reg1 = lfsr_reg1 << 1;
-            lfsr_reg2 = lfsr_reg2 << 1;
-            lfsr_reg3 = lfsr_reg3 << 1;
+            // lfsr_reg = lfsr_reg << 1;
+            // lfsr_reg1 = lfsr_reg1 << 1;
+            // lfsr_reg2 = lfsr_reg2 << 1;
+            // lfsr_reg3 = lfsr_reg3 << 1;
 
-            // lfsr_reg = {lfsr_reg[30:0], lfsr_reg[31]};  // Shift left
+            lfsr_reg <= {lfsr_reg[1] ^ lfsr_reg[5] ^ lfsr_reg[6] ^ lfsr_reg[31], lfsr_reg[30:1]};  // Shift left
+            lfsr_reg1 <= {lfsr_reg1[1] ^ lfsr_reg1[5] ^ lfsr_reg1[6] ^ lfsr_reg1[31], lfsr_reg1[30:1]};
+            lfsr_reg2 <= {lfsr_reg2[1] ^ lfsr_reg2[5] ^ lfsr_reg2[6] ^ lfsr_reg2[31], lfsr_reg2[30:1]};
+            lfsr_reg3 <= {lfsr_reg3[1] ^ lfsr_reg3[5] ^ lfsr_reg3[6] ^ lfsr_reg3[31], lfsr_reg3[30:1]};
         end
     end
 
