@@ -482,7 +482,7 @@ bne $zero, $a1, child_create #if next child isn't at 0, we need to create/mutate
 
 inc $zero, $zero, 0 #increment the generation counter
 
-add $a0, $s0, $zero #setting a0 to head of linkedlist 
+add $a0, $s5, $zero #setting a0 to head of linkedlist 
 j run
 
 stop:
