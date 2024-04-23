@@ -20,8 +20,8 @@ module VGAController(
 	);
 	
 	// Lab Memory Files Location
-	 localparam FILES_PATH = "C:/Users/wjn7/Desktop/full_cpu/final_modules/";
-//    localparam FILES_PATH = "./final_modules/";
+	//  localparam FILES_PATH = "C:/Users/wjn7/Desktop/full_cpu/final_modules/";
+   localparam FILES_PATH = "./final_modules/";
 	// Clock divider 100 MHz -> 25 MHz
 	wire clk25; // 25MHz clock
 
