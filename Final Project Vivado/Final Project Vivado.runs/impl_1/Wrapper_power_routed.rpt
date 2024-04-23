@@ -1,7 +1,7 @@
 Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2021.1 (win64) Build 3247384 Thu Jun 10 19:36:33 MDT 2021
-| Date             : Tue Apr 23 16:37:49 2024
+| Date             : Tue Apr 23 17:31:48 2024
 | Host             : P1-07 running 64-bit major release  (build 9200)
 | Command          : report_power -file Wrapper_power_routed.rpt -pb Wrapper_power_summary_routed.pb -rpx Wrapper_power_routed.rpx
 | Design           : Wrapper
@@ -53,15 +53,15 @@ Table of Contents
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
 | Clocks                  |     0.004 |        3 |       --- |             --- |
-| Slice Logic             |     0.165 |    10382 |       --- |             --- |
-|   LUT as Logic          |     0.164 |     6533 |     63400 |           10.30 |
+| Slice Logic             |     0.164 |    10381 |       --- |             --- |
+|   LUT as Logic          |     0.163 |     6541 |     63400 |           10.32 |
 |   Register              |    <0.001 |     3009 |    126800 |            2.37 |
 |   CARRY4                |    <0.001 |      168 |     15850 |            1.06 |
 |   LUT as Shift Register |    <0.001 |        6 |     19000 |            0.03 |
 |   BUFG                  |    <0.001 |        2 |        32 |            6.25 |
 |   F7/F8 Muxes           |    <0.001 |        8 |     63400 |            0.01 |
 |   Others                |     0.000 |      126 |       --- |             --- |
-| Signals                 |     0.139 |     9564 |       --- |             --- |
+| Signals                 |     0.140 |     9564 |       --- |             --- |
 | Block RAM               |     0.036 |    116.5 |       135 |           86.30 |
 | DSPs                    |    <0.001 |        1 |       240 |            0.42 |
 | I/O                     |     0.031 |       53 |       210 |           25.24 |
@@ -150,24 +150,25 @@ Table of Contents
 |     A_bypass                |     0.005 |
 |       second                |     0.005 |
 |     alu_in                  |     0.005 |
-|     dx_instruction          |     0.220 |
+|     dx_instruction          |     0.222 |
 |       loop1[0].dff1         |     0.091 |
 |       loop1[10].dff1        |     0.004 |
-|       loop1[16].dff1        |     0.114 |
+|       loop1[16].dff1        |     0.115 |
 |       loop1[3].dff1         |     0.005 |
+|       loop1[5].dff1         |     0.001 |
 |       loop1[9].dff1         |     0.001 |
 |     fd_instruction          |     0.007 |
 |       loop1[20].dff1        |     0.002 |
 |       loop1[26].dff1        |     0.003 |
 |     mem_data_in             |     0.003 |
-|     mw_d                    |     0.031 |
+|     mw_d                    |     0.030 |
 |       loop1[10].dff1        |     0.002 |
 |       loop1[12].dff1        |     0.001 |
 |       loop1[14].dff1        |     0.001 |
 |       loop1[16].dff1        |     0.002 |
-|       loop1[18].dff1        |     0.001 |
-|       loop1[20].dff1        |     0.002 |
-|       loop1[22].dff1        |     0.002 |
+|       loop1[18].dff1        |     0.002 |
+|       loop1[20].dff1        |     0.001 |
+|       loop1[22].dff1        |     0.001 |
 |       loop1[24].dff1        |     0.001 |
 |       loop1[26].dff1        |     0.001 |
 |       loop1[28].dff1        |     0.001 |
@@ -176,7 +177,7 @@ Table of Contents
 |       loop1[8].dff1         |     0.002 |
 |     mw_instruction          |     0.002 |
 |     register_write_data     |     0.004 |
-|     xm_o                    |     0.005 |
+|     xm_o                    |     0.004 |
 |   InstMem                   |     0.001 |
 |   ProcMem                   |     0.008 |
 |   RNG                       |     0.002 |
@@ -188,7 +189,7 @@ Table of Contents
 |   VGA                       |     0.034 |
 |     ColorPalette            |     0.001 |
 |     Display                 |     0.002 |
-|     ImageData               |     0.030 |
+|     ImageData               |     0.029 |
 |   seg_ctrl                  |     0.002 |
 +-----------------------------+-----------+
 

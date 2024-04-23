@@ -1,7 +1,7 @@
 Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2021.1 (win64) Build 3247384 Thu Jun 10 19:36:33 MDT 2021
-| Date         : Tue Apr 23 16:36:10 2024
+| Date         : Tue Apr 23 17:30:06 2024
 | Host         : P1-07 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file Wrapper_utilization_synth.rpt -pb Wrapper_utilization_synth.pb
 | Design       : Wrapper
@@ -151,12 +151,12 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT6     | 4277 |                 LUT |
+| LUT6     | 4276 |                 LUT |
 | FDCE     | 1481 |        Flop & Latch |
 | FDRE     | 1470 |        Flop & Latch |
-| LUT4     | 1310 |                 LUT |
-| LUT2     |  584 |                 LUT |
-| LUT5     |  522 |                 LUT |
+| LUT4     | 1312 |                 LUT |
+| LUT2     |  585 |                 LUT |
+| LUT5     |  519 |                 LUT |
 | LUT3     |  266 |                 LUT |
 | CARRY4   |  168 |          CarryLogic |
 | RAMB36E1 |  116 |        Block Memory |

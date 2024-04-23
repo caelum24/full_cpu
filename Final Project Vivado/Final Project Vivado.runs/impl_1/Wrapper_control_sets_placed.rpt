@@ -1,7 +1,7 @@
 Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2021.1 (win64) Build 3247384 Thu Jun 10 19:36:33 MDT 2021
-| Date         : Tue Apr 23 16:37:09 2024
+| Date         : Tue Apr 23 17:31:07 2024
 | Host         : P1-07 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file Wrapper_control_sets_placed.rpt
 | Design       : Wrapper
@@ -58,11 +58,11 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |             114 |           80 |
-| No           | No                    | Yes                    |             206 |           80 |
+| No           | No                    | No                     |             114 |           85 |
+| No           | No                    | Yes                    |             206 |           77 |
 | No           | Yes                   | No                     |              32 |            8 |
-| Yes          | No                    | No                     |            1330 |          405 |
-| Yes          | No                    | Yes                    |            1327 |          686 |
+| Yes          | No                    | No                     |            1330 |          402 |
+| Yes          | No                    | Yes                    |            1327 |          680 |
 | Yes          | Yes                   | No                     |               0 |            0 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
@@ -74,190 +74,190 @@ Table of Contents
 |      Clock Signal     |                         Enable Signal                        |                        Set/Reset Signal                       | Slice Load Count | Bel Load Count | Bels / Slice |
 +-----------------------+--------------------------------------------------------------+---------------------------------------------------------------+------------------+----------------+--------------+
 |  clock_BUFG           |                                                              | CPU/muldiv_operator/staller/ones/toggle_reg/multdiv_resultRDY |                1 |              4 |         4.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_5[0]  |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_9[0]                            |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_27[0]                           |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_3[0]                            |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_21[0]                           |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_35[0]                           |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_39[0]                           |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_5[0]                            |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_22[0]                           |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_38[0]                           |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_24[0]                           |                                                               |                4 |              9 |         2.25 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_7[0]                            |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_5[0]  |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_11[0]   |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_4[0]    |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_5[0]    |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_2[0]    |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_7[0]    |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_11[0] |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_2[0]  |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_13[0] |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_9[0]    |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_33[0]                           |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_15[0]                           |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_13[0]                           |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_7[0]  |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_9[0]  |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_11[0]                           |                                                               |                4 |              9 |         2.25 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_7[0]    |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_4[0]    |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_13[0]   |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_5[0]    |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_2[0]    |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_13[0]   |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_4[0]  |                                                               |                3 |              9 |         3.00 |
 |  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_1[0]  |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_2[0]  |                                                               |                4 |              9 |         2.25 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_1[0]    |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_5[0]  |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_4[0]  |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_19[0]                           |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_1[0]    |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_7[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_13[0] |                                                               |                2 |              9 |         4.50 |
 |  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_7[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_9[0]  |                                                               |                4 |              9 |         2.25 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_4[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_4[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_13[0] |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/E[0]                                  |                                                               |                4 |              9 |         2.25 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_19[0]                           |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_5[0]  |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_2[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_5[0]  |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_13[0] |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_9[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_2[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_11[0]   |                                                               |                3 |              9 |         3.00 |
 |  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_1[0]  |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_1[0]  |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_17[0]                           |                                                               |                4 |              9 |         2.25 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_13[0] |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_11[0] |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_2[0]  |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_5[0]  |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_9[0]  |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_7[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_2[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_4[0]    |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_9[0]  |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_1[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_2[0]    |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_5[0]  |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_5[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_11[0]                           |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_7[0]  |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_15[0]                           |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_1[0]  |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_17[0]                           |                                                               |                3 |              9 |         3.00 |
 |  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_11[0] |                                                               |                2 |              9 |         4.50 |
 |  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_4[0]  |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_11[0]   |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_9[0]  |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_13[0] |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/E[0]                                  |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_4[0]  |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_1[0]  |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_2[0]  |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_11[0] |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_13[0] |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_4[0]  |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_9[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_11[0]   |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_1[0]    |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_21[0]                           |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_11[0] |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_11[0] |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_2[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_9[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_13[0] |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_9[0]    |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_13[0]   |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_7[0]    |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_11[0] |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_13[0]                           |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_5[0]    |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_1[0]    |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_7[0]    |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_7[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_4[0]    |                                                               |                2 |              9 |         4.50 |
 |  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_9[0]    |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_31[0]                           |                                                               |                4 |              9 |         2.25 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_36[0]                           |                                                               |                3 |              9 |         3.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_25[0]                           |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_29[0]                           |                                                               |                2 |              9 |         4.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_3[0]  |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_6[0]  |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_8[0]  |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_6[0]  |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_0[0]  |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_10[0] |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_8[0]  |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_0[0]  |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_12[0] |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_10[0] |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_12[0] |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_3[0]  |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_10[0] |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_12[0]   |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_3[0]    |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_10[0]   |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_6[0]  |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_12[0] |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_6[0]    |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_0[0]    |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_10[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_12[0]   |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_16[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_12[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_18[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_10[0]   |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_3[0]  |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_0[0]    |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_10[0] |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_0[0]  |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_8[0]  |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_3[0]    |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_6[0]  |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_8[0]  |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_8[0]    |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_2[0]    |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_13[0]   |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_5[0]    |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_22[0]                           |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_29[0]                           |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_7[0]                            |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_24[0]                           |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_35[0]                           |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_25[0]                           |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_31[0]                           |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_7[0]  |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_36[0]                           |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_38[0]                           |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_39[0]                           |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_5[0]                            |                                                               |                2 |              9 |         4.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_27[0]                           |                                                               |                4 |              9 |         2.25 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_9[0]                            |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_3[0]                            |                                                               |                3 |              9 |         3.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_33[0]                           |                                                               |                4 |              9 |         2.25 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_12[0]   |                                                               |                4 |             10 |         2.50 |
 |  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_8[0]    |                                                               |                4 |             10 |         2.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_0[0]    |                                                               |                4 |             10 |         2.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_12[0]                           |                                                               |                4 |             10 |         2.50 |
 |  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_14[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_6[0]    |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_0[0]  |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_12[0]   |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_6[0]    |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_0[0]    |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_6[0]  |                                                               |                3 |             10 |         3.33 |
 |  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_3[0]  |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_40[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_1[0]                        |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_7[0]                        |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_43[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_6[0]                        |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_28[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_45[0]                           |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_46[0]                           |                                                               |                2 |             10 |         5.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_5[0]                        |                                                               |                2 |             10 |         5.00 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_0[0]                        |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_3[0]                        |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_41[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_2[0]                            |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_18[0]                           |                                                               |                4 |             10 |         2.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_3[0]    |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_6[0]    |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_6[0]  |                                                               |                4 |             10 |         2.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_10[0]                           |                                                               |                4 |             10 |         2.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_8[0]  |                                                               |                4 |             10 |         2.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_10[0]   |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[8].dots_y[8][8]_i_2_8[0]    |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_3[0]    |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_10[0] |                                                               |                4 |             10 |         2.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[9].dots_y[9][8]_i_2_10[0]   |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_16[0]                           |                                                               |                3 |             10 |         3.33 |
+|  clk25                |                                                              | reset_IBUF                                                    |                5 |             10 |         2.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_8[0]  |                                                               |                3 |             10 |         3.33 |
 |  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_30[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_37[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_32[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_4[0]                            |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_44[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_23[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_4[0]                        |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_48[0]                           |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_26[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_12[0] |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_20[0]                           |                                                               |                3 |             10 |         3.33 |
-|  clk25                |                                                              | reset_IBUF                                                    |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_6[0]                            |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_8[0]                            |                                                               |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_2[0]                        |                                                               |                4 |             10 |         2.50 |
-|  clk25                | VGA/Display/vPos                                             | reset_IBUF                                                    |                3 |             10 |         3.33 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_34[0]                           |                                                               |                4 |             10 |         2.50 |
 |  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_42[0]                           |                                                               |                4 |             10 |         2.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_6[0]                            |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_12[0] |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_1[0]                        |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_2[0]                        |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_46[0]                           |                                                               |                2 |             10 |         5.00 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_3[0]                        |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_4[0]                            |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_0[0]  |                                                               |                4 |             10 |         2.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_10[0] |                                                               |                4 |             10 |         2.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_26[0]                           |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_6[0]                        |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_34[0]                           |                                                               |                4 |             10 |         2.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_41[0]                           |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_43[0]                           |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_6[0]  |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_12[0] |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_44[0]                           |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_5[0]                        |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_8[0]  |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_7[0]                        |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_8[0]  |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_28[0]                           |                                                               |                4 |             10 |         2.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_6[0]  |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_37[0]                           |                                                               |                4 |             10 |         2.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_32[0]                           |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_12[0] |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_3[0]  |                                                               |                4 |             10 |         2.50 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_0[0]  |                                                               |                4 |             10 |         2.50 |
 |  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_47[0]                           |                                                               |                4 |             10 |         2.50 |
-|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[16].dots_y[16][8]_i_2_0[0]  |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_48[0]                           |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[24].dots_y[24][8]_i_2_10[0] |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_10[0] |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_12[0] |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_4[0]                        |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_3[0]  |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_23[0]                           |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[17].dots_y[17][8]_i_2_0[0]  |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_20[0]                           |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_8[0]                            |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_40[0]                           |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_45[0]                           |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_2[0]                            |                                                               |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/q_reg_rep_0[0]                        |                                                               |                4 |             10 |         2.50 |
+|  clk25                | VGA/Display/vPos                                             | reset_IBUF                                                    |                3 |             10 |         3.33 |
+|  clk25                | CPU/xm_o/loop1[9].dff1/dots_move[25].dots_y[25][8]_i_2_3[0]  |                                                               |                3 |             10 |         3.33 |
 |  clock_BUFG           | CPU/dx_instruction/loop1[27].dff1/increment_seg              | reset_IBUF                                                    |                4 |             14 |         3.50 |
-|  clock_100_IBUF_BUFG  |                                                              |                                                               |                9 |             15 |         1.67 |
+|  clock_100_IBUF_BUFG  |                                                              |                                                               |                8 |             15 |         1.88 |
 |  clock_BUFG           |                                                              |                                                               |                5 |             16 |         3.20 |
-|  seg_ctrl/clock_250Hz |                                                              |                                                               |                7 |             18 |         2.57 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_11                      | reset_IBUF                                                    |               13 |             32 |         2.46 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_14                      | reset_IBUF                                                    |               12 |             32 |         2.67 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_20                      | reset_IBUF                                                    |               15 |             32 |         2.13 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_1                       | reset_IBUF                                                    |               21 |             32 |         1.52 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_25                      | reset_IBUF                                                    |               15 |             32 |         2.13 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_16                      | reset_IBUF                                                    |               16 |             32 |         2.00 |
+|  seg_ctrl/clock_250Hz |                                                              |                                                               |                8 |             18 |         2.25 |
 |  clock_100_IBUF_BUFG  |                                                              | seg_ctrl/count_250Hz[32]_i_1_n_0                              |                8 |             32 |         4.00 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_10                      | reset_IBUF                                                    |               22 |             32 |         1.45 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_29                      | reset_IBUF                                                    |               15 |             32 |         2.13 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_19                      | reset_IBUF                                                    |               16 |             32 |         2.00 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_28                      | reset_IBUF                                                    |               21 |             32 |         1.52 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_22                      | reset_IBUF                                                    |               14 |             32 |         2.29 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_6                       | reset_IBUF                                                    |               20 |             32 |         1.60 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_12                      | reset_IBUF                                                    |               15 |             32 |         2.13 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_21                      | reset_IBUF                                                    |               20 |             32 |         1.60 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_18                      | reset_IBUF                                                    |               17 |             32 |         1.88 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_13                      | reset_IBUF                                                    |               20 |             32 |         1.60 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_4                       | reset_IBUF                                                    |               14 |             32 |         2.29 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_8                       | reset_IBUF                                                    |               12 |             32 |         2.67 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_31                      | reset_IBUF                                                    |               20 |             32 |         1.60 |
-|  clock_BUFG           | CPU/muldiv_operator/staller/twos/toggle_reg/input_en0        | reset_IBUF                                                    |               27 |             32 |         1.19 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_9                       | reset_IBUF                                                    |               17 |             32 |         1.88 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_3                       | reset_IBUF                                                    |               19 |             32 |         1.68 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_27                      | reset_IBUF                                                    |               25 |             32 |         1.28 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_26                      | reset_IBUF                                                    |               11 |             32 |         2.91 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_15                      | reset_IBUF                                                    |               13 |             32 |         2.46 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_23                      | reset_IBUF                                                    |               12 |             32 |         2.67 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_5                       | reset_IBUF                                                    |               11 |             32 |         2.91 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_7                       | reset_IBUF                                                    |               19 |             32 |         1.68 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_2                       | reset_IBUF                                                    |               11 |             32 |         2.91 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_24                      | reset_IBUF                                                    |               20 |             32 |         1.60 |
+|  clock_BUFG           | CPU/muldiv_operator/staller/twos/toggle_reg/input_en0        | reset_IBUF                                                    |               20 |             32 |         1.60 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_1                       | reset_IBUF                                                    |               20 |             32 |         1.60 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_29                      | reset_IBUF                                                    |               12 |             32 |         2.67 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_22                      | reset_IBUF                                                    |               15 |             32 |         2.13 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_16                      | reset_IBUF                                                    |               15 |             32 |         2.13 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_11                      | reset_IBUF                                                    |               11 |             32 |         2.91 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_21                      | reset_IBUF                                                    |               18 |             32 |         1.78 |
 |  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_17                      | reset_IBUF                                                    |               11 |             32 |         2.91 |
-|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_30                      | reset_IBUF                                                    |               13 |             32 |         2.46 |
-| ~clock_BUFG           | CPU/muldiv_operator/staller/twos/toggle_reg/input_en0        | reset_IBUF                                                    |               30 |             64 |         2.13 |
-|  clk25                |                                                              |                                                               |               59 |             71 |         1.20 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_20                      | reset_IBUF                                                    |               13 |             32 |         2.46 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_8                       | reset_IBUF                                                    |               17 |             32 |         1.88 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_6                       | reset_IBUF                                                    |               22 |             32 |         1.45 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_2                       | reset_IBUF                                                    |               14 |             32 |         2.29 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_4                       | reset_IBUF                                                    |               18 |             32 |         1.78 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_5                       | reset_IBUF                                                    |               13 |             32 |         2.46 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_30                      | reset_IBUF                                                    |               17 |             32 |         1.88 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_23                      | reset_IBUF                                                    |               14 |             32 |         2.29 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_13                      | reset_IBUF                                                    |               22 |             32 |         1.45 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_25                      | reset_IBUF                                                    |               20 |             32 |         1.60 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_26                      | reset_IBUF                                                    |               16 |             32 |         2.00 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_28                      | reset_IBUF                                                    |               15 |             32 |         2.13 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_14                      | reset_IBUF                                                    |               10 |             32 |         3.20 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_7                       | reset_IBUF                                                    |               14 |             32 |         2.29 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_24                      | reset_IBUF                                                    |               19 |             32 |         1.68 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_3                       | reset_IBUF                                                    |               18 |             32 |         1.78 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_19                      | reset_IBUF                                                    |               12 |             32 |         2.67 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_10                      | reset_IBUF                                                    |               17 |             32 |         1.88 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_15                      | reset_IBUF                                                    |               17 |             32 |         1.88 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_12                      | reset_IBUF                                                    |               16 |             32 |         2.00 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_27                      | reset_IBUF                                                    |               24 |             32 |         1.33 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_31                      | reset_IBUF                                                    |               16 |             32 |         2.00 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_9                       | reset_IBUF                                                    |               16 |             32 |         2.00 |
+|  clock_BUFG           | CPU/mw_instruction/loop1[29].dff1/we_18                      | reset_IBUF                                                    |               20 |             32 |         1.60 |
+| ~clock_BUFG           | CPU/muldiv_operator/staller/twos/toggle_reg/input_en0        | reset_IBUF                                                    |               23 |             64 |         2.78 |
+|  clk25                |                                                              |                                                               |               64 |             71 |         1.11 |
 | ~clock_BUFG           |                                                              | reset_IBUF                                                    |               40 |             77 |         1.92 |
-|  clock_BUFG           |                                                              | reset_IBUF                                                    |               36 |            115 |         3.19 |
-| ~clock_BUFG           | CPU/muldiv_operator/staller/twos/toggle_reg/input_en112_in   | reset_IBUF                                                    |              122 |            215 |         1.76 |
+|  clock_BUFG           |                                                              | reset_IBUF                                                    |               31 |            115 |         3.71 |
+| ~clock_BUFG           | CPU/muldiv_operator/staller/twos/toggle_reg/input_en112_in   | reset_IBUF                                                    |              128 |            215 |         1.68 |
 +-----------------------+--------------------------------------------------------------+---------------------------------------------------------------+------------------+----------------+--------------+
 
 
