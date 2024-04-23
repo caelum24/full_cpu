@@ -425,6 +425,7 @@ lw $s0, 9($s0) #next
 lw $s0, 9($s0) #next
 lw $s0, 9($s0) #next
 lw $29, 9($s0) #next
+add $s0, $v0, $zero
 # inc $zero, $zero, 0 #increment the generation counter
 # lw $t0, 10($s0) #previous
 # lw $26, 0($s0) #xloc 176
