@@ -388,7 +388,7 @@ addi $26, $26, 1
 blt $26, $27, waiter
 
 blt $s3, $s4, play_generation
-
+inc $zero, $zero, 0 #increment the generation counter
 # CALCULATING THE FITNESS OF A DOT
 # ## s2 holds the number of dots
 add $s1, $zero, $zero #counter for which dot we're calculating = 0
@@ -398,7 +398,7 @@ jal calculateFitness
 addi $s1, $s1, 1 #increment looper
 lw $a0, 9($a0) #loading dot.next for next loop over the dots
 blt $s1, $s2, fitness_loop
-
+inc $zero, $zero, 0 #increment the generation counter
 
 # # SORTING ALL OF THE DOTS BASED ON THEIR FITNESS
 add $a0, $s0, $zero #making $a0 the head of the linkedlist
