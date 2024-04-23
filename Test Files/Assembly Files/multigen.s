@@ -8,7 +8,7 @@
 # GOALX: .word 320 #x location on VGA of center of goal
 # GOALY: .word 60  #y location on VGA of center of goal
 # STARTX: .word 320 #x location on VGA of dots' start location
-# STARTY: .word 420 #y location on VGA of dots' start location
+# STARTY: .word 360 #y location on VGA of dots' start location
 # MUTATIONRATE: .word 4 #How likely a dot's vector is to mutate when being born (likely out of 128 by using lfsr rng)
 # # STARTING_ADDR: .word 0x100 #Starting addr for  dots
 # START_ADDR: .word 1000 
@@ -41,7 +41,7 @@ addi $s7, $zero, 0      # $s7 = prev (initialized to 0 for 0th dot)
 addi $s3, $zero, 400    # $s3 = NUMVECTORS number of vectors needed to be created 
 sll $s3, $s3, 1         # $s3 mult by 2 to account for x and y in each vector (2*NUMVECTORS)
 addi $t8, $zero, 320    # $t8 = start location X for dots
-addi $t9, $zero, 420    # $t9 = start location Y for dots
+addi $t9, $zero, 360    # $t9 = start location Y for dots
 
 # Initialize variables for current dot
 loop_dots:
@@ -136,7 +136,7 @@ fix_posy:
 addi $t6, $zero, 7 #set Y vel to MAXVEL
 j ok_vel
 fix_negy:
-addi $t6, $zero, 7 #set Y vel to MAXVEL
+addi $t6, $zero, -7 #set Y vel to MAXVEL
 
 ok_vel:
 # Dot.position = dot.position + dot.velocity
@@ -307,7 +307,7 @@ addi $t1, $zero, 800 #NUMVECTORS*2
 
 #RESETTING THE INIT VALUES FOR THE CHILD DOT
 addi $t8, $zero, 320    # $t8 = start location X for dots
-addi $t9, $zero, 420    # $t9 = start location Y for dots
+addi $t9, $zero, 360    # $t9 = start location Y for dots
 
 # Initialize variables for current dot
 sw $t8, 0($a1)      # x start position
@@ -417,7 +417,7 @@ add $s0, $v0, $zero #making s0 head of sorted linkedlist
 
 # #RESETTING THE INIT VALUES FOR THE Champion
 addi $t8, $zero, 320    # $t8 = start location X for dots
-addi $t9, $zero, 420    # $t9 = start location Y for dots
+addi $t9, $zero, 360    # $t9 = start location Y for dots
 addi $t7, $zero, 1
 # Initialize variables for current dot
 sw $t8, 0($s0)      # x start position
