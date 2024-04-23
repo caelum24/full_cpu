@@ -14,7 +14,7 @@ nop
 
 # TODO -> INITIALIZE everything with a prev word
 init_dots:
-addi $s0, $zero, 4     # Load NUMDOTS
+addi $s0, $zero, 7     # Load NUMDOTS
 addi $s1, $zero, 0      # Initialize counter for initializing all dots
 addi $t2, $zero, 1000   # Load starting addr (head)
 add $t1, $zero, $t2     # $t1 = current (initialized to head)
@@ -114,6 +114,7 @@ bne $t6, $zero, sortiter    # if current.next != 0, go to sortiter
 add $a0, $t0, $zero         # $a0 = head
 bne $t7, $zero, sortrecur   # if $t7 != 0, go to sortrecur
 add $v0, $t0, $zero         # $v0 = head
+addi $1, $zero, 69
 
 # jr $ra
 lw $v0, 9($v0)
@@ -124,3 +125,7 @@ lw $28, 8($v0)
 lw $29, 10($27)
 lw $30, 9($27)
 lw $31, 8($27)
+
+stop:
+nop
+j stop
