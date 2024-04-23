@@ -151,6 +151,7 @@ Cycle 368: Wrote 4244 into register 12
 Cycle 370: Wrote 4 into register 17
 Cycle 371: Wrote 3433 into register 23
 Cycle 372: Wrote 4244 into register 9
+<<<<<<< HEAD
 Cycle 384: Wrote 4294967289 into register 13
 Cycle 389: Wrote 0 into register 18
 Cycle 390: Wrote 4294967294 into register 13
@@ -1352,3 +1353,4 @@ Reg 28:           0
 Reg 29:           0
 Reg 30:           0
 Reg 31:           0
+
