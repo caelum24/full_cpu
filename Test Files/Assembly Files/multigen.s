@@ -38,7 +38,7 @@ addi $s1, $zero, 0      # Initialize counter for initializing all dots
 addi $t2, $zero, 1000   # Load starting addr (head)
 add $t1, $zero, $t2     # $t1 = current (initialized to head)
 addi $s7, $zero, 0      # $s7 = prev (initialized to 0 for 0th dot)
-addi $s3, $zero, 5    # $s3 = NUMVECTORS number of vectors needed to be created 
+addi $s3, $zero, 400    # $s3 = NUMVECTORS number of vectors needed to be created 
 sll $s3, $s3, 1         # $s3 mult by 2 to account for x and y in each vector (2*NUMVECTORS)
 addi $t8, $zero, 320    # $t8 = start location X for dots
 addi $t9, $zero, 420    # $t9 = start location Y for dots
@@ -164,7 +164,7 @@ blt $t9, $t7, make_dead #if ypos(t9) < maxvel($t7) -> top boundary of arena
 blt $t0, $t9, make_dead #if Ypos(t9) > Height-maxvel($t0) -> bottom boundary of arena
 
 # TODO: this logic could be wrong
-addi $t0, $zero, 5 #MAXSTEP
+addi $t0, $zero, 400 #MAXSTEP
 # blt $t0, $t3, make_dead #if MAXSTEP < Numsteps, make dead
 blt $t3, $t0, check_at_goal #if Numsteps < MAXSTEP, check at goal (else make dead)
 # j check_at_goal
@@ -236,7 +236,7 @@ add $t9, $t7, $t8 #calculating squared distance: dx^2 + dy^2
 # mul $29, $t8, $t8 #t8 =  ydist^2
 # add $t9, $28, $29 #calculating squared distance: dx^2 + dy^2
 
-addi $t2, $t9, 5 #dist+MAXSTEP
+addi $t2, $t9, 400 #dist+MAXSTEP
 sw $t2, 8($a0) #store fitness
 
 exit_calcFitness:
@@ -357,7 +357,7 @@ add $s0, $a0, $zero #head of linkedlist
 addi $s2, $zero, 4 #while counter < NUMDOTS, we loop move
 
 addi $s3, $zero, 0 #counter for which step we're on
-addi $s4, $zero, 5 #MAXSTEP
+addi $s4, $zero, 400 #MAXSTEP
 
 # RUNNING A GENERATION (ALL DOTS MOVE UNTIL DEAD)
 play_generation: #loop through this to play out the entire generation's movement
