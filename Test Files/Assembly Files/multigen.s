@@ -404,13 +404,14 @@ blt $s1, $s2, fitness_loop
 add $a0, $s0, $zero #making $a0 the head of the linkedlist
 jal sort
 add $s0, $v0, $zero #making s0 head of sorted linkedlist
+inc $zero, $zero, 0 #increment the generation counter
 lw $t0, 10($s0) #previous
 lw $26, 0($s0) #xloc 176
 lw $27, 1($s0) #yloc 271
-lw $a0, 9($s0) #next
+lw $s0, 9($s0) #next
 lw $28, 0($s0) #xloc 373
 lw $29, 1($s0) #yloc 474
-lw $a0, 9($s0) #next
+lw $s0, 9($s0) #next
 lw $30, 0($s0) #xloc 368
 lw $31, 1($s0) #yloc 477
 
