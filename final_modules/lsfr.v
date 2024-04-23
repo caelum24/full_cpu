@@ -13,7 +13,8 @@ module lsfr(clock, reset, randNum);
     
     // Initialize the LFSR register value upon startup
     initial begin
-        lfsr_reg = 32'b10101110101011110110100101101100;  // Set initial value to a specific value
+        lfsr_reg = 32'hACE1ACE1;
+        // lfsr_reg = 32'b10101110101011110110100101101100;  // Set initial value to a specific value
         lfsr_reg1 = 32'b10001111010100111101001000101001;
         lfsr_reg2 = 32'b01001101111001100011000100011110;
         lfsr_reg3 = 32'b11001001101100111010110100100100;
@@ -22,7 +23,7 @@ module lsfr(clock, reset, randNum);
     // Clock the LFSR
     always @(posedge clock or posedge reset) begin
         if (reset) begin
-            lfsr_reg <= 32'b10001110101011110110100101101100;  // Reset the LFSR to initial state (any non-zero value)
+            lfsr_reg <= 32'hACE1ACE1;  // Reset the LFSR to initial state (any non-zero value)
             lfsr_reg1 <= 32'b10001111010100111101001000101001;
             lfsr_reg2 <= 32'b01001101111001100011000100011110;
             lfsr_reg3 <= 32'b00110010010001100011011110001000;
