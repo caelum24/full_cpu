@@ -251,15 +251,21 @@ jr $ra
 sort:
 addi $t7, $zero, 0          # $t7 = 0
 add $t0, $a0, $zero         # $t0 = head
+nop
+nop
 add $t1, $t0, $zero         # $t1 = current
 j siguard
 
 sortiter:
 lw $t2, 8($t1)              # $t2 = current fitness
 lw $t3, 8($t6)              # $t3 = current.next fitness
+nop
+nop
 blt $t2, $t3, sinext        # if current fitness < next fitness, go to sinext
 addi $t7, $zero, 1          # $t7 = 1
 lw $t4, 10($t1)             # $t4 = current.prev
+nop
+nop
 bne $t4, $zero, supprev     # if current.prev != 0, go to supprev
 j supprevd
 
@@ -269,6 +275,8 @@ sw $t6, 9($t4)             # current.prev.next = current next
 supprevd:
 sw $t4, 10($t6)             # current.next.prev = current.prev
 lw $t5, 9($t6)             # $t5 = current.next.next
+nop
+nop
 bne $t5, $zero, supnnprev   # if current.next.next != 0, go to supnnprev
 j supnnprevd
 
@@ -279,14 +287,20 @@ supnnprevd:
 sw $t5, 9($t1)             # current.next = current.next.next
 sw $t1, 9($t6)             # current.next.next = current
 sw $t6, 10($t1)             # current.prev = current.next
+nop
+nop
 bne $t0, $t1, sinext        # if head != current, go to sinext
-add $t0, $t6, $zero         # head = current next
+nop
+nop
+add $t0, $t6, $zero         # head = current.next
 
 sinext:
 add $t1, $t6, $zero         # $t1 = current.next
 
 siguard:
 lw $t6, 9($t1)              # $t6 = current.next
+nop
+nop
 bne $t6, $zero, sortiter    # if current.next != 0, go to sortiter
 add $a0, $t0, $zero         # $a0 = head
 bne $t7, $zero, sortrecur   # if $t7 != 0, go to sortrecur
@@ -388,7 +402,7 @@ addi $26, $26, 1
 blt $26, $27, waiter
 
 blt $s3, $s4, play_generation
-inc $zero, $zero, 0 #increment the generation counter
+
 # CALCULATING THE FITNESS OF A DOT
 # ## s2 holds the number of dots
 add $s1, $zero, $zero #counter for which dot we're calculating = 0
@@ -398,7 +412,6 @@ jal calculateFitness
 addi $s1, $s1, 1 #increment looper
 lw $a0, 9($a0) #loading dot.next for next loop over the dots
 blt $s1, $s2, fitness_loop
-inc $zero, $zero, 0 #increment the generation counter
 
 # # SORTING ALL OF THE DOTS BASED ON THEIR FITNESS
 add $a0, $s0, $zero #making $a0 the head of the linkedlist
