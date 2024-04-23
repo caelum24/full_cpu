@@ -340,8 +340,7 @@ add $t4, $t0, $a1 #address of child vector
 lw $t9, 99($zero)   # $t9 = getting a random value from the LFSR
 sw $t9, 11($t4) #storing the nth x_vector for child
 lw $t9, 99($zero)   # $t9 = getting a random value from the LFSR
-sw $t3, 12($t4) #storing the nth y_vector for child
-
+sw $t9, 12($t4) #storing the nth y_vector for child
 
 copy_comp:
 addi $t0, $t0, 2 #incrementing t0 by 2 (for x and y)
@@ -404,54 +403,50 @@ blt $s1, $s2, fitness_loop
 add $a0, $s0, $zero #making $a0 the head of the linkedlist
 jal sort
 add $s0, $v0, $zero #making s0 head of sorted linkedlist
-inc $zero, $zero, 0 #increment the generation counter
-lw $t0, 10($s0) #previous
-lw $26, 0($s0) #xloc 176
-lw $27, 1($s0) #yloc 271
-lw $s0, 9($s0) #next
-lw $28, 0($s0) #xloc 373
-lw $29, 1($s0) #yloc 474
-lw $s0, 9($s0) #next
-lw $30, 0($s0) #xloc 368
-lw $31, 1($s0) #yloc 477
-
+# inc $zero, $zero, 0 #increment the generation counter
+# lw $t0, 10($s0) #previous
+# lw $26, 0($s0) #xloc 176
+# lw $27, 1($s0) #yloc 271
+# lw $s0, 9($s0) #next
+# lw $28, 0($s0) #xloc 373
+# lw $29, 1($s0) #yloc 474
+# lw $s0, 9($s0) #next
+# lw $30, 0($s0) #xloc 368
+# lw $31, 1($s0) #yloc 477
 
 
 # #RESETTING THE INIT VALUES FOR THE Champion
-# addi $t8, $zero, 320    # $t8 = start location X for dots
-# addi $t9, $zero, 420    # $t9 = start location Y for dots
-# addi $t7, $zero, 1
-# # Initialize variables for current dot
-# sw $t8, 0($s0)      # x start position
-# sw $t9, 1($s0)      # y start position
-# sw $zero, 2($s0)    # x velocity
-# sw $zero, 3($s0)    # y velocity
-# sw $zero, 4($s0)    # dead status
-# sw $zero, 5($s0)    # reachedGoal status
-# sw $t7, 6($s0)    # champion status -> champion = 1
-# sw $zero, 7($s0)    # numSteps
-# sw $zero, 8($s0)    # fitness
-
-# # TODO: choose how to give each dot their offspring
-# # TODO: MAKE 7 SEG DISPLAY RESET PROPERLY
+addi $t8, $zero, 320    # $t8 = start location X for dots
+addi $t9, $zero, 420    # $t9 = start location Y for dots
+addi $t7, $zero, 1
+# Initialize variables for current dot
+sw $t8, 0($s0)      # x start position
+sw $t9, 1($s0)      # y start position
+sw $zero, 2($s0)    # x velocity
+sw $zero, 3($s0)    # y velocity
+sw $zero, 4($s0)    # dead status
+sw $zero, 5($s0)    # reachedGoal status
+sw $t7, 6($s0)    # champion status -> champion = 1
+sw $zero, 7($s0)    # numSteps
+sw $zero, 8($s0)    # fitness
 
 # # CREATING NEW DOT OFFSPRING AND MUTATING THEM
 # # TODO -> for now, just copying the best dot each time... not an 
-# lw $s5, 9($s0) #getting next of linkedlist
-# add $a0, $s0, $zero #making $a0 the head of the linkedlist
-# add $a1, $s5, $zero #making $a1 the next value of the linkedlist (child)
+lw $s5, 9($s0) #getting next of linkedlist
+add $a0, $s0, $zero #making $a0 the head of the linkedlist
+add $a1, $s5, $zero #making $a1 the next value of the linkedlist (child)
 
-# child_create:
-# jal mutate
-# lw $a1, 9($a1) #new child = child.next
-# nop
-# nop #nops just in case
-# bne $zero, $a1, child_create #if next child isn't at 0, we need to create/mutate it
+child_create:
+jal mutate
+lw $a1, 9($a1) #new child = child.next
+nop
+nop #nops just in case
+bne $zero, $a1, child_create #if next child isn't at 0, we need to create/mutate it
 
-# inc $zero, $zero, 0 #increment the generation counter
+inc $zero, $zero, 0 #increment the generation counter
 
-# add $a0, $s0, $zero #setting a0 to head of linkedlist 
-# j run
+add $a0, $s0, $zero #setting a0 to head of linkedlist 
+j run
 
 stop:
 nop

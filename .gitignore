@@ -2,3 +2,5 @@
 */*.hw
 */*.runs
 */*.sim
+*/*.vcd
+./Test\ Files/Output\ Files/sort_test.vcd
