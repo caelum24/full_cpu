@@ -33,7 +33,7 @@ nop
 
 # TODO -> INITIALIZE everything with a prev word
 init_dots:
-addi $s0, $zero, 10     # Load NUMDOTS
+addi $s0, $zero, 5     # Load NUMDOTS
 addi $s1, $zero, 0      # Initialize counter for initializing all dots
 addi $t2, $zero, 1000   # Load starting addr (head)
 add $t1, $zero, $t2     # $t1 = current (initialized to head)
@@ -354,7 +354,7 @@ run: #loop over this for all of time
 # a0 is the head of the linkedlist
 # addi $sp, $zero, 3 #testing
 add $s0, $a0, $zero #head of linkedlist
-addi $s2, $zero, 10 #while counter < NUMDOTS, we loop move
+addi $s2, $zero, 5 #while counter < NUMDOTS, we loop move
 
 addi $s3, $zero, 0 #counter for which step we're on
 addi $s4, $zero, 400 #MAXSTEP
