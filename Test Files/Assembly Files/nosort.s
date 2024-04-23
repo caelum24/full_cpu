@@ -416,7 +416,7 @@ addi $s3, $s3, 1 #increment step counter
 addi $26, $zero, 0
 addi $27, $zero, 47962 #12*1600 63950 ns per line of VGA -> 747400 instructions to == nanoseconds -> /4 because brand and 2 nops
 # sll $27, $27, 2 #191850/4 ~= 47962
-sll $27, $27, 3 #arbitrary to make it 2 times slower than it was with above instruction
+sll $27, $27, 1 #arbitrary to make it 2 times slower than it was with above instruction
 waiter:
 addi $26, $26, 1
 blt $26, $27, waiter
