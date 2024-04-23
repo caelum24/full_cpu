@@ -1,0 +1,536 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Tue Apr 23 16:34:23 2024
+# Process ID: 9032
+# Current directory: C:/Users/wjn7/Desktop/full_cpu/Final Project Vivado/Final Project Vivado.runs/synth_1
+# Command line: vivado.exe -log Wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Wrapper.tcl
+# Log file: C:/Users/wjn7/Desktop/full_cpu/Final Project Vivado/Final Project Vivado.runs/synth_1/Wrapper.vds
+# Journal file: C:/Users/wjn7/Desktop/full_cpu/Final Project Vivado/Final Project Vivado.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source Wrapper.tcl -notrace
+Command: synth_design -top Wrapper -part xc7a100tcsg324-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 18172
+WARNING: [Synth 8-6901] identifier 'xm_out' is used before its declaration [C:/Users/wjn7/Desktop/full_cpu/hazards.v:57]
+WARNING: [Synth 8-6901] identifier 'xm_out' is used before its declaration [C:/Users/wjn7/Desktop/full_cpu/hazards.v:57]
+WARNING: [Synth 8-6901] identifier 'xm_out' is used before its declaration [C:/Users/wjn7/Desktop/full_cpu/hazards.v:57]
+WARNING: [Synth 8-6901] identifier 'mw_out' is used before its declaration [C:/Users/wjn7/Desktop/full_cpu/hazards.v:87]
+WARNING: [Synth 8-6901] identifier 'mw_out' is used before its declaration [C:/Users/wjn7/Desktop/full_cpu/hazards.v:88]
+WARNING: [Synth 8-6901] identifier 'wb_out' is used before its declaration [C:/Users/wjn7/Desktop/full_cpu/hazards.v:93]
+WARNING: [Synth 8-6901] identifier 'wb_out' is used before its declaration [C:/Users/wjn7/Desktop/full_cpu/hazards.v:94]
+WARNING: [Synth 8-6901] identifier 'wb_out' is used before its declaration [C:/Users/wjn7/Desktop/full_cpu/hazards.v:111]
+WARNING: [Synth 8-992] multdiv_halt is already implicitly declared earlier [C:/Users/wjn7/Desktop/full_cpu/processor.v:175]
+WARNING: [Synth 8-992] xm_o_out is already implicitly declared earlier [C:/Users/wjn7/Desktop/full_cpu/processor.v:195]
+WARNING: [Synth 8-992] xm_error_out is already implicitly declared earlier [C:/Users/wjn7/Desktop/full_cpu/processor.v:199]
+WARNING: [Synth 8-6901] identifier 'isNotEqual' is used before its declaration [C:/Users/wjn7/Desktop/full_cpu/processor.v:84]
+WARNING: [Synth 8-6901] identifier 'isLessThan' is used before its declaration [C:/Users/wjn7/Desktop/full_cpu/processor.v:84]
+WARNING: [Synth 8-6901] identifier 'isNotEqual' is used before its declaration [C:/Users/wjn7/Desktop/full_cpu/processor.v:84]
+WARNING: [Synth 8-6901] identifier 'isNotEqual' is used before its declaration [C:/Users/wjn7/Desktop/full_cpu/processor.v:84]
+WARNING: [Synth 8-6901] identifier 'pc_hopper' is used before its declaration [C:/Users/wjn7/Desktop/full_cpu/processor.v:86]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1328.996 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'Wrapper' [C:/Users/wjn7/Desktop/full_cpu/Wrapper.v:27]
+INFO: [Synth 8-6157] synthesizing module 'processor' [C:/Users/wjn7/Desktop/full_cpu/processor.v:20]
+INFO: [Synth 8-6157] synthesizing module 'register_32b' [C:/Users/wjn7/Desktop/full_cpu/subelements/register_32b.v:1]
+INFO: [Synth 8-6157] synthesizing module 'dffe_ref' [C:/Users/wjn7/Desktop/full_cpu/subelements/dffe_ref.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'dffe_ref' (1#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/dffe_ref.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'register_32b' (2#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/register_32b.v:1]
+INFO: [Synth 8-6157] synthesizing module 'add_32bit' [C:/Users/wjn7/Desktop/full_cpu/subelements/add_32bit.v:1]
+INFO: [Synth 8-6157] synthesizing module 'cla_8b' [C:/Users/wjn7/Desktop/full_cpu/subelements/cla_8b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'cla_8b' (3#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/cla_8b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'add_32bit' (4#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/add_32bit.v:1]
+WARNING: [Synth 8-7071] port 'add_overflow' of module 'add_32bit' is unconnected for instance 'pc_incrementer' [C:/Users/wjn7/Desktop/full_cpu/processor.v:89]
+WARNING: [Synth 8-7023] instance 'pc_incrementer' of module 'add_32bit' has 4 connections declared, but only 3 given [C:/Users/wjn7/Desktop/full_cpu/processor.v:89]
+INFO: [Synth 8-6157] synthesizing module 'mux_2' [C:/Users/wjn7/Desktop/full_cpu/subelements/mux_2.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mux_2' (5#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/mux_2.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mux_4' [C:/Users/wjn7/Desktop/full_cpu/subelements/mux_4.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mux_4' (6#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/mux_4.v:1]
+INFO: [Synth 8-6157] synthesizing module 's_ext17_32' [C:/Users/wjn7/Desktop/full_cpu/subelements/s_ext17_32.v:1]
+INFO: [Synth 8-6155] done synthesizing module 's_ext17_32' (7#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/s_ext17_32.v:1]
+INFO: [Synth 8-6157] synthesizing module 's_ext27_32' [C:/Users/wjn7/Desktop/full_cpu/subelements/s_ext27_32.v:1]
+INFO: [Synth 8-6155] done synthesizing module 's_ext27_32' (8#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/s_ext27_32.v:1]
+WARNING: [Synth 8-7071] port 'add_overflow' of module 'add_32bit' is unconnected for instance 'pc_branch_calc' [C:/Users/wjn7/Desktop/full_cpu/processor.v:147]
+WARNING: [Synth 8-7023] instance 'pc_branch_calc' of module 'add_32bit' has 4 connections declared, but only 3 given [C:/Users/wjn7/Desktop/full_cpu/processor.v:147]
+INFO: [Synth 8-6157] synthesizing module 'mux_2_5b' [C:/Users/wjn7/Desktop/full_cpu/subelements/mux_2_5b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mux_2_5b' (9#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/mux_2_5b.v:1]
+INFO: [Synth 8-6157] synthesizing module 'alu' [C:/Users/wjn7/Desktop/full_cpu/main_modules/alu.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sub_32bit' [C:/Users/wjn7/Desktop/full_cpu/subelements/sub_32bit.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'sub_32bit' (10#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/sub_32bit.v:1]
+INFO: [Synth 8-6157] synthesizing module 'and_32bit' [C:/Users/wjn7/Desktop/full_cpu/subelements/and_32bit.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'and_32bit' (11#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/and_32bit.v:1]
+INFO: [Synth 8-6157] synthesizing module 'or_32bit' [C:/Users/wjn7/Desktop/full_cpu/subelements/or_32bit.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'or_32bit' (12#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/or_32bit.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sll_32bit' [C:/Users/wjn7/Desktop/full_cpu/subelements/sll_32bit.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sl_1b' [C:/Users/wjn7/Desktop/full_cpu/subelements/sl_1b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'sl_1b' (13#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/sl_1b.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sl_2b' [C:/Users/wjn7/Desktop/full_cpu/subelements/sl_2b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'sl_2b' (14#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/sl_2b.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sl_4b' [C:/Users/wjn7/Desktop/full_cpu/subelements/sl_4b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'sl_4b' (15#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/sl_4b.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sl_8b' [C:/Users/wjn7/Desktop/full_cpu/subelements/sl_8b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'sl_8b' (16#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/sl_8b.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sl_16b' [C:/Users/wjn7/Desktop/full_cpu/subelements/sl_16b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'sl_16b' (17#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/sl_16b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'sll_32bit' (18#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/sll_32bit.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sra_32bit' [C:/Users/wjn7/Desktop/full_cpu/subelements/sra_32bit.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sr_1b' [C:/Users/wjn7/Desktop/full_cpu/subelements/sr_1b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'sr_1b' (19#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/sr_1b.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sr_2b' [C:/Users/wjn7/Desktop/full_cpu/subelements/sr_2b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'sr_2b' (20#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/sr_2b.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sr_4b' [C:/Users/wjn7/Desktop/full_cpu/subelements/sr_4b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'sr_4b' (21#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/sr_4b.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sr_8b' [C:/Users/wjn7/Desktop/full_cpu/subelements/sr_8b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'sr_8b' (22#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/sr_8b.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sr_16b' [C:/Users/wjn7/Desktop/full_cpu/subelements/sr_16b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'sr_16b' (23#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/sr_16b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'sra_32bit' (24#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/sra_32bit.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mux_8' [C:/Users/wjn7/Desktop/full_cpu/subelements/mux_8.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mux_8' (25#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/mux_8.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'alu' (26#1) [C:/Users/wjn7/Desktop/full_cpu/main_modules/alu.v:1]
+INFO: [Synth 8-6157] synthesizing module 'multdiv' [C:/Users/wjn7/Desktop/full_cpu/main_modules/multdiv.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mod_8_counter' [C:/Users/wjn7/Desktop/full_cpu/subelements/mod_8_counter.v:1]
+INFO: [Synth 8-6157] synthesizing module 'tff_reset' [C:/Users/wjn7/Desktop/full_cpu/subelements/tff_asyncR.v:1]
+INFO: [Synth 8-6157] synthesizing module 'dff_sync_clear' [C:/Users/wjn7/Desktop/full_cpu/subelements/dff_sync_clear.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'dff_sync_clear' (27#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/dff_sync_clear.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'tff_reset' (28#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/tff_asyncR.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mod_8_counter' (29#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/mod_8_counter.v:1]
+INFO: [Synth 8-6157] synthesizing module 'wallace_tree_32b' [C:/Users/wjn7/Desktop/full_cpu/Wallace Tree/wallace_32b.v:1]
+INFO: [Synth 8-6157] synthesizing module 'full_adder' [C:/Users/wjn7/Desktop/full_cpu/Wallace Tree/full_adder.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'full_adder' (30#1) [C:/Users/wjn7/Desktop/full_cpu/Wallace Tree/full_adder.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'wallace_tree_32b' (31#1) [C:/Users/wjn7/Desktop/full_cpu/Wallace Tree/wallace_32b.v:1]
+INFO: [Synth 8-6157] synthesizing module 'array_divider_32b' [C:/Users/wjn7/Desktop/full_cpu/array_divider/array_divider_32b.v:1]
+INFO: [Synth 8-6157] synthesizing module 'divider_cell' [C:/Users/wjn7/Desktop/full_cpu/array_divider/divider_cell.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'divider_cell' (32#1) [C:/Users/wjn7/Desktop/full_cpu/array_divider/divider_cell.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'array_divider_32b' (33#1) [C:/Users/wjn7/Desktop/full_cpu/array_divider/array_divider_32b.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'multdiv' (34#1) [C:/Users/wjn7/Desktop/full_cpu/main_modules/multdiv.v:1]
+INFO: [Synth 8-6157] synthesizing module 'control' [C:/Users/wjn7/Desktop/full_cpu/control.v:1]
+INFO: [Synth 8-6157] synthesizing module 'decoder_5' [C:/Users/wjn7/Desktop/full_cpu/subelements/decoder_5.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'decoder_5' (35#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/decoder_5.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'control' (36#1) [C:/Users/wjn7/Desktop/full_cpu/control.v:1]
+INFO: [Synth 8-6157] synthesizing module 'hazards' [C:/Users/wjn7/Desktop/full_cpu/hazards.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'hazards' (37#1) [C:/Users/wjn7/Desktop/full_cpu/hazards.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'processor' (38#1) [C:/Users/wjn7/Desktop/full_cpu/processor.v:20]
+INFO: [Synth 8-6157] synthesizing module 'ROM' [C:/Users/wjn7/Desktop/full_cpu/ROM.v:2]
+	Parameter MEMFILE bound to: 80'b01101110011011110111001101101111011100100111010000101110011011010110010101101101 
+INFO: [Synth 8-3876] $readmem data file 'nosort.mem' is read successfully [C:/Users/wjn7/Desktop/full_cpu/ROM.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'ROM' (39#1) [C:/Users/wjn7/Desktop/full_cpu/ROM.v:2]
+INFO: [Synth 8-6157] synthesizing module 'regfile' [C:/Users/wjn7/Desktop/full_cpu/main_modules/regfile.v:1]
+INFO: [Synth 8-6157] synthesizing module 'register' [C:/Users/wjn7/Desktop/full_cpu/subelements/register.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'register' (40#1) [C:/Users/wjn7/Desktop/full_cpu/subelements/register.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'regfile' (41#1) [C:/Users/wjn7/Desktop/full_cpu/main_modules/regfile.v:1]
+INFO: [Synth 8-6157] synthesizing module 'RAM' [C:/Users/wjn7/Desktop/full_cpu/RAM.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'RAM' (42#1) [C:/Users/wjn7/Desktop/full_cpu/RAM.v:2]
+INFO: [Synth 8-6157] synthesizing module 'lsfr' [C:/Users/wjn7/Desktop/full_cpu/final_modules/lsfr.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'lsfr' (43#1) [C:/Users/wjn7/Desktop/full_cpu/final_modules/lsfr.v:1]
+INFO: [Synth 8-6157] synthesizing module 'VGAController' [C:/Users/wjn7/Desktop/full_cpu/final_modules/VGAController.v:3]
+INFO: [Synth 8-6157] synthesizing module 'VGATimingGenerator' [C:/Users/wjn7/Desktop/full_cpu/final_modules/VGATimingGenerator.v:2]
+	Parameter HEIGHT bound to: 480 - type: integer 
+	Parameter WIDTH bound to: 640 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'VGATimingGenerator' (44#1) [C:/Users/wjn7/Desktop/full_cpu/final_modules/VGATimingGenerator.v:2]
+INFO: [Synth 8-6157] synthesizing module 'VGA_RAM' [C:/Users/wjn7/Desktop/full_cpu/final_modules/VGA_RAM.v:2]
+	Parameter DATA_WIDTH bound to: 9 - type: integer 
+	Parameter ADDRESS_WIDTH bound to: 20 - type: integer 
+	Parameter DEPTH bound to: 307200 - type: integer 
+	Parameter MEMFILE bound to: 432'b010000110011101000101111010101010111001101100101011100100111001100101111011101110110101001101110001101110010111101000100011001010111001101101011011101000110111101110000001011110110011001110101011011000110110001011111011000110111000001110101001011110110011001101001011011100110000101101100010111110110110101101111011001000111010101101100011001010111001100101111011010010110110101100001011001110110010100101110011011010110010101101101 
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/wjn7/Desktop/full_cpu/final_modules/image.mem' is read successfully [C:/Users/wjn7/Desktop/full_cpu/final_modules/VGA_RAM.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'VGA_RAM' (45#1) [C:/Users/wjn7/Desktop/full_cpu/final_modules/VGA_RAM.v:2]
+WARNING: [Synth 8-7071] port 'dataIn' of module 'VGA_RAM' is unconnected for instance 'ImageData' [C:/Users/wjn7/Desktop/full_cpu/final_modules/VGAController.v:75]
+WARNING: [Synth 8-7023] instance 'ImageData' of module 'VGA_RAM' has 5 connections declared, but only 4 given [C:/Users/wjn7/Desktop/full_cpu/final_modules/VGAController.v:75]
+INFO: [Synth 8-6157] synthesizing module 'VGA_RAM__parameterized0' [C:/Users/wjn7/Desktop/full_cpu/final_modules/VGA_RAM.v:2]
+	Parameter DATA_WIDTH bound to: 12 - type: integer 
+	Parameter ADDRESS_WIDTH bound to: 9 - type: integer 
+	Parameter DEPTH bound to: 256 - type: integer 
+	Parameter MEMFILE bound to: 440'b01000011001110100010111101010101011100110110010101110010011100110010111101110111011010100110111000110111001011110100010001100101011100110110101101110100011011110111000000101111011001100111010101101100011011000101111101100011011100000111010100101111011001100110100101101110011000010110110001011111011011010110111101100100011101010110110001100101011100110010111101100011011011110110110001101111011100100111001100101110011011010110010101101101 
+INFO: [Synth 8-3876] $readmem data file 'C:/Users/wjn7/Desktop/full_cpu/final_modules/colors.mem' is read successfully [C:/Users/wjn7/Desktop/full_cpu/final_modules/VGA_RAM.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'VGA_RAM__parameterized0' (45#1) [C:/Users/wjn7/Desktop/full_cpu/final_modules/VGA_RAM.v:2]
+WARNING: [Synth 8-7071] port 'dataIn' of module 'VGA_RAM' is unconnected for instance 'ColorPalette' [C:/Users/wjn7/Desktop/full_cpu/final_modules/VGAController.v:90]
+WARNING: [Synth 8-7023] instance 'ColorPalette' of module 'VGA_RAM' has 5 connections declared, but only 4 given [C:/Users/wjn7/Desktop/full_cpu/final_modules/VGAController.v:90]
+INFO: [Synth 8-6155] done synthesizing module 'VGAController' (46#1) [C:/Users/wjn7/Desktop/full_cpu/final_modules/VGAController.v:3]
+INFO: [Synth 8-6157] synthesizing module 'seg7_handle' [C:/Users/wjn7/Desktop/full_cpu/final_modules/seg7_handle.v:1]
+INFO: [Synth 8-6157] synthesizing module 'bin2bcd' [C:/Users/wjn7/Desktop/full_cpu/final_modules/seg7_handle.v:126]
+INFO: [Synth 8-6155] done synthesizing module 'bin2bcd' (47#1) [C:/Users/wjn7/Desktop/full_cpu/final_modules/seg7_handle.v:126]
+INFO: [Synth 8-6155] done synthesizing module 'seg7_handle' (48#1) [C:/Users/wjn7/Desktop/full_cpu/final_modules/seg7_handle.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'Wrapper' (49#1) [C:/Users/wjn7/Desktop/full_cpu/Wrapper.v:27]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1512.414 ; gain = 183.418
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 1512.414 ; gain = 183.418
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 1512.414 ; gain = 183.418
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.161 . Memory (MB): peak = 1512.414 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/wjn7/Desktop/full_cpu/master.xdc]
+Finished Parsing XDC File [C:/Users/wjn7/Desktop/full_cpu/master.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/wjn7/Desktop/full_cpu/master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/Wrapper_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/Wrapper_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.018 . Memory (MB): peak = 1550.086 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.059 . Memory (MB): peak = 1550.086 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1550.086 ; gain = 221.090
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tcsg324-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1550.086 ; gain = 221.090
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1550.086 ; gain = 221.090
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1550.086 ; gain = 221.090
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   33 Bit       Adders := 1     
+	   2 Input   32 Bit       Adders := 2     
+	   2 Input   10 Bit       Adders := 2     
+	   2 Input    4 Bit       Adders := 26    
+	   2 Input    3 Bit       Adders := 1     
+	   2 Input    2 Bit       Adders := 2     
++---XORs : 
+	   3 Input      1 Bit         XORs := 2241  
+	   2 Input      1 Bit         XORs := 1032  
+	   4 Input      1 Bit         XORs := 4     
++---Registers : 
+	               33 Bit    Registers := 1     
+	               32 Bit    Registers := 6     
+	               12 Bit    Registers := 1     
+	               10 Bit    Registers := 72    
+	                9 Bit    Registers := 71    
+	                4 Bit    Registers := 4     
+	                3 Bit    Registers := 1     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 1521  
++---RAMs : 
+	            2700K Bit	(307200 X 9 bit)          RAMs := 1     
+	            1024K Bit	(32768 X 32 bit)          RAMs := 1     
+	               3K Bit	(256 X 12 bit)          RAMs := 1     
++---ROMs : 
+	                    ROMs := 1     
++---Muxes : 
+	   2 Input   33 Bit        Muxes := 1     
+	   2 Input   32 Bit        Muxes := 50    
+	   2 Input   12 Bit        Muxes := 2     
+	   2 Input   10 Bit        Muxes := 1     
+	   2 Input    9 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 19    
+	   2 Input    4 Bit        Muxes := 30    
+	   2 Input    1 Bit        Muxes := 3     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+DSP Report: Generating DSP imgAddress, operation Mode is: C+(A:0x280)*B.
+DSP Report: operator imgAddress is absorbed into DSP imgAddress.
+DSP Report: operator imgAddress0 is absorbed into DSP imgAddress.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:12 ; elapsed = 00:01:13 . Memory (MB): peak = 1995.379 ; gain = 666.383
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+ROM: Preliminary Mapping Report
++------------+---------------------+---------------+----------------+
+|Module Name | RTL Object          | Depth x Width | Implemented As | 
++------------+---------------------+---------------+----------------+
+|Wrapper     | InstMem/dataOut_reg | 4096x32       | Block RAM      | 
++------------+---------------------+---------------+----------------+
+
+
+Block RAM: Preliminary Mapping Report (see note below)
++-------------------------+-------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name              | RTL Object              | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++-------------------------+-------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Wrapper                  | ProcMem/MemoryArray_reg | 32 K x 32(NO_CHANGE)   | W | R |                        |   |   | Port A           | 0      | 32     | 
+|VGA_RAM:                 | MemoryArray_reg         | 300 K x 9(NO_CHANGE)   | W | R |                        |   |   | Port A           | 0      | 90     | 
+|VGA_RAM__parameterized0: | MemoryArray_reg         | 256 x 12(NO_CHANGE)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++-------------------------+-------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+
+DSP: Preliminary Mapping Report (see note below)
++--------------+---------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name   | DSP Mapping   | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++--------------+---------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|VGAController | C+(A:0x280)*B | 9      | 10     | 10     | -      | 19     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
++--------------+---------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:19 ; elapsed = 00:01:20 . Memory (MB): peak = 1995.379 ; gain = 666.383
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:01:21 ; elapsed = 00:01:22 . Memory (MB): peak = 1995.379 ; gain = 666.383
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++-------------------------+-------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name              | RTL Object              | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++-------------------------+-------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Wrapper                  | ProcMem/MemoryArray_reg | 32 K x 32(NO_CHANGE)   | W | R |                        |   |   | Port A           | 0      | 32     | 
+|VGA_RAM:                 | MemoryArray_reg         | 300 K x 9(NO_CHANGE)   | W | R |                        |   |   | Port A           | 0      | 90     | 
+|VGA_RAM__parameterized0: | MemoryArray_reg         | 256 x 12(NO_CHANGE)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++-------------------------+-------------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_8 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_9 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_10 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_11 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_12 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_13 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_14 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_15 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_16 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_17 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_18 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_19 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_20 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_21 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_22 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_23 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_24 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_25 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_26 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_27 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_28 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_29 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_30 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_0_31 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_1_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_1_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_1_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_1_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_1_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_1_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_1_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_1_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_3_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_3_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_3_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_3_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_3_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_3_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_3_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_3_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_5_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_5_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_5_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_5_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_5_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_5_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_5_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_5_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_7_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_7_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_7_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_7_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_7_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_7_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_7_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_7_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_9_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_9_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_9_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_9_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_9_4 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_9_5 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_9_6 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ImageData/MemoryArray_reg_9_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance VGA/ColorPalette/MemoryArray_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance InstMem/dataOut_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance InstMem/dataOut_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance InstMem/dataOut_reg_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance InstMem/dataOut_reg_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:01:29 ; elapsed = 00:01:30 . Memory (MB): peak = 2330.699 ; gain = 1001.703
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:33 ; elapsed = 00:01:34 . Memory (MB): peak = 2330.699 ; gain = 1001.703
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:33 ; elapsed = 00:01:34 . Memory (MB): peak = 2330.699 ; gain = 1001.703
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:33 ; elapsed = 00:01:35 . Memory (MB): peak = 2330.699 ; gain = 1001.703
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:34 ; elapsed = 00:01:35 . Memory (MB): peak = 2330.699 ; gain = 1001.703
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:34 ; elapsed = 00:01:35 . Memory (MB): peak = 2330.699 ; gain = 1001.703
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:34 ; elapsed = 00:01:35 . Memory (MB): peak = 2330.699 ; gain = 1001.703
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++------------+-----------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name | RTL Name              | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++------------+-----------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Wrapper     | RNG/lfsr_reg1_reg[24] | 4      | 2     | YES          | NO                 | YES               | 2      | 0       | 
+|Wrapper     | RNG/lfsr_reg2_reg[21] | 4      | 2     | YES          | NO                 | YES               | 2      | 0       | 
+|Wrapper     | RNG/lfsr_reg_reg[17]  | 4      | 2     | YES          | NO                 | YES               | 2      | 0       | 
++------------+-----------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |BUFG     |     3|
+|2     |CARRY4   |   168|
+|3     |DSP48E1  |     1|
+|4     |LUT1     |    79|
+|5     |LUT2     |   584|
+|6     |LUT3     |   266|
+|7     |LUT4     |  1310|
+|8     |LUT5     |   522|
+|9     |LUT6     |  4277|
+|10    |MUXF7    |     8|
+|11    |RAMB18E1 |     1|
+|12    |RAMB36E1 |   116|
+|32    |SRL16E   |     6|
+|33    |FDCE     |  1481|
+|34    |FDPE     |    52|
+|35    |FDRE     |  1470|
+|36    |IBUF     |     7|
+|37    |OBUF     |    30|
+|38    |OBUFT    |    16|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:34 ; elapsed = 00:01:35 . Memory (MB): peak = 2330.699 ; gain = 1001.703
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:21 ; elapsed = 00:01:32 . Memory (MB): peak = 2330.699 ; gain = 964.031
+Synthesis Optimization Complete : Time (s): cpu = 00:01:34 ; elapsed = 00:01:36 . Memory (MB): peak = 2330.699 ; gain = 1001.703
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.175 . Memory (MB): peak = 2330.699 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 294 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 2330.699 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: 2d1738df
+INFO: [Common 17-83] Releasing license: Synthesis
+195 Infos, 24 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:39 ; elapsed = 00:01:41 . Memory (MB): peak = 2330.699 ; gain = 1001.703
+INFO: [Common 17-1381] The checkpoint 'C:/Users/wjn7/Desktop/full_cpu/Final Project Vivado/Final Project Vivado.runs/synth_1/Wrapper.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file Wrapper_utilization_synth.rpt -pb Wrapper_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Apr 23 16:36:10 2024...

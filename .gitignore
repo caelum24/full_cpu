@@ -1,6 +1,7 @@
 */*.cache
 */*.hw
 */*.runs
+!*/*.runs/impl_1
 */*.sim
 */*.vcd
 ./Test\ Files/Output\ Files/sort_test.vcd
