@@ -129,11 +129,11 @@ fix_posx:
 addi $t5, $zero, 7 #set X vel to MAXVEL
 j ok_xvel
 fix_negx:
-addi $t5, $zero, 7 #set X vel to -MAXVEL
+addi $t5, $zero, 3 #set X vel to -MAXVEL
 j ok_xvel
 
 fix_posy:
-addi $t6, $zero, 7 #set Y vel to MAXVEL
+addi $t6, $zero, 3 #set Y vel to MAXVEL
 j ok_vel
 fix_negy:
 addi $t6, $zero, -7 #set Y vel to MAXVEL
