@@ -144,7 +144,7 @@ module VGAController(
         for (i = 0; i< NUM_DOTS; i = i+1) begin : dots_move
             initial begin
                 dots_x[i] <= 320;
-                dots_y[i] <= 240;
+                dots_y[i] <= 360;
 				// dots_x[i] <= 4*(i+1);
                 // dots_y[i] <= 0;
                 is_dots[i] <= 1'b0;
@@ -193,7 +193,9 @@ module VGAController(
     
     initial 
     begin //SET THESE TO CHANGE WHERE THE GOAL IS
-        refx <= 10'd310;
+        // refx <= 10'd310;
+        // refy <= 9'd50;
+		refx <= 10'd490;
         refy <= 9'd50;
         // dotx <= 10'd20;
         // doty <= 9'd20;

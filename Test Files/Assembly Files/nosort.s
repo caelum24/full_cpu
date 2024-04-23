@@ -178,7 +178,7 @@ j move_exit
     # dot.reachedGoal = true
 check_at_goal:
 addi $t0, $zero, 10
-addi $t2, $zero, 320 #t2 = goalX
+addi $t2, $zero, 500 #t2 = goalX
 add $t2, $t2, $t0 #$t2 = GoalX + 10 (right boundary)
 blt $t2, $t8, not_reachedGoal #if Xpos > goal right boundary, not in goal
 addi $t2, $zero, 60 #t2 = goalY
@@ -186,7 +186,7 @@ add $t2, $t2, $t0 #$t2 = GoalY + 10 (bottom boundary)
 blt $t2, $t9, not_reachedGoal #if Ypos > goal right boundary, not in goal
 
 addi $t0, $zero, -10
-addi $t2, $zero, 320 #t2 = goalX
+addi $t2, $zero, 500 #t2 = goalX
 add $t2, $t2, $t0 #$t2 = GoalX - 10 (left boundary)
 blt $t8, $t2, not_reachedGoal #if Xpos < goal left boundary, not in goal
 addi $t2, $zero, 60 #t2 = goalY
