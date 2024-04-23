@@ -1,4 +1,5 @@
 `timescale 1 ns/ 100 ps
+
 module VGAController(     
 	input clk, 			// 100 MHz System Clock
 	input reset, 		// Reset Signal
@@ -19,8 +20,8 @@ module VGAController(
 	);
 	
 	// Lab Memory Files Location
-	localparam FILES_PATH = "C:/Users/wjn7/Desktop/full_cpu/final_modules/";
-    //localparam FILES_PATH = "";
+	 localparam FILES_PATH = "C:/Users/wjn7/Desktop/full_cpu/final_modules/";
+//    localparam FILES_PATH = "./final_modules/";
 	// Clock divider 100 MHz -> 25 MHz
 	wire clk25; // 25MHz clock
 
@@ -124,7 +125,7 @@ module VGAController(
     reg [9:0] refx;
     reg [8:0] refy;
     
-    parameter NUM_DOTS = 20;
+    parameter NUM_DOTS = 38;
     reg [9:0] dots_x [NUM_DOTS-1 : 0];
     reg [8:0] dots_y [NUM_DOTS-1 : 0];
     reg [NUM_DOTS-1:0] is_dots;
@@ -137,12 +138,15 @@ module VGAController(
 //	is_Yloc,
 //	[31:0] dotID, 
 //	[31:0] dotLoc
+	// TODO: add functionality for the champion
     genvar i;
     generate
         for (i = 0; i< NUM_DOTS; i = i+1) begin : dots_move
             initial begin
                 dots_x[i] <= 320;
                 dots_y[i] <= 240;
+				// dots_x[i] <= 4*(i+1);
+                // dots_y[i] <= 0;
                 is_dots[i] <= 1'b0;
             end
 //            always @(posedge screenEnd) begin //TODO this will go away once processor is implemented
@@ -158,8 +162,20 @@ module VGAController(
                 end
           end
           //TODO: Check over -> moving the dots based on inputs from processor
-          always @(posedge dotWren) begin
-            if (dotID == i) begin
+//          always @(posedge dotWren) begin
+//            if (dotID == i) begin
+//          always @(posedge dotWren) begin
+//            if (dotID == i) begin
+//                if (is_Yloc == 1) begin
+//                    dots_y[i] <= dotLoc[8:0];
+//                end
+//                else begin
+//                    dots_x[i] <= dotLoc[9:0];
+//                end
+//            end
+//          end 
+          always @(posedge clk25) begin
+            if (dotID == i && dotWren) begin
                 if (is_Yloc == 1) begin
                     dots_y[i] <= dotLoc[8:0];
                 end
@@ -170,8 +186,8 @@ module VGAController(
           end       
       end
     endgenerate
-    reg [9:0] dotx;
-    reg [8:0] doty;
+    // reg [9:0] dotx;
+    // reg [8:0] doty;
     wire is_dot;
     assign is_dot = |is_dots;
     
@@ -179,8 +195,8 @@ module VGAController(
     begin //SET THESE TO CHANGE WHERE THE GOAL IS
         refx <= 10'd310;
         refy <= 9'd50;
-        dotx <= 10'd20;
-        doty <= 9'd20;
+        // dotx <= 10'd20;
+        // doty <= 9'd20;
     end
 
     reg isInBox;
@@ -212,10 +228,10 @@ module VGAController(
 	assign background = show ? colorData : 12'b000011010000; //TODO: SET THIS TO GOAL COLOR
 
 	// moving the dot around the screen
-    always @(posedge screenEnd) begin
-		dotx = dotx+1;
-		doty = doty+1;
-	end 
+//    always @(posedge screenEnd) begin
+//		dotx = dotx+1;
+//		doty = doty+1;
+//	end 
 
 //	wire x_equal, y_equal;
 //	check_equal x_check(.A({21'd0, x}), .B({21'd0, dotx}), .is_equal(x_equal));

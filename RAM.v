@@ -1,7 +1,8 @@
 `timescale 1ns / 1ps
-module RAM #( parameter DATA_WIDTH = 32, ADDRESS_WIDTH = 12, DEPTH = 4096) (
-    input wire                     clk,
+module RAM #( parameter DATA_WIDTH = 32, ADDRESS_WIDTH = 15, DEPTH = 32768) ( // //12 4096, 18 262144
+    input wire                     clk,                     
     input wire                     wEn,
+    // input wire                     big,
     input wire [ADDRESS_WIDTH-1:0] addr,
     input wire [DATA_WIDTH-1:0]    dataIn,
     output reg [DATA_WIDTH-1:0]    dataOut = 0);
@@ -25,4 +26,15 @@ module RAM #( parameter DATA_WIDTH = 32, ADDRESS_WIDTH = 12, DEPTH = 4096) (
             dataOut <= MemoryArray[addr];
         end
     end
+
+    // integer j;
+    // always @(posedge (clk && big)) begin
+    //     if(wEn) begin
+    //         for (j = 0; j< BRAIN_SIZE; j = j+1) begin
+    //             MemoryArray[addr+j] <= MemoryArray[dataIn+j]; //for loop to copy brains over very quickly
+    //         end
+    //     end
+    // end
+
+
 endmodule

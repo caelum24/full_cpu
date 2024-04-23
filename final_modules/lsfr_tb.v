@@ -3,13 +3,13 @@
 module tb_lsfr;
 
     reg clk, reset;
-    wire [3:0] random_acc;
+    wire [31:0] randNum;
 
     // Instantiate the LSFR module
     lsfr lsfr_inst (
         .clock(clk),
         .reset(reset),
-        .random_acc(random_acc)
+        .randNum(randNum)
     );
 
     // Clock generator
@@ -24,7 +24,7 @@ module tb_lsfr;
 
     // Output random number every cycle
     always @(posedge clk) begin
-        $display("Random number: %d, %b", $signed(random_acc), random_acc);
+        $display("Random number: %d, %b", $signed(randNum), randNum);
     end
 
     // Stop simulation after some time
