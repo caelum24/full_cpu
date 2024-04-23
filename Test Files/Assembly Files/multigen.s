@@ -129,7 +129,7 @@ fix_posx:
 addi $t5, $zero, 7 #set X vel to MAXVEL
 j ok_xvel
 fix_negx:
-addi $t5, $zero, -4 #set X vel to -MAXVEL
+addi $t5, $zero, -2 #set X vel to -MAXVEL
 j ok_xvel
 
 fix_posy:
@@ -256,19 +256,14 @@ sortrecur:
 addi $t7, $zero, 0          # $t7 = 0
 add $t0, $a0, $zero         # $t0 = head
 add $t1, $t0, $zero         # $t1 = current
-addi $30, $zero, 1
 j siguard
 
 sortiter:
 lw $t2, 8($t1)              # $t2 = current fitness
 lw $t3, 8($t6)              # $t3 = current.next fitness
-nop
-nop
 blt $t2, $t3, sinext        # if current fitness < next fitness, go to sinext
 addi $t7, $zero, 1          # $t7 = 1
 lw $t4, 10($t1)             # $t4 = current.prev
-nop
-nop
 bne $t4, $zero, supprev     # if current.prev != 0, go to supprev
 j supprevd
 
@@ -278,8 +273,6 @@ sw $t6, 9($t4)             # current.prev.next = current next
 supprevd:
 sw $t4, 10($t6)             # current.next.prev = current.prev
 lw $t5, 9($t6)             # $t5 = current.next.next
-nop
-nop
 bne $t5, $zero, supnnprev   # if current.next.next != 0, go to supnnprev
 j supnnprevd
 
@@ -290,8 +283,6 @@ supnnprevd:
 sw $t5, 9($t1)             # current.next = current.next.next
 sw $t1, 9($t6)             # current.next.next = current
 sw $t6, 10($t1)             # current.prev = current.next
-nop
-nop
 bne $t0, $t1, sinext        # if head != current, go to sinext
 add $t0, $t6, $zero         # head = current.next
 
@@ -300,12 +291,8 @@ add $t1, $t6, $zero         # $t1 = current.next
 
 siguard:
 lw $t6, 9($t1)              # $t6 = current.next
-nop
-nop
 bne $t6, $zero, sortiter    # if current.next != 0, go to sortiter
 add $a0, $t0, $zero         # $a0 = head
-nop
-nop
 bne $t7, $zero, sortrecur   # if $t7 != 0, go to sortrecur
 add $v0, $t0, $zero         # $v0 = head
 
@@ -354,7 +341,7 @@ lw $t9, 99($zero)   # $t9 = getting a random value from the LFSR
 sw $t9, 11($t4) #storing the nth x_vector for child
 lw $t9, 99($zero)   # $t9 = getting a random value from the LFSR
 sw $t9, 12($t4) #storing the nth y_vector for child
-addi $30, $zero, 2
+
 copy_comp:
 addi $t0, $t0, 2 #incrementing t0 by 2 (for x and y)
 blt $t0, $t1, mutate_loop #counter < numvectors*2
@@ -399,7 +386,7 @@ sll $27, $27, 3 #arbitrary to make it 2 times slower than it was with above inst
 waiter:
 addi $26, $26, 1
 blt $26, $27, waiter
-addi $30, $zero, 3
+
 blt $s3, $s4, play_generation
 
 # CALCULATING THE FITNESS OF A DOT
@@ -410,22 +397,12 @@ fitness_loop:
 jal calculateFitness
 addi $s1, $s1, 1 #increment looper
 lw $a0, 9($a0) #loading dot.next for next loop over the dots
-addi $30, $zero, 4
 blt $s1, $s2, fitness_loop
 
 # # SORTING ALL OF THE DOTS BASED ON THEIR FITNESS
 add $a0, $s0, $zero #making $a0 the head of the linkedlist
 jal sort
-addi $30, $zero, 5
 add $s0, $v0, $zero #making s0 head of sorted linkedlist
-lw $s0, 9($s0) #next
-lw $s0, 9($s0) #next
-lw $s0, 9($s0) #next
-lw $s0, 9($s0) #next
-lw $s0, 9($s0) #next
-lw $s0, 9($s0) #next
-lw $29, 9($s0) #next
-add $s0, $v0, $zero
 # inc $zero, $zero, 0 #increment the generation counter
 # lw $t0, 10($s0) #previous
 # lw $26, 0($s0) #xloc 176
@@ -462,7 +439,6 @@ add $a1, $s5, $zero #making $a1 the next value of the linkedlist (child)
 child_create:
 jal mutate
 lw $a1, 9($a1) #new child = child.next
-addi $30, $zero, 8
 nop
 nop #nops just in case
 bne $zero, $a1, child_create #if next child isn't at 0, we need to create/mutate it
