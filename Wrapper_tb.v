@@ -87,7 +87,7 @@ module Wrapper_tb #(parameter FILE = "t_gen");
 	// Wires for Test Harness
 	wire[4:0] rs1_test, rs1_in;
 	reg testMode = 0; 
-	reg[9:0] num_cycles = DEFAULT_CYCLES;
+	reg[31:0] num_cycles = DEFAULT_CYCLES;
 	reg[15*8:0] exp_text;
 	reg null;
 
@@ -142,7 +142,7 @@ module Wrapper_tb #(parameter FILE = "t_gen");
 	// Processor Memory (RAM)
 	RAM ProcMem(.clk(clock), 
 		.wEn(mwe), 
-		.addr(memAddr[11:0]), 
+		.addr(memAddr[14:0]), 
 		.dataIn(memDataIn), 
 		.dataOut(memoryData));
 
