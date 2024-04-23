@@ -64,7 +64,8 @@ module lsfr(clock, reset, randNum);
     assign rand[3] = lfsr_reg3[0]; 
 
     assign limiter = rand[3] & ~rand[2] & ~rand[1] & ~rand[0];
-    assign random_acc = limiter ?  4'd0 : rand; //want to keep + and - sides even, but 2's complement isn't even, so -8 becomes 0
+    assign random_acc = 4'b1111;
+    // assign random_acc = limiter ?  4'd0 : rand; //want to keep + and - sides even, but 2's complement isn't even, so -8 becomes 0
     // 4'b1001
     assign randNum[4] = random_acc[3];
     assign randNum[5] = random_acc[3];

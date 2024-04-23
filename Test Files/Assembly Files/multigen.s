@@ -61,7 +61,7 @@ addi $s2, $zero, 0  # initialize random vector creation counter
 
 # Creating the random vectors
 loop_random:
-# lw $t5, 99($zero)   # $t5 = getting a random value from the LFSR
+lw $t5, 99($zero)   # $t5 = getting a random value from the LFSR
 add $t6, $t1, $s2   # $t6 = address to put random value in the brain (current + vector number)
 sw $t5, 11($t6)     # 11 is vector 0 of the brain for current dot
 addi $s2, $s2, 1    # increment random vector counter
@@ -113,30 +113,30 @@ add $t6, $t6, $t2 #Yvel = Yvel+Yacc
 
 # If dot.velocity (in either direction) > maxVelocity:
 # Set dot.velocity to maxVelocity
-#TODO-> uncomment these
-# addi $t7, $zero, 7 #$t7 = maxvel
-# sub $t0, $zero, $t7 #$t0 = -MAXVEL
 
-# blt $t7, $t5, fix_posx #if xvel > maxvel ($t7)
-# blt $t5, $t0, fix_negx #if xvel < -maxvel ($t0)
-# ok_xvel:
-# blt $t7, $t6, fix_posy #if yvel > maxvel ($t7)
-# blt $t6, $t0, fix_negy #if yvel < -maxvel ($t0)
-# j ok_vel
+addi $t7, $zero, 7 #$t7 = maxvel
+sub $t0, $zero, $t7 #$t0 = -MAXVEL
 
-# #standardizing velocity within a range
-# fix_posx:
-# addi $t5, $zero, 7 #set X vel to MAXVEL
-# j ok_xvel
-# fix_negx:
-# addi $t5, $zero, -7 #set X vel to -MAXVEL
-# j ok_xvel
+blt $t7, $t5, fix_posx #if xvel > maxvel ($t7)
+blt $t5, $t0, fix_negx #if xvel < -maxvel ($t0)
+ok_xvel:
+blt $t7, $t6, fix_posy #if yvel > maxvel ($t7)
+blt $t6, $t0, fix_negy #if yvel < -maxvel ($t0)
+j ok_vel
 
-# fix_posy:
-# addi $t6, $zero, 7 #set Y vel to MAXVEL
-# j ok_vel
-# fix_negy:
-# addi $t6, $zero, -7 #set Y vel to MAXVEL
+#standardizing velocity within a range
+fix_posx:
+addi $t5, $zero, 7 #set X vel to MAXVEL
+j ok_xvel
+fix_negx:
+addi $t5, $zero, -7 #set X vel to -MAXVEL
+j ok_xvel
+
+fix_posy:
+addi $t6, $zero, 7 #set Y vel to MAXVEL
+j ok_vel
+fix_negy:
+addi $t6, $zero, -7 #set Y vel to MAXVEL
 
 ok_vel:
 # Dot.position = dot.position + dot.velocity
